@@ -106,9 +106,24 @@ influence on the Mising people, and stimulated a process of Sanskritisation.
     coverImage: '/images/articles/welcome.jpg',
     featured: false,
     content: `
-<p>Alongside the Digital Book Library, this corner of the archive holds shorter, standalone articles — notes on language, culture, history, and tradition that don't need a full book to tell.</p>
-<p>Some articles here will be original writing from community members. Others, like the overview of the Mising people linked from this page, are adapted from open, freely reusable sources such as Wikipedia, with the source credited at the bottom of the page.</p>
-<p>If you'd like to contribute an article, it can be about anything connected to Mising culture, tradition, history, or language — long or short, formal or personal.</p>
+<p>
+  Every story, memory, and perspective helps preserve our heritage.
+  We welcome articles on any aspect of Mising life, our culture, traditions,
+  language, history, folklore, customs, and the experiences of our people today.
+  Whether you are writing a researched article, sharing a personal reflection,
+  or expressing an opinion, your contribution is valuable. <b> Accepted languages include Mising and English. </b>
+</p>
+
+<p>
+  To submit an article, please send it in a suitable document format
+  (DOCX, ODT, or PDF) together with your name and contact details to
+  <a href="mailto:misingarchives@gmail.com">misingarchives@gmail.com</a>.
+  For more information about submissions, you can also contact
+  <a href="https://www.instagram.com/hehehe.pegu/" target="_blank" rel="noopener noreferrer">
+    @hehehe.pegu
+  </a>
+  on Instagram.
+</p>
     `,
   },
 ]

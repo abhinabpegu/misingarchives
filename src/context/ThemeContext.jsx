@@ -2,17 +2,17 @@ import React, { createContext, useContext, useState } from 'react'
 
 export const themeColors = {
   light: {
-    bg: '#F8F7F5',
-    bgSecondary: '#FFFFFF',
+    bg: '#f5f6f8',
+    bgSecondary: '#ffffff',
     bgTertiary: 'rgba(255, 255, 255, 0.7)',
     text: '#1A1A1A',
     textSecondary: '#5A6C7D',
     textTertiary: '#8B9BAC',
-    border: 'rgba(193, 122, 107, 0.15)',
+    border: 'rgba(107, 117, 193, 0.15)',
     accentPrimary: '#6b76c1',
     accentSecondary: '#6fa3d1',
-    accentLight: 'rgba(193, 122, 107, 0.1)',
-    tableHover: 'rgba(193, 122, 107, 0.05)',
+    accentLight: 'rgba(110, 107, 193, 0.1)',
+    tableHover: 'rgba(140, 107, 193, 0.05)',
     shadowColor: 'rgba(0, 0, 0, 0.08)',
   },
   dark: {

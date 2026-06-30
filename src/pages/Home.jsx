@@ -69,8 +69,7 @@ export default function Home() {
               marginBottom: '28px'
             }}>
               Mising Archives is a free, open digital library documenting Mising culture, tradition,
-              history, and language — archived by the community, for the community and for anyone
-              who wants to learn.
+              history, and language. It is currently hosted by the members of Takam Mising Sí:sang Kebang (TMSK).
             </p>
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
               <Link
