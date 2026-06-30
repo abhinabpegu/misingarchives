@@ -45,7 +45,7 @@ export default function ArticleCard({ article, size = 'normal' }) {
             justifyContent: 'center',
             fontSize: isFeatured ? '40px' : '28px'
           }}>
-            ✍️
+            
           </div>
         )
       )}

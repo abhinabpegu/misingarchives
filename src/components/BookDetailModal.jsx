@@ -112,7 +112,7 @@ export default function BookDetailModal({ book, onClose }) {
                 margin: '0 auto 16px',
                 boxShadow: `0 8px 24px ${colors.shadowColor}`
               }}>
-                📖
+                
               </div>
             )}
           </div>
