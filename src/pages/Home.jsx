@@ -133,6 +133,7 @@ export default function Home() {
             }}>
               Foundational Text · {featuredBook.code}
             </span>
+          
             <div style={{ display: 'flex', gap: '18px' }}>
               <div style={{
                 width: '76px',
@@ -145,7 +146,9 @@ export default function Home() {
                 justifyContent: 'center',
                 fontSize: '28px'
               }}>
+                
               </div>
+            
               <div>
                 <h3 style={{ margin: '0 0 8px', fontSize: '17px', fontWeight: '700', lineHeight: '1.3' }}>
                   {featuredBook.title}
@@ -338,20 +341,11 @@ export default function Home() {
             Why This Archive Exists
           </h2>
           <p style={{ fontSize: '15px', color: colors.textSecondary, lineHeight: '1.7' }}>
-            Mising Archives exists to make sure that knowledge passed down through generations
-            isn't lost — and that anyone, anywhere, can access it without barriers.
+            "Knowledge should be free. Culture should be accessible. History should be preserved."
           </p>
         </div>
 
-        <div className="cards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '48px' }}>
-          {MISSION_PILLARS.map(p => (
-            <div key={p.title} style={{ ...cardBase, padding: '24px', textAlign: 'center' }}>
-              <div style={{ fontSize: '28px', marginBottom: '12px' }}>{p.icon}</div>
-              <h3 style={{ margin: '0 0 8px', fontSize: '15px', fontWeight: '700' }}>{p.title}</h3>
-              <p style={{ margin: 0, fontSize: '13px', color: colors.textSecondary, lineHeight: '1.5' }}>{p.desc}</p>
-            </div>
-          ))}
-        </div>
+       
 
         <p style={{
           textAlign: 'center',
@@ -362,7 +356,7 @@ export default function Home() {
           margin: '0 auto',
           lineHeight: '1.6'
         }}>
-          "Knowledge should be free. Culture should be accessible. History should be preserved."
+          "Mising Réngam Írroi"
         </p>
       </section>
     </div>

@@ -41,32 +41,59 @@ export const articlesData = [
     slug: 'mising-people',
     title: 'The Mising People: An Overview',
     category: 'Culture',
-    excerpt: 'Who the Mising are, where their name comes from, and how centuries of migration, Ahom-era history, and festival traditions shaped the community as it stands today.',
+    excerpt: 'The Mising people or Miri people are a Tibeto-Burman ethnic group living mostly in the Northeast Indian states of Assam and Arunachal Pradesh.',
     author: 'Contributors of English Wikipedia',
     date: '2026-06-30',
-    coverImage: null,
+    coverImage: '/images/articles/misingpeople.png',
     featured: true,
     sourceUrl: 'https://en.wikipedia.org/wiki/Mising_people',
-    sourceLabel: 'Adapted from the Wikipedia article "Mising people" (CC BY-SA 4.0)',
+    sourceLabel: 'An excerpt from the Wikipedia article "Mising people" (CC BY-SA 4.0)',
     content: `
-<p>The <strong>Mising</strong> (also written Mishing, and historically recorded as <strong>Miri</strong>) are a Tibeto-Burman-speaking community native to the Brahmaputra Valley, numbering well over half a million people across Assam and Arunachal Pradesh. They are the second-largest tribal community in Assam after the Bodo, and their language belongs to the Tani branch of the Tibeto-Burman family — the same linguistic family shared by the Adi, Apatani, Galo, and several other communities of the eastern Himalayan foothills.</p>
+<p>The Mising people or Miri people (/ˈmiːsɪŋ/ or /ˈmɪsɪŋ/) are
+ a Tibeto-Burman ethnic group living mostly in the Northeast Indian
+  states of Assam and Arunachal Pradesh. Their Mising language is a part
+   of the Tani languages and the Tibeto-Burman language group. The Misings
+    are a major ethnic group of Assam, the second largest tribe after the Bodos.
+     15.4% of Assam's tribal population speaks Mising, but many more speak Assamese
+      (24.7%) and Mising organisations estimate that the unofficial Mising population
+       is 1.2 million rather than the 587,310 declared by the 2001 census of India</p>
 
-<h2>A Name Rooted in the Land</h2>
-<p>"Mising" is the community's own name for itself, generally understood to mean something close to "people of the soil." "Miri," by contrast, was an outside name once used by Assamese speakers, and remains the term recorded in India's official Scheduled Tribes list even though the community itself prefers Mising. Scholars still debate exactly how the name Miri came about; one long-standing theory ties it to religious functionaries among the Tani hill peoples, whose reputation eventually attached itself to anyone descending from the same hills.</p>
+<h2>Ethymology</h2>
+<p>The Misings are officially listed as
+ Miri in the Constitution of India's order
+  of Scheduled Tribes, but they prefer to known as Mising.
+   Mising is an endonym and demonym which literally means 
+   'man of the soil'. Miri, on the other hand, is an
+    exonym once applied by the Assamese.
+     There is still much scholarly debate
+      on the origin of Miri as an ethnonym.
+ The Misings also use the endonym Tani, 'man', for identifying themselves</p>
 
-<h2>From the Hills to the Brahmaputra Plains</h2>
-<p>Mising oral tradition and early colonial-era records point to origins in the hills of present-day Arunachal Pradesh, with a gradual migration down into the plains beginning somewhere around the 13th or 14th century. Because the Mising were an oral society until the early twentieth century, much of this history survives not in documents but in folk songs and stories passed down through generations. What written evidence exists comes mostly from outside observers — Assamese literature from the Vaishnavite era, the Ahom court chronicles known as Buranjis, and British accounts beginning in the 1800s.</p>
-<p>Relations with the Ahom kingdom shifted between conflict and cooperation. Mising communities near Sadiya rebelled against Ahom authority more than once during the seventeenth century, but were eventually folded into the kingdom's administration and army, and some Mising families were elevated to noble status at the Ahom court. By the time the British annexed Upper Assam in the late 1830s, Mising settlements were already well established along the northern bank of the Brahmaputra.</p>
+<h2>Language</h2>
+<p>Educated Misings are bilingual in Assamese and Mising,
+ but some speak only Assamese and a minority speak only Mising.
+  The Misings practice code switching, depending on the degree of their 
+  interactions with the non-tribal Assamese, the dominant community in the
+   Brahmaputra Valley.</p>
 
-<h2>Language and Education</h2>
-<p>For most of their history, the Mising had no written script of their own. That changed with the arrival of Christian missionaries in the late nineteenth century, who began recording the Mising language in the Roman alphabet — a choice the community formally settled on, after years of debate, over the Assamese script during the 1970s and 80s. Many Mising speakers today are bilingual in Mising and Assamese, moving between the two depending on context.</p>
+<h2>Religion</h2>
+<p>The neo-Vaishnavite cult of Sankardev had a significant 
 
-<h2>Belief and Festivals</h2>
-<p>Most Mising are Hindu, with a strong historical influence from the Vaishnavite movement associated with the saint Sankardev, though the community has retained many of its own customary practices rather than fully adopting caste Hindu traditions. A revival movement called Donyi-Polo, centered on reverence for the sun and moon, has also gained followers, particularly in Arunachal Pradesh, alongside a smaller Christian population.</p>
-<p>The Mising calendar turns on two major agricultural festivals. Ali-Aye-Ligang, held over five days starting the first Wednesday of February, marks the beginning of the sowing season with ceremonial planting, music, and nightly dancing from house to house. Po:rag, by contrast, is a harvest festival, traditionally celebrated once the rice crop is in. Both are marked by distinctive music and dance — Gumrag, performed in circles to drums and cymbals, is among the best known — and by communal feasting that turns a farming calendar into a shared cultural identity.</p>
-
-<h2>A Riverine Life</h2>
-<p>Agriculture and animal husbandry remain the backbone of the Mising economy, and weaving is a near-universal household skill among Mising women, producing the distinctive striped ege, ri:bi, and gaseng garments still worn today. But the Mising are also, by geography, a riverine people: many villages sit close to the Brahmaputra and its tributaries, which makes seasonal flooding and erosion a constant pressure on farmland and settlement. Since 1995, the community has had a degree of political self-governance through the Mising Autonomous Council, even as migration to towns and cities for work has become increasingly common among younger generations.</p>
+influence on the Mising people, and stimulated a process of Sanskritisation.
+ There are many neo-Vaishnavite monasteries, or xatras, in the Mising populated 
+ areas of Assam. However, the Misings later perceived
+  that the xatras had become instruments perpetuating the
+   interest of non-tribal Assamese speaking elites, which led
+    to the weakening of neo-Vaishnavism by the 1970s.
+     Although the Misings are reckoned amongst the Hinduized
+      peoples, they have retained many of their customary practices.
+       This is in contrast to other Hinduized tribal groups in Assam,
+        which have relinquished many of their traditional customs and
+         embraced the Assamese caste Hindu system. A new identity-centric cultural movement called Donyi-Polo has gained
+          some following among the Mising people,
+           with a point of origin in Arunachal Pradesh, where it has a wider following.
+            Christianity has been embraced by some of the Mising population,
+             which has led to some sectarian tensions.</p>
     `,
   },
   {
@@ -76,7 +103,7 @@ export const articlesData = [
     excerpt: 'A short note on what this part of the archive holds, and how it works.',
     author: 'Mising Archives',
     date: '2026-06-29',
-    coverImage: null,
+    coverImage: '/images/articles/welcome.jpg',
     featured: false,
     content: `
 <p>Alongside the Digital Book Library, this corner of the archive holds shorter, standalone articles — notes on language, culture, history, and tradition that don't need a full book to tell.</p>
