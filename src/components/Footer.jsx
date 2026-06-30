@@ -70,7 +70,7 @@ export default function Footer() {
         color: colors.textTertiary,
         fontSize: '12px'
       }}>
-        <p style={{ opacity: 0.8 }}>{new Date().getFullYear()} — Built with ❤️ by the Mising community</p>
+        <p style={{ opacity: 0.8 }}>©{new Date().getFullYear()}  Mising Archives. Original articles, documentation, and website content are licensed under CC BY-SA 4.0. The Digital Book Library contains works made available under their respective copyright permissions, licences, or public domain status, as indicated for each item.</p>
       </div>
     </footer>
   )

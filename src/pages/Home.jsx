@@ -7,17 +7,17 @@ import { useCardStyle } from '../utils/cardStyle'
 import ArticleCard from '../components/ArticleCard'
 
 const CATEGORIES = [
-  { tag: 'History', icon: '📜', desc: 'Chronicles of the Mising people and the Brahmaputra valley.' },
-  { tag: 'Culture', icon: '🎭', desc: 'Customs, social life, and community heritage.' },
-  { tag: 'Language', icon: '🗣️', desc: 'Grammars, vocabulary, and linguistic studies.' },
-  { tag: 'Folklore', icon: '🪶', desc: 'Folk literature, songs, and oral traditions.' },
+  { tag: 'History', icon: '', desc: 'Chronicles of the Mising people and the Brahmaputra valley.' },
+  { tag: 'Culture', icon: '', desc: 'Customs, social life, and community heritage.' },
+  { tag: 'Language', icon: '', desc: 'Grammars, vocabulary, and linguistic studies.' },
+  { tag: 'Folklore', icon: '', desc: 'Folk literature, songs, and oral traditions.' },
 ]
 
 const MISSION_PILLARS = [
-  { icon: '🛡️', title: 'Preserve', desc: 'Cultural knowledge and heritage, before it is lost to time.' },
-  { icon: '🤝', title: 'Share', desc: 'Freely, without barriers, paywalls, or gatekeeping.' },
-  { icon: '🌱', title: 'Empower', desc: 'Community members, students, and researchers alike.' },
-  { icon: '📖', title: 'Document', desc: 'The richness of Mising culture for future generations.' },
+  { icon: '', title: 'Preserve', desc: 'Cultural knowledge and heritage, before it is lost to time.' },
+  { icon: '', title: 'Share', desc: 'Freely, without barriers, paywalls, or gatekeeping.' },
+  { icon: '', title: 'Empower', desc: 'Community members, students, and researchers alike.' },
+  { icon: '', title: 'Document', desc: 'The richness of Mising culture for future generations.' },
 ]
 
 export default function Home() {
@@ -145,7 +145,6 @@ export default function Home() {
                 justifyContent: 'center',
                 fontSize: '28px'
               }}>
-                📖
               </div>
               <div>
                 <h3 style={{ margin: '0 0 8px', fontSize: '17px', fontWeight: '700', lineHeight: '1.3' }}>
@@ -234,7 +233,7 @@ export default function Home() {
             onMouseEnter={hoverIn}
             onMouseLeave={hoverOut}
           >
-            <div style={{ fontSize: '28px', marginBottom: '14px' }}>📚</div>
+            <div style={{ fontSize: '28px', marginBottom: '14px' }}></div>
             <h3 style={{ margin: '0 0 8px', fontSize: '16px', fontWeight: '700' }}>View All Books</h3>
             <p style={{ margin: '0 0 14px', fontSize: '13px', opacity: 0.9, lineHeight: '1.5' }}>The full collection, searchable and sortable.</p>
             <span style={{ fontSize: '12px', fontWeight: '700' }}>Open Library →</span>
