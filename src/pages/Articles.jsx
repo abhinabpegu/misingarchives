@@ -42,7 +42,7 @@ export default function Articles() {
           margin: '10px 0 8px',
           color: colors.text
         }}>
-          ✍️ Articles
+           Articles
         </h1>
         <p style={{
           fontSize: '15px',

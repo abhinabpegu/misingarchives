@@ -78,7 +78,7 @@ export default function DigitalBookLibrary() {
           margin: '10px 0 8px',
           color: colors.text
         }}>
-          📚 Digital Book Library
+           Digital Book Library
         </h1>
         <p style={{
           fontSize: '15px',
