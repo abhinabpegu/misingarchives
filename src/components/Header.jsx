@@ -60,7 +60,7 @@ export default function Header() {
           textShadow: isDarkMode ? '0 2px 8px rgba(0,0,0,0.3)' : 'none',
           whiteSpace: 'nowrap'
         }}>
-          🏛️ Mising Archives
+          Mising Archives
         </Link>
 
         {/* Desktop nav */}

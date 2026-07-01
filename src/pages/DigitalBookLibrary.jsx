@@ -80,16 +80,7 @@ export default function DigitalBookLibrary() {
         }}>
            Digital Book Library
         </h1>
-        <p style={{
-          fontSize: '15px',
-          color: colors.textSecondary,
-          maxWidth: '640px',
-          lineHeight: '1.6',
-          marginBottom: '8px'
-        }}>
-          {booksData.length} freely downloadable books on Mising culture, tradition, history, and language —
-          each one archived and shared by the community.
-        </p>
+      
       </section>
 
       {/* Filters with Glass Effect */}

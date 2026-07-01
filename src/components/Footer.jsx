@@ -25,15 +25,19 @@ export default function Footer() {
       borderTop: `1px solid ${colors.border}`,
       backgroundColor: colors.bgTertiary,
       backdropFilter: 'blur(10px)',
-      marginTop: '60px'
+      marginTop: '60px',
+      display: 'flex',
+      flexDirection: 'column'
     }}>
       <div className="footer-grid" style={{
         maxWidth: '1400px',
+        width: '100%',
         margin: '0 auto',
         padding: '48px 40px 32px',
         display: 'grid',
-        gridTemplateColumns: '1.4fr 1fr 1fr',
-        gap: '32px'
+        gridTemplateColumns: '1.3fr 1fr 1fr 1fr',
+        gap: '32px',
+        boxSizing: 'border-box'
       }}>
         <div style={colStyle}>
           <h3 style={{ margin: 0, fontSize: '17px', fontWeight: '700', color: colors.accentPrimary }}>
@@ -61,6 +65,12 @@ export default function Footer() {
           <a href="https://pahar.in" target="_blank" rel="noopener noreferrer" style={linkStyle}>Pahar.in</a>
           <a href="https://public.resource.org" target="_blank" rel="noopener noreferrer" style={linkStyle}>Public.Resource.Org</a>
         </div>
+
+        <div style={colStyle}>
+          <span style={headingStyle}>Contact</span>
+          <a href="mailto:misingarchives@gmail.com" style={linkStyle}>misingarchives@gmail.com</a>
+          <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={linkStyle}>@misingarchives on Instagram</a>
+        </div>
       </div>
 
       <div style={{
@@ -68,9 +78,13 @@ export default function Footer() {
         padding: '20px 40px',
         textAlign: 'center',
         color: colors.textTertiary,
-        fontSize: '12px'
+        fontSize: '12px',
+        width: '100%',
+        boxSizing: 'border-box'
       }}>
-        <p style={{ opacity: 0.8 }}>©{new Date().getFullYear()}  Mising Archives. Original articles, documentation, and website content are licensed under CC BY-SA 4.0. The Digital Book Library contains works made available under their respective copyright permissions, licences, or public domain status, as indicated for each item.</p>
+        <p style={{ margin: 0, opacity: 0.8, maxWidth: '1200px', marginLeft: 'auto', marginRight: 'auto' }}>
+          ©{new Date().getFullYear()} Mising Archives. Original articles, documentation, and website content are licensed under CC BY-SA 4.0. The Digital Book Library contains works made available under their respective copyright permissions, licences, or public domain status, as indicated for each item.
+        </p>
       </div>
     </footer>
   )

@@ -44,15 +44,7 @@ export default function Articles() {
         }}>
            Articles
         </h1>
-        <p style={{
-          fontSize: '15px',
-          color: colors.textSecondary,
-          maxWidth: '640px',
-          lineHeight: '1.6'
-        }}>
-          {articlesData.length} {articlesData.length === 1 ? 'article' : 'articles'} on Mising language, culture,
-          history, and tradition — shorter reads alongside the Digital Book Library.
-        </p>
+        
       </section>
 
       {/* Category filter */}
@@ -121,12 +113,45 @@ export default function Articles() {
         )}
       </section>
 
-      {/* Quiet pointer to the library for people who landed here looking for books */}
-      <section style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 40px) 60px' }}>
-        <p style={{ fontSize: '13px', color: colors.textTertiary, textAlign: 'center' }}>
-          Looking for full books instead? Visit the <Link to="/digital-book-library" style={{ color: colors.accentPrimary, fontWeight: '600' }}>Digital Book Library</Link>.
-        </p>
-      </section>
+     {/* Contribute an article */}
+<section style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 40px) 40px' }}>
+  <div style={{
+    textAlign: 'center',
+    padding: '32px 24px',
+    borderRadius: '14px',
+    border: `1px solid ${colors.border}`,
+    backgroundColor: colors.bgSecondary,
+    backdropFilter: 'blur(10px)',
+    boxShadow: `0 4px 16px ${colors.shadowColor}`
+  }}>
+    <h3 style={{ margin: '0 0 10px', fontSize: '17px', fontWeight: '700', color: colors.text }}>
+      Want to contribute an article?
+    </h3>
+    <p style={{ margin: '0 0 6px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6', maxWidth: '520px', marginLeft: 'auto', marginRight: 'auto' }}>
+      Send your draft in a suitable format to{' '}
+      <a href="mailto:misingarchives@gmail.com" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+        misingarchives@gmail.com
+      </a>, along with your author details and contact info.
+    </p>
+    <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
+      For further details, reach out on Instagram —{' '}
+      <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+        @misingarchives
+      </a>{' '}
+      or{' '}
+      <a href="https://instagram.com/hehehe.pegu" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+        @hehehe.pegu
+      </a>.
+    </p>
+  </div>
+</section>
+
+{/* Quiet pointer to the library for people who landed here looking for books */}
+<section style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 40px) 60px' }}>
+  <p style={{ fontSize: '13px', color: colors.textTertiary, textAlign: 'center' }}>
+    Looking for full books instead? Visit the <Link to="/digital-book-library" style={{ color: colors.accentPrimary, fontWeight: '600' }}>Digital Book Library</Link>.
+  </p>
+</section>
     </div>
   )
 }

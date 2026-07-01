@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { booksData } from '../data/books'
 import { articlesData } from '../data/articles'
 import { useTheme } from '../context/ThemeContext'
 import { useCardStyle } from '../utils/cardStyle'
 import ArticleCard from '../components/ArticleCard'
+import DonateButton from '../components/DonateButton'
 
 const CATEGORIES = [
   { tag: 'History', icon: '', desc: 'Chronicles of the Mising people and the Brahmaputra valley.' },
@@ -23,7 +24,6 @@ const MISSION_PILLARS = [
 export default function Home() {
   const { isDarkMode, colors } = useTheme()
   const { cardBase, hoverIn, hoverOut } = useCardStyle()
-
   const featuredBook = booksData[0]
   const latestBooks = [...booksData].slice(-3).reverse()
 
@@ -51,7 +51,7 @@ export default function Home() {
       <section style={{ ...sectionWrap, padding: '64px clamp(20px, 5vw, 40px) 56px' }}>
         <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '48px', alignItems: 'center' }}>
           <div>
-            <span style={eyebrow}>Community-Led Digital Archive</span>
+          
             <h1 style={{
               fontSize: '44px',
               lineHeight: '1.15',
@@ -59,7 +59,7 @@ export default function Home() {
               margin: '14px 0 18px',
               color: colors.text
             }}>
-              Preserving Knowledge.<br />Sharing Culture.
+              Kumrígsudung
             </h1>
             <p style={{
               fontSize: '16px',
@@ -69,7 +69,7 @@ export default function Home() {
               marginBottom: '28px'
             }}>
               Mising Archives is a free, open digital library documenting Mising culture, tradition,
-              history, and language. It is currently hosted by the members of Takam Mising Sí:sang Kebang (TMSK).
+              history, and language, started by community members to preserve knowledge for future generations.
             </p>
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
               <Link
@@ -111,56 +111,69 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Featured book card */}
-          <Link
-            to={`/digital-book-library?book=${featuredBook.code}`}
-            style={{ ...cardBase, display: 'block', padding: '28px', textDecoration: 'none', color: colors.text }}
-            onMouseEnter={hoverIn}
-            onMouseLeave={hoverOut}
-          >
-            <span style={{
-              display: 'inline-block',
-              fontSize: '11px',
-              fontWeight: '700',
-              textTransform: 'uppercase',
-              letterSpacing: '1px',
-              color: colors.accentPrimary,
-              backgroundColor: colors.accentLight,
-              padding: '5px 10px',
-              borderRadius: '6px',
-              marginBottom: '16px'
-            }}>
-              Foundational Text · {featuredBook.code}
-            </span>
-          
-            <div style={{ display: 'flex', gap: '18px' }}>
-              <div style={{
-                width: '76px',
-                height: '108px',
-                flexShrink: 0,
-                borderRadius: '8px',
-                backgroundColor: colors.accentLight,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '28px'
-              }}>
-                
-              </div>
-            
-              <div>
-                <h3 style={{ margin: '0 0 8px', fontSize: '17px', fontWeight: '700', lineHeight: '1.3' }}>
-                  {featuredBook.title}
-                </h3>
-                <p style={{ margin: '0 0 10px', fontSize: '13px', color: colors.textSecondary }}>
-                  by {featuredBook.author}
-                </p>
-                <span style={{ fontSize: '13px', fontWeight: '700', color: colors.accentPrimary }}>
-                  View Book →
-                </span>
-              </div>
-            </div>
-          </Link>
+         {/* Featured book card */}
+<Link
+  to={`/digital-book-library?book=${featuredBook.code}`}
+  style={{ ...cardBase, display: 'block', padding: '28px', textDecoration: 'none', color: colors.text }}
+  onMouseEnter={hoverIn}
+  onMouseLeave={hoverOut}
+>
+  <span style={{
+    display: 'inline-block',
+    fontSize: '11px',
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+    color: colors.accentPrimary,
+    backgroundColor: colors.accentLight,
+    padding: '5px 10px',
+    borderRadius: '6px',
+    marginBottom: '16px'
+  }}>
+    Featured Book · {featuredBook.code}
+  </span>
+  <div style={{ display: 'flex', gap: '18px' }}>
+    {featuredBook.coverImage ? (
+      <img
+        src={featuredBook.coverImage}
+        alt={featuredBook.title}
+        style={{
+          width: '76px',
+          height: '108px',
+          flexShrink: 0,
+          borderRadius: '8px',
+          objectFit: 'cover',
+          boxShadow: `0 6px 16px ${colors.shadowColor}`
+        }}
+      />
+    ) : (
+      <div style={{
+        width: '76px',
+        height: '108px',
+        flexShrink: 0,
+        borderRadius: '8px',
+        backgroundColor: colors.accentLight,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '28px'
+      }}>
+        📖
+      </div>
+    )}
+    <div>
+      <h3 style={{ margin: '0 0 8px', fontSize: '17px', fontWeight: '700', lineHeight: '1.3' }}>
+        {featuredBook.title}
+      </h3>
+      <p style={{ margin: '0 0 10px', fontSize: '13px', color: colors.textSecondary }}>
+        by {featuredBook.author}
+      </p>
+      <span style={{ fontSize: '13px', fontWeight: '700', color: colors.accentPrimary }}>
+        View Book →
+      </span>
+    </div>
+  </div>
+</Link>
         </div>
       </section>
 
@@ -331,6 +344,7 @@ export default function Home() {
           </div>
         )}
       </section>
+      
 
       {/* Mission */}
       <section id="mission" style={{ ...sectionWrap, padding: '88px clamp(20px, 5vw, 40px) 80px' }}>
@@ -344,8 +358,6 @@ export default function Home() {
           </p>
         </div>
 
-       
-
         <p style={{
           textAlign: 'center',
           fontSize: '16px',
@@ -357,6 +369,42 @@ export default function Home() {
         }}>
           "Mising Réngam Írroi"
         </p>
+      </section>
+      {/* Support the Archive */}
+      <section style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}>
+        <div style={{
+          ...cardBase,
+          padding: '40px clamp(24px, 5vw, 48px)',
+          textAlign: 'center'
+        }}>
+          <span style={eyebrow}>Support the Archive</span>
+          <h2 style={{ fontSize: '26px', fontWeight: '700', margin: '10px 0 12px', color: colors.text }}>
+            Help Keep This Archive Free
+          </h2>
+          <p style={{
+            fontSize: '14px',
+            color: colors.textSecondary,
+            maxWidth: '480px',
+            margin: '0 auto 28px',
+            lineHeight: '1.7'
+          }}>
+            Mising Archives is community-run and free to access. If it's been useful to you,
+            consider supporting the cost of hosting, archiving, and growing the collection.
+          </p>
+
+          <DonateButton />
+
+          <p style={{
+            fontSize: '12px',
+            color: colors.textTertiary,
+            maxWidth: '440px',
+            margin: '20px auto 0',
+            lineHeight: '1.6'
+          }}>
+            Supports UPI, cards, netbanking, and wallets. This is a community initiative,
+            not a registered nonprofit — donations aren't tax-deductible.
+          </p>
+        </div>
       </section>
     </div>
   )
