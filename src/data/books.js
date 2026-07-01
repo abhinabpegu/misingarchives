@@ -16,7 +16,7 @@ export const booksData = [
     language: 'English',
     tags: ['Culture', 'History', 'Sociology'],
     driveLink: 'https://drive.google.com/file/d/1au1pTo3_J_qwzN3lb1R_9AyrXceFdFSb/view?usp=drive_link',
-    archivedBy: 'Pahar.in',
+    archivedBy: 'pahar.in',
     coverImage: '/images/book0002.png',
   },
   {

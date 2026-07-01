@@ -8,6 +8,7 @@ import DigitalBookLibrary from './pages/DigitalBookLibrary'
 import Articles from './pages/Articles'
 import ArticleDetail from './pages/ArticleDetail'
 import './styles/App.css'
+import DonationBanner from './components/DonationBanner'
 
 function Layout() {
   const { colors } = useTheme()
@@ -22,6 +23,7 @@ function Layout() {
       display: 'flex',
       flexDirection: 'column'
     }}>
+      <DonationBanner />
       <Header />
       <main style={{ flex: 1 }}>
         <Routes>

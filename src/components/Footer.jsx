@@ -40,9 +40,23 @@ export default function Footer() {
         boxSizing: 'border-box'
       }}>
         <div style={colStyle}>
-          <h3 style={{ margin: 0, fontSize: '17px', fontWeight: '700', color: colors.accentPrimary }}>
-            🏛️ Mising Archives
-          </h3>
+          <h3 style={{
+  margin: 0,
+  fontSize: '17px',
+  fontWeight: '700',
+  color: colors.accentPrimary,
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px'
+}}>
+  <img
+    src="/images/logo.png"
+    alt=""
+    style={{ height: '24px', width: '24px', objectFit: 'contain', borderRadius: '5px' }}
+    onError={(e) => { e.target.style.display = 'none' }}
+  />
+  Mising Archives
+</h3>
           <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary, lineHeight: '1.6', maxWidth: '320px' }}>
             A community-led initiative to preserve and share knowledge about Mising culture, tradition, history, and language.
           </p>

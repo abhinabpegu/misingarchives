@@ -371,6 +371,7 @@ export default function Home() {
         </p>
       </section>
       {/* Support the Archive */}
+      <section id="support" style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}></section>
       <section style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}>
         <div style={{
           ...cardBase,

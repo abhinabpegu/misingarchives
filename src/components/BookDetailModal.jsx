@@ -200,6 +200,24 @@ export default function BookDetailModal({ book, onClose }) {
               {book.archivedBy}
             </p>
           </div>
+          {/* Takedown notice — only for books archived by Mising Archives itself */}
+{book.archivedBy === 'Mising Archives' && (
+  <div style={{
+    marginBottom: '24px',
+    padding: '14px 16px',
+    borderRadius: '10px',
+    border: `1px solid ${colors.border}`,
+    backgroundColor: colors.bgTertiary,
+    fontSize: '12px',
+    color: colors.textSecondary,
+    lineHeight: '1.6'
+  }}>
+    Copyright holder? If you'd like this book taken down, email{' '}
+    <a href="mailto:misingarchives@gmail.com" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+      misingarchives@gmail.com
+    </a>.
+  </div>
+)}
 
           {/* Download Button */}
           <a
