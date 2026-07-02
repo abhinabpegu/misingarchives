@@ -6,6 +6,7 @@ import { useTheme } from '../context/ThemeContext'
 import { useCardStyle } from '../utils/cardStyle'
 import ArticleCard from '../components/ArticleCard'
 import DonateButton from '../components/DonateButton'
+import InstagramCard from '../components/InstagramCard'
 
 const CATEGORIES = [
   { tag: 'History', icon: '', desc: 'Historic accounts of the Mising people' },
@@ -370,6 +371,10 @@ export default function Home() {
           "Mising Réngam Írroi"
         </p>
       </section>
+      {/* Follow on Instagram */}
+<section style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 56px' }}>
+  <InstagramCard />
+</section>
       {/* Support the Archive */}
       <section id="support" style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}></section>
       <section style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}>
