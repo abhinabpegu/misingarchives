@@ -4,6 +4,7 @@ import { Search } from 'lucide-react'
 import { booksData } from '../data/books'
 import { useTheme } from '../context/ThemeContext'
 import BookDetailModal from '../components/BookDetailModal'
+import ContributeCard from '../components/ContributeCard'
 
 export default function DigitalBookLibrary() {
   const { isDarkMode, colors } = useTheme()
@@ -82,6 +83,27 @@ export default function DigitalBookLibrary() {
         </h1>
       
       </section>
+      {/* Request or donate a book */}
+<section style={{ padding: '0 clamp(20px, 5vw, 40px)', maxWidth: '1400px', margin: '0 auto' }}>
+  <ContributeCard
+    title="Have a book to donate, or want one archived?"
+    teaser="Request a title, or help us preserve one you own."
+  >
+    <p style={{ margin: '0 0 6px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6' }}>
+      If you'd like to request a book for the archive, or donate one for archival, email{' '}
+      <a href="mailto:contact@misingarchives.co.in" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+        contact@misingarchives.co.in
+      </a>.
+    </p>
+    <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
+      For further details, reach out on Instagram —{' '}
+      <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+        @misingarchives
+      </a>{' '}
+    
+    </p>
+  </ContributeCard>
+</section>
 
       {/* Filters with Glass Effect */}
       <section style={{
@@ -495,28 +517,6 @@ export default function DigitalBookLibrary() {
           </div>
         )}
       </section>
-      {/* Request or donate a book */}
-<section style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 40px) 60px' }}>
-  <div style={{
-    textAlign: 'center',
-    padding: '32px 24px',
-    borderRadius: '14px',
-    border: `1px solid ${colors.border}`,
-    backgroundColor: colors.bgSecondary,
-    backdropFilter: 'blur(10px)',
-    boxShadow: `0 4px 16px ${colors.shadowColor}`
-  }}>
-    <h3 style={{ margin: '0 0 10px', fontSize: '17px', fontWeight: '700', color: colors.text }}>
-      Have a book to donate, or want one archived?
-    </h3>
-    <p style={{ margin: 0, fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6', maxWidth: '520px', marginLeft: 'auto', marginRight: 'auto' }}>
-      If you'd like to request a book for the archive, or donate one for archival, email{' '}
-      <a href="mailto:misingarchives@gmail.com" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
-        misingarchives@gmail.com
-      </a>.
-    </p>
-  </div>
-</section>
 
 <BookDetailModal book={selectedBook} onClose={() => setSelectedBook(null)} />
 

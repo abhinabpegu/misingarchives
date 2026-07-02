@@ -82,7 +82,7 @@ export default function Footer() {
 
         <div style={colStyle}>
           <span style={headingStyle}>Contact</span>
-          <a href="mailto:misingarchives@gmail.com" style={linkStyle}>misingarchives@gmail.com</a>
+          <a href="mailto:contact@misingarchives.co.in" style={linkStyle}>contact@misingarchives.co.in</a>
           <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={linkStyle}>@misingarchives on Instagram</a>
         </div>
       </div>

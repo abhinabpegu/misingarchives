@@ -117,12 +117,8 @@ influence on the Mising people, and stimulated a process of Sanskritisation.
 <p>
   To submit an article, please send it in a suitable document format
   (DOCX, ODT, or PDF) together with your name and contact details to
-  <a href="mailto:misingarchives@gmail.com">misingarchives@gmail.com</a>.
-  For more information about submissions, you can also contact
-  <a href="https://www.instagram.com/hehehe.pegu/" target="_blank" rel="noopener noreferrer">
-    @hehehe.pegu
-  </a>
-  on Instagram.
+  <a href="mailto:contact@misingarchives.co.in">contact@misingarchives.co.in</a>.
+
 </p>
     `,
   },

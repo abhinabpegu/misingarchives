@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { articlesData } from '../data/articles'
 import { useTheme } from '../context/ThemeContext'
 import ArticleCard from '../components/ArticleCard'
+import ContributeCard from '../components/ContributeCard'
 
 export default function Articles() {
   const { isDarkMode, colors } = useTheme()
@@ -46,6 +47,28 @@ export default function Articles() {
         </h1>
         
       </section>
+      {/* Contribute an article */}
+<section style={{ padding: '0 clamp(20px, 5vw, 40px)', maxWidth: '1400px', margin: '0 auto' }}>
+  <ContributeCard
+    title="Want to contribute an article?"
+    teaser="Send us your writing"
+  >
+    <p style={{ margin: '0 0 6px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6' }}>
+      Send your draft in a suitable format to{' '}
+      <a href="mailto:contact@misingarchives.co.in" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+        contact@misingarchives.co.in
+      </a>, along with your author details and contact info.
+    </p>
+    <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
+      For further details, reach out on Instagram —{' '}
+      <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+        @misingarchives
+      </a>{' '}
+      {' '}
+      
+    </p>
+  </ContributeCard>
+</section>
 
       {/* Category filter */}
       <section style={{
@@ -113,38 +136,7 @@ export default function Articles() {
         )}
       </section>
 
-     {/* Contribute an article */}
-<section style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 40px) 40px' }}>
-  <div style={{
-    textAlign: 'center',
-    padding: '32px 24px',
-    borderRadius: '14px',
-    border: `1px solid ${colors.border}`,
-    backgroundColor: colors.bgSecondary,
-    backdropFilter: 'blur(10px)',
-    boxShadow: `0 4px 16px ${colors.shadowColor}`
-  }}>
-    <h3 style={{ margin: '0 0 10px', fontSize: '17px', fontWeight: '700', color: colors.text }}>
-      Want to contribute an article?
-    </h3>
-    <p style={{ margin: '0 0 6px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6', maxWidth: '520px', marginLeft: 'auto', marginRight: 'auto' }}>
-      Send your draft in a suitable format to{' '}
-      <a href="mailto:misingarchives@gmail.com" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
-        misingarchives@gmail.com
-      </a>, along with your author details and contact info.
-    </p>
-    <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
-      For further details, reach out on Instagram —{' '}
-      <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
-        @misingarchives
-      </a>{' '}
-      or{' '}
-      <a href="https://instagram.com/hehehe.pegu" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
-        @hehehe.pegu
-      </a>.
-    </p>
-  </div>
-</section>
+     
 
 {/* Quiet pointer to the library for people who landed here looking for books */}
 <section style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 40px) 60px' }}>
