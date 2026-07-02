@@ -59,7 +59,7 @@ export default function Home() {
               margin: '14px 0 18px',
               color: colors.text
             }}>
-              Kumrígsudung
+              Kumríksudung
             </h1>
             <p style={{
               fontSize: '16px',
