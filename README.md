@@ -1,40 +1,3 @@
-#  Mising Archives
-
-> **Preserving Knowledge. Sharing Culture. Community-Led.**
-
-A beautiful, open-source web platform dedicated to archiving and making freely accessible books about Mising culture, tradition, history, and language. Built by the community, for the community.
-
-
-![License](https://img.shields.io/badge/license-Open%20Source-brightgreen)
-![Built with React](https://img.shields.io/badge/built%20with-React-61dafb)
-
----
-
-----
-
-##  Live Website
-
- **Visit:** [mising-archives.vercel.app](https://mising-archives.vercel.app)
-
-The site now has three parts:
-- **Home** (`/`) — an introduction to the archive, browse-by-category shortcuts, featured content, and the project's mission.
-- **Digital Book Library** (`/#/digital-book-library`) — the full searchable, filterable book collection (this was the whole site before).
-- **Articles** (`/#/articles`) — shorter standalone reads on Mising language, culture, history, and tradition.
-
----
-
-## 📚 Current Collection
-
-**12 Books** spanning:
-- Mising Grammar & Linguistics
-- History & Culture
-- Folk Literature & Traditions
-- Biographies & Essays
-
-All books are **freely downloadable** and include information about who archived/digitized each one.
-
----
-
 ##  Project Structure
 
 ```
@@ -71,7 +34,6 @@ public/
     └── deploy.yml                # GitHub Actions auto-deployment
 ```
 
-Routing uses `react-router-dom` with a `HashRouter`, so subpages (e.g. `/#/digital-book-library`) work on any static host — including GitHub Pages — without extra server configuration. If you deploy exclusively to a host that handles SPA rewrites for you (like Vercel), you can switch to `BrowserRouter` in `src/main.jsx` for cleaner URLs.
 
 ---
 
@@ -92,7 +54,6 @@ Edit `src/data/books.js` and follow this format:
 }
 ```
 
-The website automatically updates! No need to restart anything. The homepage's "Browse by Category" cards and "Recently Archived" section also update automatically — they're computed from this same file.
 
 ---
 
@@ -184,15 +145,10 @@ All styling is inline CSS-in-JS inside each component, with a small `src/styles/
 
 ##  Vision
 
-**Mising Archives** exists to:
-1. **Preserve** cultural knowledge and heritage
-2. **Share** freely without barriers or paywalls
-3. **Empower** community members and researchers
-4. **Document** the richness of Mising culture for future generations
+
 
 > Knowledge should be free. Culture should be accessible. History should be preserved.
 
 ---
 
 
-**Made with ❤️ for the Mising community**

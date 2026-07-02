@@ -8,7 +8,7 @@ import ArticleCard from '../components/ArticleCard'
 import DonateButton from '../components/DonateButton'
 
 const CATEGORIES = [
-  { tag: 'History', icon: '', desc: 'Chronicles of the Mising people and the Brahmaputra valley.' },
+  { tag: 'History', icon: '', desc: 'Historic accounts of the Mising people' },
   { tag: 'Culture', icon: '', desc: 'Customs, social life, and community heritage.' },
   { tag: 'Language', icon: '', desc: 'Grammars, vocabulary, and linguistic studies.' },
   { tag: 'Folklore', icon: '', desc: 'Folk literature, songs, and oral traditions.' },
