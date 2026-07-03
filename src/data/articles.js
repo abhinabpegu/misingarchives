@@ -45,7 +45,7 @@ export const articlesData = [
     author: 'Contributors of English Wikipedia',
     date: '2026-06-30',
     coverImage: '/images/articles/misingpeople.png',
-    featured: true,
+    featured: false,
     sourceUrl: 'https://en.wikipedia.org/wiki/Mising_people',
     sourceLabel: 'An excerpt from the Wikipedia article "Mising people" (CC BY-SA 4.0)',
     content: `

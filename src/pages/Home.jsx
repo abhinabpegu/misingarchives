@@ -178,32 +178,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section style={sectionWrap}>
-        <div className="stats-grid" style={{
+      {/* From the Articles */}
+      <section style={{ ...sectionWrap, padding: '72px clamp(20px, 5vw, 40px) 0' }}>
+        <div style={{
           display: 'flex',
-          gap: '20px',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
           flexWrap: 'wrap',
-          padding: '28px 32px',
-          borderRadius: '16px',
-          border: `1px solid ${colors.border}`,
-          backgroundColor: colors.bgSecondary,
-          backdropFilter: 'blur(10px)',
-          boxShadow: `0 4px 16px ${colors.shadowColor}`
+          gap: '16px',
+          marginBottom: '28px'
         }}>
-          {[
-            [String(booksData.length), 'Books'],
-            [String(articlesData.length), 'Articles'],
-            ['3', 'Languages'],
-            ['100%', 'Free to Access']
-          ].map(([num, label]) => (
-            <div key={label} style={{ flex: '1 1 140px' }}>
-              <div style={{ fontSize: '28px', fontWeight: '800', color: colors.accentPrimary }}>{num}</div>
-              <div style={{ fontSize: '12px', color: colors.textSecondary, textTransform: 'uppercase', letterSpacing: '0.8px', fontWeight: '600' }}>{label}</div>
-            </div>
-          ))}
+          <div>
+            <span style={eyebrow}>Notes & Essays</span>
+            <h2 style={{ fontSize: '28px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>
+              From the Articles
+            </h2>
+            <p style={{ fontSize: '14px', color: colors.textSecondary, maxWidth: '520px' }}>
+              Shorter reads on Mising language, culture, and history.
+            </p>
+          </div>
+          <Link to="/articles" style={{ fontSize: '13px', fontWeight: '700', color: colors.accentPrimary, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+            View All Articles →
+          </Link>
         </div>
+
+        {featuredArticle && (
+          <div className="articles-grid" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '24px' }}>
+            <ArticleCard article={featuredArticle} size="featured" />
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {otherArticles.length > 0 ? (
+                otherArticles.map(a => <ArticleCard key={a.slug} article={a} />)
+              ) : (
+                <div style={{
+                  ...cardBase,
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  padding: '24px',
+                  color: colors.textSecondary,
+                  fontSize: '13px'
+                }}>
+                  More articles are on their way.
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </section>
+
 
       {/* Explore by category */}
       <section style={{ ...sectionWrap, padding: '72px clamp(20px, 5vw, 40px) 0' }}>
@@ -295,56 +320,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* From the Articles */}
-      <section style={{ ...sectionWrap, padding: '72px clamp(20px, 5vw, 40px) 0' }}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-end',
-          flexWrap: 'wrap',
-          gap: '16px',
-          marginBottom: '28px'
-        }}>
-          <div>
-            <span style={eyebrow}>Notes & Essays</span>
-            <h2 style={{ fontSize: '28px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>
-              From the Articles
-            </h2>
-            <p style={{ fontSize: '14px', color: colors.textSecondary, maxWidth: '520px' }}>
-              Shorter reads on Mising language, culture, and history.
-            </p>
-          </div>
-          <Link to="/articles" style={{ fontSize: '13px', fontWeight: '700', color: colors.accentPrimary, textDecoration: 'none', whiteSpace: 'nowrap' }}>
-            View All Articles →
-          </Link>
-        </div>
-
-        {featuredArticle && (
-          <div className="articles-grid" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '24px' }}>
-            <ArticleCard article={featuredArticle} size="featured" />
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              {otherArticles.length > 0 ? (
-                otherArticles.map(a => <ArticleCard key={a.slug} article={a} />)
-              ) : (
-                <div style={{
-                  ...cardBase,
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                  padding: '24px',
-                  color: colors.textSecondary,
-                  fontSize: '13px'
-                }}>
-                  More articles are on their way.
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-      </section>
       
 
       {/* Mission */}
