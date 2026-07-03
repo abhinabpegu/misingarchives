@@ -74,14 +74,7 @@ export default function Header() {
           <NavLink to="/" style={navLinkStyle} end>Home</NavLink>
           <NavLink to="/digital-book-library" style={navLinkStyle}>Digital Book Library</NavLink>
           <NavLink to="/articles" style={navLinkStyle}>Articles</NavLink>
-          <a href="#mission" onClick={scrollToMission} style={{
-            color: colors.textSecondary,
-            fontWeight: '600',
-            fontSize: '14px',
-            textDecoration: 'none',
-            padding: '8px 4px',
-            borderBottom: '2px solid transparent'
-          }}>Our Mission</a>
+          <NavLink to="/article/About-Mising-Archives" style={navLinkStyle}>About</NavLink>
         </nav>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -147,12 +140,8 @@ export default function Header() {
           <NavLink to="/" onClick={() => setMenuOpen(false)} style={navLinkStyle} end>Home</NavLink>
           <NavLink to="/digital-book-library" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Digital Book Library</NavLink>
           <NavLink to="/articles" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Articles</NavLink>
-          <a href="#mission" onClick={scrollToMission} style={{
-            color: colors.textSecondary,
-            fontWeight: '600',
-            fontSize: '14px',
-            textDecoration: 'none'
-          }}>Our Mission</a>
+          <NavLink to="/article/About-Mising-Archives" onClick={() => setMenuOpen(false)} style={navLinkStyle}>About</NavLink>
+      
         </nav>
       )}
     </header>
