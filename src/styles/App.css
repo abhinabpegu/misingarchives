@@ -1,26 +1,17 @@
 /* Responsive Design */
 
-/* Desktop - Show Table */
-@media (min-width: 769px) {
-  .desktop-table {
-    display: block;
-  }
+/* Responsive Design */
 
-  .mobile-cards {
-    display: none;
-  }
+/* Book library card grid */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
 
-/* Mobile - Show Cards */
 @media (max-width: 768px) {
-  .desktop-table {
-    display: none;
-  }
-
-  .mobile-cards {
-    display: grid;
+  .books-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
   }
 
   .section-container {

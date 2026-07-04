@@ -87,20 +87,40 @@ export default function DigitalBookLibrary() {
 <section style={{ padding: '0 clamp(20px, 5vw, 40px)', maxWidth: '1400px', margin: '0 auto' }}>
   <ContributeCard
     title="Have a book to donate, or want one archived?"
-    teaser="Request a title, or help us preserve one you own."
+    teaser="Request a title, or give permission to archive one you hold the rights to."
   >
-    <p style={{ margin: '0 0 6px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6' }}>
-      If you'd like to request a book for the archive, or donate one for archival, email{' '}
+    <p style={{ margin: '0 0 14px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6' }}>
+      Whether you're requesting a book for the archive, or you're a copyright holder/author
+      giving permission for your book to be archived, fill out our short form:
+    </p>
+
+    <a
+      href="https://docs.google.com/forms/d/e/1FAIpQLScahQG34BhG6t03j8lXFSNiqpmnlHhdvWIe8UpisYbBFrOqpg/viewform"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: 'inline-block',
+        padding: '10px 18px',
+        backgroundColor: colors.accentPrimary,
+        color: '#fff',
+        borderRadius: '8px',
+        textDecoration: 'none',
+        fontSize: '13px',
+        fontWeight: '700',
+        marginBottom: '12px'
+      }}
+    >
+      Open the Book Archival Form →
+    </a>
+    <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
+      Prefer email? Reach us at{' '}
       <a href="mailto:contact@misingarchives.co.in" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
         contact@misingarchives.co.in
-      </a>.
-    </p>
-    <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
-      For further details, reach out on Instagram —{' '}
+      </a>{' '}
+      or on Instagram —{' '}
       <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
         @misingarchives
-      </a>{' '}
-    
+      </a>.
     </p>
   </ContributeCard>
 </section>
@@ -216,289 +236,167 @@ export default function DigitalBookLibrary() {
         </div>
       </section>
 
-      {/* Books Table with Glass Effect - Responsive */}
+      {/* Books Grid — unified card layout, 2 columns on desktop, 1 on mobile */}
       <section className="section-container" style={{
         padding: '0 40px 60px',
         maxWidth: '1400px',
         margin: '0 auto'
       }}>
         {displayedBooks.length > 0 ? (
-          <>
-            {/* Desktop Table */}
-            <div className="desktop-table" style={{
-              borderRadius: '12px',
-              border: `1px solid ${colors.border}`,
-              overflow: 'hidden',
-              boxShadow: `0 8px 32px ${colors.shadowColor}`,
-              backgroundColor: colors.bgSecondary,
-              backdropFilter: 'blur(10px)',
-              marginTop: '32px'
-            }}>
-              <table style={{
-                width: '100%',
-                borderCollapse: 'collapse',
-              }}>
-                <thead>
-                  <tr style={{
-                    borderBottom: `1px solid ${colors.border}`,
-                    backgroundColor: colors.bgTertiary,
-                    backdropFilter: 'blur(10px)'
-                  }}>
-                    {['Code', 'Title', 'Author', 'Language', 'Tags', 'Action'].map(header => (
-                      <th key={header} style={{
-                        padding: '18px 16px',
-                        textAlign: 'left',
-                        fontSize: '11px',
-                        fontWeight: '700',
-                        textTransform: 'uppercase',
-                        letterSpacing: '1.2px',
-                        color: colors.accentPrimary,
-                        borderRight: header !== 'Action' ? `1px solid ${colors.border}` : 'none'
-                      }}>
-                        {header}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {displayedBooks.map((book) => (
-                    <tr
-                      key={book.code}
+          <div className="books-grid" style={{ marginTop: '32px' }}>
+            {displayedBooks.map((book) => (
+              <div
+                key={book.code}
+                className="book-card"
+                style={{
+                  backgroundColor: colors.bgSecondary,
+                  borderRadius: '12px',
+                  border: `1px solid ${colors.border}`,
+                  padding: '20px',
+                  backdropFilter: 'blur(10px)',
+                  boxShadow: `0 4px 12px ${colors.shadowColor}`,
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = colors.tableHover
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = colors.bgSecondary
+                }}
+              >
+                <div style={{ display: 'flex', gap: '14px', marginBottom: '12px', flex: 1 }}>
+                  {book.coverImage ? (
+                    <img
+                      src={book.coverImage}
+                      alt={book.title}
                       style={{
-                        borderBottom: `1px solid ${colors.border}`,
-                        transition: 'all 0.2s ease',
-                        cursor: 'pointer'
+                        width: '64px',
+                        height: '92px',
+                        flexShrink: 0,
+                        objectFit: 'cover',
+                        borderRadius: '6px',
+                        boxShadow: `0 4px 10px ${colors.shadowColor}`
                       }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = colors.tableHover
-                        e.currentTarget.style.boxShadow = `inset 0 0 10px ${colors.shadowColor}`
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = 'transparent'
-                        e.currentTarget.style.boxShadow = 'none'
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: '64px',
+                        height: '92px',
+                        flexShrink: 0,
+                        borderRadius: '6px',
+                        backgroundColor: colors.accentLight,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '22px'
                       }}
                     >
-                      <td style={{
-                        padding: '16px',
-                        fontSize: '14px',
-                        fontWeight: '700',
-                        color: colors.accentPrimary,
-                        borderRight: `1px solid ${colors.border}`
-                      }}>
-                        {book.code}
-                      </td>
-                      <td style={{
-                        padding: '16px',
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: colors.text,
-                        borderRight: `1px solid ${colors.border}`,
-                        maxWidth: '300px',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap'
-                      }}>
-                        {book.title}
-                      </td>
-                      <td style={{
-                        padding: '16px',
-                        fontSize: '14px',
-                        color: colors.textSecondary,
-                        borderRight: `1px solid ${colors.border}`
-                      }}>
-                        {book.author}
-                      </td>
-                      <td style={{
-                        padding: '16px',
-                        fontSize: '14px',
-                        color: colors.textSecondary,
-                        borderRight: `1px solid ${colors.border}`
-                      }}>
-                        <span style={{
-                          display: 'inline-block',
-                          padding: '6px 10px',
-                          backgroundColor: colors.accentLight,
-                          color: colors.accentPrimary,
-                          borderRadius: '6px',
-                          fontSize: '12px',
-                          fontWeight: '600'
-                        }}>
-                          {book.language}
-                        </span>
-                      </td>
-                      <td style={{
-                        padding: '16px',
-                        fontSize: '12px',
-                        color: colors.textTertiary,
-                        borderRight: `1px solid ${colors.border}`
-                      }}>
-                        {book.tags.slice(0, 2).map(tag => (
-                          <span key={tag} style={{
-                            display: 'inline-block',
-                            marginRight: '6px',
-                            marginBottom: '4px'
-                          }}>
-                            {tag}
-                          </span>
-                        ))}
-                        {book.tags.length > 2 && (
-                          <span>+{book.tags.length - 2}</span>
-                        )}
-                      </td>
-                      <td style={{
-                        padding: '16px',
-                        textAlign: 'center'
-                      }}>
-                        <button
-                          onClick={() => setSelectedBook(book)}
-                          style={{
-                            padding: '8px 14px',
-                            backgroundColor: colors.accentPrimary,
-                            color: isDarkMode ? colors.bg : '#fff',
-                            border: 'none',
-                            borderRadius: '8px',
-                            cursor: 'pointer',
-                            fontSize: '12px',
-                            fontWeight: '600',
-                            transition: 'all 0.2s ease',
-                            boxShadow: `0 4px 12px ${colors.shadowColor}`
-                          }}
-                          onMouseEnter={(e) => {
-                            e.target.style.backgroundColor = colors.accentSecondary
-                            e.target.style.transform = 'translateY(-2px)'
-                            e.target.style.boxShadow = `0 6px 20px ${colors.shadowColor}`
-                          }}
-                          onMouseLeave={(e) => {
-                            e.target.style.backgroundColor = colors.accentPrimary
-                            e.target.style.transform = 'translateY(0)'
-                            e.target.style.boxShadow = `0 4px 12px ${colors.shadowColor}`
-                          }}
-                        >
-                          View
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                      📖
+                    </div>
+                  )}
 
-            {/* Mobile Card View */}
-            <div className="mobile-cards" style={{ marginTop: '32px' }}>
-              {displayedBooks.map((book) => (
-                <div
-                  key={book.code}
-                  style={{
-                    backgroundColor: colors.bgSecondary,
-                    borderRadius: '12px',
-                    border: `1px solid ${colors.border}`,
-                    padding: '16px',
-                    backdropFilter: 'blur(10px)',
-                    boxShadow: `0 4px 12px ${colors.shadowColor}`,
-                    transition: 'all 0.2s ease'
-                  }}
-                  onTouchStart={(e) => {
-                    e.currentTarget.style.backgroundColor = colors.tableHover
-                  }}
-                  onTouchEnd={(e) => {
-                    e.currentTarget.style.backgroundColor = colors.bgSecondary
-                  }}
-                >
-                  <div style={{ marginBottom: '12px' }}>
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'start',
-                      marginBottom: '8px'
-                    }}>
-                      <span style={{
-                        fontSize: '13px',
-                        fontWeight: '700',
-                        color: colors.accentPrimary
-                      }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'start',
+                        marginBottom: '8px'
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: '13px',
+                          fontWeight: '700',
+                          color: colors.accentPrimary
+                        }}
+                      >
                         {book.code}
                       </span>
-                      <span style={{
+                      <span
+                        style={{
+                          fontSize: '11px',
+                          padding: '4px 8px',
+                          backgroundColor: colors.accentLight,
+                          color: colors.accentPrimary,
+                          borderRadius: '4px',
+                          fontWeight: '600'
+                        }}
+                      >
+                        {book.language}
+                      </span>
+                    </div>
+                    <h3
+                      style={{
+                        margin: '0 0 6px 0',
+                        fontSize: '16px',
+                        fontWeight: '700',
+                        color: colors.text,
+                        lineHeight: '1.35'
+                      }}
+                    >
+                      {book.title}
+                    </h3>
+                    <p
+                      style={{
+                        margin: '0 0 12px 0',
+                        fontSize: '13px',
+                        color: colors.textSecondary
+                      }}
+                    >
+                      {book.author}
+                    </p>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
+                  {book.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
                         fontSize: '11px',
                         padding: '4px 8px',
                         backgroundColor: colors.accentLight,
                         color: colors.accentPrimary,
                         borderRadius: '4px',
-                        fontWeight: '600'
-                      }}>
-                        {book.language}
-                      </span>
-                    </div>
-                    <h3 style={{
-                      margin: '0 0 6px 0',
-                      fontSize: '15px',
-                      fontWeight: '600',
-                      color: colors.text,
-                      lineHeight: '1.3'
-                    }}>
-                      {book.title}
-                    </h3>
-                    <p style={{
-                      margin: '0 0 10px 0',
-                      fontSize: '13px',
-                      color: colors.textSecondary
-                    }}>
-                      {book.author}
-                    </p>
-                  </div>
-
-                  <div style={{ marginBottom: '12px' }}>
-                    <div style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      gap: '4px'
-                    }}>
-                      {book.tags.map(tag => (
-                        <span
-                          key={tag}
-                          style={{
-                            fontSize: '11px',
-                            padding: '4px 8px',
-                            backgroundColor: colors.accentLight,
-                            color: colors.accentPrimary,
-                            borderRadius: '4px',
-                            fontWeight: '500'
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => setSelectedBook(book)}
-                    style={{
-                      width: '100%',
-                      padding: '10px 14px',
-                      backgroundColor: colors.accentPrimary,
-                      color: isDarkMode ? colors.bg : '#fff',
-                      border: 'none',
-                      borderRadius: '8px',
-                      cursor: 'pointer',
-                      fontSize: '13px',
-                      fontWeight: '600',
-                      transition: 'all 0.2s ease',
-                      boxShadow: `0 4px 12px ${colors.shadowColor}`
-                    }}
-                    onTouchStart={(e) => {
-                      e.target.style.backgroundColor = colors.accentSecondary
-                    }}
-                    onTouchEnd={(e) => {
-                      e.target.style.backgroundColor = colors.accentPrimary
-                    }}
-                  >
-                    View Details
-                  </button>
+                        fontWeight: '500'
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </>
+
+                <button
+                  onClick={() => setSelectedBook(book)}
+                  style={{
+                    width: '100%',
+                    padding: '10px 14px',
+                    backgroundColor: colors.accentPrimary,
+                    color: isDarkMode ? colors.bg : '#fff',
+                    border: 'none',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    transition: 'all 0.2s ease',
+                    boxShadow: `0 4px 12px ${colors.shadowColor}`
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = colors.accentSecondary
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = colors.accentPrimary
+                  }}
+                >
+                  View Details
+                </button>
+              </div>
+            ))}
+          </div>
         ) : (
           <div style={{
             textAlign: 'center',
@@ -517,8 +415,6 @@ export default function DigitalBookLibrary() {
           </div>
         )}
       </section>
-
-<BookDetailModal book={selectedBook} onClose={() => setSelectedBook(null)} />
 
       <BookDetailModal book={selectedBook} onClose={() => setSelectedBook(null)} />
     </div>
