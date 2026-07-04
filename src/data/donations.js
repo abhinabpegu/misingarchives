@@ -25,16 +25,29 @@ export const donationsData = [
     name: 'Nabajit Pamegam',
     anonymous: false,
     amount: 50,
-    date: '2026-07-01', // TODO: replace with actual donation date
+    date: '2026-07-01', 
     note: '',
   },
   {
     name: 'Bikash Mili',
     anonymous: false,
     amount: 200,
-    date: '2026-07-01', // TODO: replace with actual donation date
+    date: '2026-07-01', 
     note: '',
   },
+
+  {
+    name: 'Oyir Patir',
+    anonymous: false,
+    amount: 200,
+    date: '2026-07-04', 
+  },
+  {
+    name: 'Runaway Lady',
+    anonymous: false,
+    amount: 1000,
+    date: '2026-07-04', 
+  }
   
 ]
 
