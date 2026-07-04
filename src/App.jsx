@@ -9,6 +9,7 @@ import Articles from './pages/Articles'
 import ArticleDetail from './pages/ArticleDetail'
 import './styles/App.css'
 import DonationBanner from './components/DonationBanner'
+import Donations from './pages/Donations'
 
 function Layout() {
   const { colors } = useTheme()
@@ -31,6 +32,7 @@ function Layout() {
           <Route path="/digital-book-library" element={<DigitalBookLibrary />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/article/:slug" element={<ArticleDetail />} />
+          <Route path="/donations" element={<Donations />} />
         </Routes>
       </main>
       <Footer />

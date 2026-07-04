@@ -385,6 +385,20 @@ export default function Home() {
             Supports UPI, cards, netbanking, and wallets. This is a community initiative,
             not a registered nonprofit — donations aren't tax-deductible.
           </p>
+
+          <Link
+            to="/donations"
+            style={{
+              display: 'inline-block',
+              marginTop: '16px',
+              fontSize: '13px',
+              fontWeight: '700',
+              color: colors.accentPrimary,
+              textDecoration: 'none'
+            }}
+          >
+            See how donations are used →
+          </Link>
         </div>
       </section>
     </div>
