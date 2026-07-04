@@ -4,7 +4,7 @@ import { useTheme } from '../context/ThemeContext'
 
 export default function ContributeCard({ title, teaser, children }) {
   const { colors } = useTheme()
-  const [expanded, setExpanded] = useState(false)
+  const [expanded, setExpanded] = useState(true)
 
   return (
     <div style={{

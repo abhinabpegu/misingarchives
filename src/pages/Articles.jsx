@@ -48,27 +48,45 @@ export default function Articles() {
         
       </section>
       {/* Contribute an article */}
-<section style={{ padding: '0 clamp(20px, 5vw, 40px)', maxWidth: '1400px', margin: '0 auto' }}>
-  <ContributeCard
-    title="Want to contribute an article?"
-    teaser="Send us your writing"
-  >
-    <p style={{ margin: '0 0 6px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6' }}>
-      Send your draft in a suitable format to{' '}
-      <a href="mailto:contact@misingarchives.co.in" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
-        contact@misingarchives.co.in
-      </a>, along with your author details and contact info.
-    </p>
-    <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
-      For further details, reach out on Instagram —{' '}
-      <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
-        @misingarchives
-      </a>{' '}
-      {' '}
-      
-    </p>
-  </ContributeCard>
-</section>
+      <section style={{ padding: '0 clamp(20px, 5vw, 40px)', maxWidth: '1400px', margin: '0 auto' }}>
+        <ContributeCard
+          title="Want to contribute an article?"
+          teaser="Send us your writing"
+        >
+          <p style={{ margin: '0 0 14px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6' }}>
+            Submit your draft, along with your author details, using our short form:
+          </p>
+
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfEnOKDzhTOoSyLdSMKrhy6SE87HK0SlTJj_8YOHOrIgt_v2Q/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              padding: '10px 18px',
+              backgroundColor: colors.accentPrimary,
+              color: '#fff',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              fontSize: '13px',
+              fontWeight: '700',
+              marginBottom: '12px'
+            }}
+          >
+            Open the Article Submission Form →
+          </a>
+          <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
+            Prefer email? Reach us at{' '}
+            <a href="mailto:contact@misingarchives.co.in" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+              contact@misingarchives.co.in
+            </a>{' '}
+            or on Instagram —{' '}
+            <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+              @misingarchives
+            </a>.
+          </p>
+        </ContributeCard>
+      </section>
 
       {/* Category filter */}
       <section style={{
