@@ -178,35 +178,7 @@ export default function Donations() {
         )}
       </section>
 
-      {/* CTA back to donate */}
-      <section style={{ ...sectionWrap, padding: '56px clamp(20px, 5vw, 40px) 88px' }}>
-        <div style={{ ...cardBase, padding: '32px', textAlign: 'center' }}
-          onMouseEnter={hoverIn}
-          onMouseLeave={hoverOut}
-        >
-          <h3 style={{ fontSize: '18px', fontWeight: '700', margin: '0 0 10px', color: colors.text }}>
-            Want to support the archive?
-          </h3>
-          <p style={{ fontSize: '13px', color: colors.textSecondary, marginBottom: '20px' }}>
-            Every contribution, big or small, goes toward keeping this collection free and growing.
-          </p>
-          <Link
-            to="/#support"
-            style={{
-              display: 'inline-block',
-              padding: '12px 22px',
-              backgroundColor: colors.accentPrimary,
-              color: '#fff',
-              borderRadius: '10px',
-              textDecoration: 'none',
-              fontSize: '13px',
-              fontWeight: '700'
-            }}
-          >
-            Donate →
-          </Link>
-        </div>
-      </section>
+      
     </div>
   )
 }
