@@ -47,7 +47,18 @@ export const donationsData = [
     anonymous: false,
     amount: 1000,
     date: '2026-07-04', 
-  }
+  },
+  {
+    name: 'A.R Takoe',
+    anonymous: false,
+    amount: 27,
+    date: '2026-07-05',
+  },
+  {name: 'Aditya Takar Doley',
+    anonymous: false,
+    amount: 20,
+    date: '2026-07-05',
+},
   
 ]
 
