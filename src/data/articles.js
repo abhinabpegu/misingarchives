@@ -38,62 +38,45 @@
 
 export const articlesData = [
   {
-    slug: 'mising-people',
-    title: 'The Mising People: An Overview',
+    slug: 'The-Mising-Tribe-Between-Assimilation-and-Preservation',
+    title: 'The Mising Tribe: Between Assimilation and Preservation',
     category: 'Culture',
-    excerpt: 'The Mising people or Miri people are a Tibeto-Burman ethnic group living mostly in the Northeast Indian states of Assam and Arunachal Pradesh.',
-    author: 'Contributors of English Wikipedia',
-    date: '2026-06-30',
-    coverImage: '/images/articles/misingpeople.png',
-    featured: false,
-    sourceUrl: 'https://en.wikipedia.org/wiki/Mising_people',
-    sourceLabel: 'An excerpt from the Wikipedia article "Mising people" (CC BY-SA 4.0)',
+    excerpt: 'The Mising tribe, one of the prominent indigenous groups of Northeast India and part of the broader Tani cultural family, possesses a rich cultural heritage shaped by language, traditions, and close ties to nature.',
+    author: 'Sumyo Doley',
+    date: '2026-07-05',
+    coverImage: '/images/articles/sumyodoley-05july26.png',
+    featured: true,
+    sourceUrl: null,
+    sourceLabel: null,
     content: `
-<p>The Mising people or Miri people (/ˈmiːsɪŋ/ or /ˈmɪsɪŋ/) are
- a Tibeto-Burman ethnic group living mostly in the Northeast Indian
-  states of Assam and Arunachal Pradesh. Their Mising language is a part
-   of the Tani languages and the Tibeto-Burman language group. The Misings
-    are a major ethnic group of Assam, the second largest tribe after the Bodos.
-     15.4% of Assam's tribal population speaks Mising, but many more speak Assamese
-      (24.7%) and Mising organisations estimate that the unofficial Mising population
-       is 1.2 million rather than the 587,310 declared by the 2001 census of India</p>
+    <p>
+The Mising tribe, one of the prominent indigenous groups of Northeast India and part of the broader Tani cultural family, possesses a rich cultural heritage shaped by language, traditions, and close ties to nature. In recent decades, like many indigenous societies, the Misings have experienced significant cultural transformation due to increased interaction with surrounding communities, education systems, and urban lifestyles.
+</p>
 
-<h2>Ethymology</h2>
-<p>The Misings are officially listed as
- Miri in the Constitution of India's order
-  of Scheduled Tribes, but they prefer to known as Mising.
-   Mising is an endonym and demonym which literally means 
-   'man of the soil'. Miri, on the other hand, is an
-    exonym once applied by the Assamese.
-     There is still much scholarly debate
-      on the origin of Miri as an ethnonym.
- The Misings also use the endonym Tani, 'man', for identifying themselves</p>
+<p>
+One visible aspect of this change is in traditional attire and cultural adoption. Alongside traditional Mising clothing, many in the community have also embraced the <em>mekhela sador</em> or <em>ege-gasor</em>, a widely worn Assamese traditional dress, especially in formal and social settings. This reflects the blending of cultural identities that has taken place over time through everyday interaction and shared regional life.
+</p>
 
-<h2>Language</h2>
-<p>Educated Misings are bilingual in Assamese and Mising,
- but some speak only Assamese and a minority speak only Mising.
-  The Misings practice code switching, depending on the degree of their 
-  interactions with the non-tribal Assamese, the dominant community in the
-   Brahmaputra Valley.</p>
+<p>
+Language and terminology have also evolved in some contexts. Certain traditional terms, such as <em>Rutum Ui/Uyu</em>, have in some cases been replaced or reinterpreted in modern usage, with terms like <em>Dangoriya Hokam</em> becoming more common in specific cultural or organizational settings. Such shifts often reflect broader changes in how traditions are expressed in contemporary environments.
+</p>
 
-<h2>Religion</h2>
-<p>The neo-Vaishnavite cult of Sankardev had a significant 
+<p>
+Religious and ritual practices have also seen adaptation. Some members of the Mising community now participate in or observe rituals influenced by Assamese traditions, including practices such as <em>Satjonia Puja</em>. These developments highlight the ongoing cultural exchange between communities living in close geographical and social proximity.
+</p>
 
-influence on the Mising people, and stimulated a process of Sanskritisation.
- There are many neo-Vaishnavite monasteries, or xatras, in the Mising populated 
- areas of Assam. However, the Misings later perceived
-  that the xatras had become instruments perpetuating the
-   interest of non-tribal Assamese speaking elites, which led
-    to the weakening of neo-Vaishnavism by the 1970s.
-     Although the Misings are reckoned amongst the Hinduized
-      peoples, they have retained many of their customary practices.
-       This is in contrast to other Hinduized tribal groups in Assam,
-        which have relinquished many of their traditional customs and
-         embraced the Assamese caste Hindu system. A new identity-centric cultural movement called Donyi-Polo has gained
-          some following among the Mising people,
-           with a point of origin in Arunachal Pradesh, where it has a wider following.
-            Christianity has been embraced by some of the Mising population,
-             which has led to some sectarian tensions.</p>
+<p>
+At the same time, this process raises important questions about cultural continuity. While assimilation and cultural blending can foster unity and shared identity within a region, they can also lead to concerns about the gradual weakening of distinct indigenous traditions, language usage, and ancestral practices.
+</p>
+
+<p>
+In this context, many feel that strengthening connections with related Tani groups—such as the Adi, Galo, and others in Arunachal Pradesh—can play a meaningful role in cultural preservation. Shared ancestry and similarities in traditional practices provide a foundation for cultural exchange that reinforces indigenous identity while still allowing engagement with broader society.
+</p>
+
+<p>
+Ultimately, the future of the Mising identity lies in balance: preserving language, traditions, and cultural memory while navigating a changing social landscape shaped by interaction, adaptation, and modern influences.
+</p>
+
     `,
   },
   {
