@@ -41,7 +41,6 @@ const featuredArticles = fillerNeeded > 0
   : markedFeatured
 
 const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
-const otherArticles = sortedArticles.filter(a => !featuredResultSlugs.has(a.slug)).slice(0, 3)
 
   const eyebrow = {
     fontSize: '12px',
@@ -213,14 +212,13 @@ const otherArticles = sortedArticles.filter(a => !featuredResultSlugs.has(a.slug
           </Link>
         </div>
 
-       {featuredArticles.length > 0 && (
+      {featuredArticles.length > 0 && (
   <div
     className="featured-articles-grid"
     style={{
       display: 'grid',
       gridTemplateColumns: featuredArticles.length === 2 ? '1fr 1fr' : '1fr',
-      gap: '24px',
-      marginBottom: otherArticles.length > 0 ? '24px' : 0
+      gap: '24px'
     }}
   >
     {featuredArticles.map(a => (
@@ -229,17 +227,6 @@ const otherArticles = sortedArticles.filter(a => !featuredResultSlugs.has(a.slug
   </div>
 )}
 
-{otherArticles.length > 0 && (
-  <div style={{
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-    gap: '20px'
-  }}>
-    {otherArticles.map(a => (
-      <ArticleCard key={a.slug} article={a} />
-    ))}
-  </div>
-)}
       </section>
 
 
