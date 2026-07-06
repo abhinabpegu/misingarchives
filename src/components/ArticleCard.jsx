@@ -15,7 +15,9 @@ export default function ArticleCard({ article, size = 'normal' }) {
       to={`/article/${article.slug}`}
       style={{
         ...cardBase,
-        display: 'block',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
         textDecoration: 'none',
         color: colors.text,
         overflow: 'hidden'
@@ -25,20 +27,23 @@ export default function ArticleCard({ article, size = 'normal' }) {
     >
       {(article.coverImage || isFeatured) && (
         article.coverImage ? (
-          <img
-            src={article.coverImage}
-            alt={article.title}
-            style={{
-              width: '100%',
-              height: isFeatured ? '260px' : '160px',
-              objectFit: 'cover',
-              display: 'block'
-            }}
-          />
-        ) : (
+  <img
+    src={article.coverImage}
+    alt={article.title}
+    style={{
+      width: '100%',
+      height: isFeatured ? '260px' : '160px',
+      objectFit: article.coverFit || 'cover',
+      backgroundColor: colors.bgTertiary,
+      display: 'block',
+      flexShrink: 0
+    }}
+  />
+) : (
           <div style={{
             width: '100%',
             height: isFeatured ? '260px' : '160px',
+            flexShrink: 0,
             backgroundColor: colors.accentLight,
             display: 'flex',
             alignItems: 'center',
@@ -50,7 +55,12 @@ export default function ArticleCard({ article, size = 'normal' }) {
         )
       )}
 
-      <div style={{ padding: isFeatured ? '26px' : '20px' }}>
+      <div style={{
+        padding: isFeatured ? '26px' : '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1
+      }}>
         <span style={{
           display: 'inline-block',
           fontSize: '11px',
@@ -61,7 +71,8 @@ export default function ArticleCard({ article, size = 'normal' }) {
           backgroundColor: colors.accentLight,
           padding: '4px 10px',
           borderRadius: '6px',
-          marginBottom: '12px'
+          marginBottom: '12px',
+          alignSelf: 'flex-start'
         }}>
           {article.category}
         </span>
@@ -88,6 +99,11 @@ export default function ArticleCard({ article, size = 'normal' }) {
         }}>
           {article.excerpt}
         </p>
+
+        {/* Spacer pushes footer to the bottom when the card is stretched
+            taller than its content (e.g. next to a taller sibling column
+            in a CSS grid), instead of leaving a dead gap under the text. */}
+        <div style={{ flex: 1 }} />
 
         <div style={{
           display: 'flex',

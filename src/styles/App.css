@@ -67,6 +67,14 @@ button:active {
   }
 }
 
+@media (max-width: 900px) {
+  .hero-grid,
+  .articles-grid,
+  .featured-articles-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* ---------------------------------- */
 /* Homepage sections                  */
 /* ---------------------------------- */

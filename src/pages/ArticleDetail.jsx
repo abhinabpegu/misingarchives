@@ -70,17 +70,19 @@ export default function ArticleDetail() {
       </p>
 
       {article.coverImage && (
-        <img
-          src={article.coverImage}
-          alt={article.title}
-          style={{
-            width: '100%',
-            maxHeight: '420px',
-            objectFit: 'cover',
-            borderRadius: '14px',
-            marginBottom: '36px',
-            boxShadow: `0 12px 32px ${colors.shadowColor}`
-          }}
+  <img
+    src={article.coverImage}
+    alt={article.title}
+    style={{
+      width: '100%',
+      maxHeight: '420px',
+      objectFit: article.coverFit || 'cover',
+      backgroundColor: colors.bgTertiary,
+      borderRadius: '14px',
+      marginBottom: '36px',
+      boxShadow: `0 12px 32px ${colors.shadowColor}`
+    }}
+  
         />
       )}
 

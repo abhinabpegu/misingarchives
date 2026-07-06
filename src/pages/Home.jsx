@@ -29,8 +29,19 @@ export default function Home() {
   const latestBooks = [...booksData].slice(-3).reverse()
 
   const sortedArticles = [...articlesData].sort((a, b) => b.date.localeCompare(a.date))
-  const featuredArticle = sortedArticles.find(a => a.featured) || sortedArticles[0]
-  const otherArticles = sortedArticles.filter(a => a.slug !== featuredArticle?.slug).slice(0, 2)
+
+// Up to 2 articles marked featured: true get the big side-by-side cards.
+// If fewer than 2 are marked featured, fill the remaining slot(s) with the
+// next most recent articles so the row is never lopsided or empty.
+const markedFeatured = sortedArticles.filter(a => a.featured).slice(0, 2)
+const featuredSlugs = new Set(markedFeatured.map(a => a.slug))
+const fillerNeeded = 2 - markedFeatured.length
+const featuredArticles = fillerNeeded > 0
+  ? [...markedFeatured, ...sortedArticles.filter(a => !featuredSlugs.has(a.slug)).slice(0, fillerNeeded)]
+  : markedFeatured
+
+const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
+const otherArticles = sortedArticles.filter(a => !featuredResultSlugs.has(a.slug)).slice(0, 3)
 
   const eyebrow = {
     fontSize: '12px',
@@ -202,31 +213,33 @@ export default function Home() {
           </Link>
         </div>
 
-        {featuredArticle && (
-          <div className="articles-grid" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '24px' }}>
-            <ArticleCard article={featuredArticle} size="featured" />
+       {featuredArticles.length > 0 && (
+  <div
+    className="featured-articles-grid"
+    style={{
+      display: 'grid',
+      gridTemplateColumns: featuredArticles.length === 2 ? '1fr 1fr' : '1fr',
+      gap: '24px',
+      marginBottom: otherArticles.length > 0 ? '24px' : 0
+    }}
+  >
+    {featuredArticles.map(a => (
+      <ArticleCard key={a.slug} article={a} size="featured" />
+    ))}
+  </div>
+)}
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              {otherArticles.length > 0 ? (
-                otherArticles.map(a => <ArticleCard key={a.slug} article={a} />)
-              ) : (
-                <div style={{
-                  ...cardBase,
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                  padding: '24px',
-                  color: colors.textSecondary,
-                  fontSize: '13px'
-                }}>
-                  More articles are on their way.
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+{otherArticles.length > 0 && (
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+    gap: '20px'
+  }}>
+    {otherArticles.map(a => (
+      <ArticleCard key={a.slug} article={a} />
+    ))}
+  </div>
+)}
       </section>
 
 
