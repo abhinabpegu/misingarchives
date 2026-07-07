@@ -38,7 +38,7 @@
 
 export const articlesData = [
   { slug: 'Are-Mising-People-Really-Assamese',
-    title: 'Are Mising People Really Assamese',
+    title: 'Are Mising People Really Assamese?',
     category: 'Culture',
     excerpt: 'The question, "Are the Mising people really Assamese?" has become a topic of discussion in Assam, especially on social media and in public debates. While some believe that the Mising community is an integral part of Assamese society, others argue that the Misings have a separate ethnic identity that should not be merged with the Assamese identity.',
     author: 'Jeshmin Pegu',
