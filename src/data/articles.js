@@ -37,6 +37,57 @@
 // content      the article body, as HTML
 
 export const articlesData = [
+  { slug: 'Are-Mising-People-Really-Assamese',
+    title: 'Are Mising People Really Assamese',
+    category: 'Culture',
+    excerpt: 'The question, "Are the Mising people really Assamese?" has become a topic of discussion in Assam, especially on social media and in public debates. While some believe that the Mising community is an integral part of Assamese society, others argue that the Misings have a separate ethnic identity that should not be merged with the Assamese identity.',
+    author: 'Jeshmin Pegu',
+    date: '2026-07-07',
+    coverImage: '/images/articles/jeshminpegu-07july26.png',
+    coverFit: 'cover',
+    featured: true,
+    sourceUrl: null,
+    sourceLabel: null,
+    content: `
+<p><em>
+The question, "Are the Mising people really Assamese?" has become a topic of discussion in Assam, especially on social media and in public debates. While some believe that the Mising community is an integral part of Assamese society, others argue that the Misings have a separate ethnic identity that should not be merged with the Assamese identity. To understand this issue, it is important to distinguish between ethnic identity and regional identity.
+</em></p>
+
+<h2>Who Are the Mising People?</h2>
+
+<p>
+The Mising people are one of the largest indigenous communities of Assam. Believed to have migrated centuries ago from the hills of present-day Arunachal Pradesh, they mainly live along the banks of the Brahmaputra River. They have their own language, traditional dress, customs, folk songs, dances, and festivals such as Ali-Aye-Ligang. These cultural traditions make the Mising community unique among the many ethnic groups of Assam.
+</p>
+
+<h2>The Debate</h2>
+
+<p>
+The debate arises because the word "Assamese" has more than one meaning. Some people use it to describe only the Assamese-speaking ethnic community. Others use it to refer to everyone who belongs to Assam, regardless of ethnicity.
+</p>
+
+<p>
+From an ethnic perspective, the Mising people are not ethnic Assamese. They have a distinct history, language, and culture. However, from a regional perspective, they are undoubtedly a part of Assam. They have lived in the state for generations and have contributed significantly to its agriculture, education, literature, culture, and public life.
+</p>
+
+<h2>My Opinion</h2>
+
+<p>
+In my opinion, the Mising people should not be forced to choose between being Mising and being part of Assam. Their ethnic identity deserves recognition and respect. At the same time, their long history and contribution to Assam make them an inseparable part of the state's identity.
+</p>
+
+<p>
+A person can proudly identify as Mising by ethnicity and Assamese by regional identity. These two identities do not contradict each other. In a multicultural society like Assam, diversity is a strength rather than a weakness.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+The question should not be whether the Mising people are "really Assamese." Instead, the focus should be on respecting every community's identity while promoting unity among all the people of Assam. A peaceful and inclusive Assam can only be built when every indigenous community is valued for its unique heritage and equal contribution. The Mising people are an important part of Assam's past, present, and future, and their identity deserves both recognition and respect.
+</p>
+    `
+
+
+  },
   {
     slug: 'A-Brief-Introduction-to-the-Mising-Community',
     title: 'A Brief Introduction to the Mising Community',
