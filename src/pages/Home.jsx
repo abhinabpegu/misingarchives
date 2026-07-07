@@ -7,6 +7,7 @@ import { useCardStyle } from '../utils/cardStyle'
 import ArticleCard from '../components/ArticleCard'
 import DonateButton from '../components/DonateButton'
 import InstagramCard from '../components/InstagramCard'
+import { donationStatus } from '../data/donations'
 
 const CATEGORIES = [
   { tag: 'History', icon: '', desc: 'Historic accounts of the Mising people' },
@@ -373,18 +374,32 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
             consider supporting the cost of hosting, archiving, and growing the collection.
           </p>
 
-          <DonateButton />
-
-          <p style={{
-            fontSize: '12px',
-            color: colors.textTertiary,
-            maxWidth: '440px',
-            margin: '20px auto 0',
-            lineHeight: '1.6'
-          }}>
-            Supports UPI, cards, netbanking, and wallets. This is a community initiative,
-            not a registered nonprofit — donations aren't tax-deductible.
-          </p>
+         {donationStatus.paused ? (
+            <p style={{
+              fontSize: '14px',
+              color: colors.textSecondary,
+              maxWidth: '440px',
+              margin: '0 auto',
+              lineHeight: '1.7',
+              fontStyle: 'italic'
+            }}>
+              {donationStatus.message}
+            </p>
+          ) : (
+            <>
+              <DonateButton />
+              <p style={{
+                fontSize: '12px',
+                color: colors.textTertiary,
+                maxWidth: '440px',
+                margin: '20px auto 0',
+                lineHeight: '1.6'
+              }}>
+                Supports UPI, cards, netbanking, and wallets. This is a community initiative,
+                not a registered nonprofit — donations aren't tax-deductible.
+              </p>
+            </>
+          )}
 
           <Link
             to="/donations"

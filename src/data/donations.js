@@ -19,6 +19,12 @@
 // amount       number, in INR
 // date         'YYYY-MM-DD'
 // category     'Infrastructure' | 'Archival' | 'Other' (or your own)
+// Simple on/off switch for accepting new donations. Flip `paused` to false
+// once the balance runs low again — no other file needs to change.
+export const donationStatus = {
+  paused: true,
+  message: "Thanks to everyone's generosity, current funds are covering our needs — we've paused new donations for now. We'll reopen here as soon as it's needed again.",
+}
 
 export const donationsData = [
   {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { X, Heart } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
+import { donationStatus } from '../data/donations'
 
 export default function DonationBanner() {
   const { isDarkMode, colors } = useTheme()
@@ -13,6 +14,8 @@ export default function DonationBanner() {
     const wasDismissed = sessionStorage.getItem('donationBannerDismissed')
     if (!wasDismissed) setDismissed(false)
   }, [])
+
+  if (donationStatus.paused) return null
 
   const handleDismiss = () => {
     setDismissed(true)
