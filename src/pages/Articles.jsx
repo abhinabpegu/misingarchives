@@ -24,33 +24,33 @@ export default function Articles() {
     <div>
       {/* Page intro */}
       <section style={{
-        padding: '48px clamp(20px, 5vw, 40px) 0',
-        maxWidth: '1400px',
-        margin: '0 auto'
-      }}>
-        <span style={{
-          fontSize: '12px',
-          fontWeight: '700',
-          textTransform: 'uppercase',
-          letterSpacing: '1.4px',
-          color: colors.accentPrimary
-        }}>
-          Notes & Essays
-        </span>
-        <h1 style={{
-          fontSize: '34px',
-          fontWeight: '700',
-          margin: '10px 0 8px',
-          color: colors.text
-        }}>
-           Articles
-        </h1>
-        
-      </section>
+  padding: '48px clamp(20px, 5vw, 40px) 0',
+  maxWidth: '1400px',
+  margin: '0 auto'
+}}>
+  <span style={{
+    fontSize: '12px',
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: '1.4px',
+    color: colors.accentPrimary
+  }}>
+    From the Community
+  </span>
+  <h1 style={{
+    fontSize: '34px',
+    fontWeight: '700',
+    margin: '10px 0 8px',
+    color: colors.text
+  }}>
+    Community Writings
+  </h1>
+  
+</section>
       {/* Contribute an article */}
       <section style={{ padding: '0 clamp(20px, 5vw, 40px)', maxWidth: '1400px', margin: '0 auto' }}>
         <ContributeCard
-          title="Want to contribute an article?"
+          title="Want to contribute an original writing of yours?"
           teaser="Send us your writing"
         >
           <p style={{ margin: '0 0 14px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6' }}>
@@ -73,7 +73,7 @@ export default function Articles() {
               marginBottom: '12px'
             }}
           >
-            Open the Article Submission Form →
+            Open the Submission Form →
           </a>
           <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
             Prefer email? Reach us at{' '}

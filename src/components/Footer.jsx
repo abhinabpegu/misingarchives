@@ -66,7 +66,7 @@ export default function Footer() {
           <span style={headingStyle}>Explore</span>
           <Link to="/" style={linkStyle}>Home</Link>
           <Link to="/digital-book-library" style={linkStyle}>Digital Book Library</Link>
-          <Link to="/articles" style={linkStyle}>Articles</Link>
+          <Link to="/articles" style={linkStyle}>Community Writings</Link>
           <a href="#mission" style={linkStyle} onClick={(e) => {
             e.preventDefault()
             document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })

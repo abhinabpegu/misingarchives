@@ -73,7 +73,7 @@ export default function Header() {
         }}>
           <NavLink to="/" style={navLinkStyle} end>Home</NavLink>
           <NavLink to="/digital-book-library" style={navLinkStyle}>Digital Book Library</NavLink>
-          <NavLink to="/articles" style={navLinkStyle}>Articles</NavLink>
+          <NavLink to="/articles" style={navLinkStyle}>Community Writings</NavLink>
           <NavLink to="/article/About-Mising-Archives" style={navLinkStyle}>About</NavLink>
         </nav>
 
@@ -139,7 +139,7 @@ export default function Header() {
         }}>
           <NavLink to="/" onClick={() => setMenuOpen(false)} style={navLinkStyle} end>Home</NavLink>
           <NavLink to="/digital-book-library" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Digital Book Library</NavLink>
-          <NavLink to="/articles" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Articles</NavLink>
+          <NavLink to="/articles" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Community Writings</NavLink>
           <NavLink to="/article/About-Mising-Archives" onClick={() => setMenuOpen(false)} style={navLinkStyle}>About</NavLink>
       
         </nav>

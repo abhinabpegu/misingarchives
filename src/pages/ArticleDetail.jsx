@@ -70,27 +70,44 @@ export default function ArticleDetail() {
       </p>
 
       {article.coverImage && (
-  <img
-    src={article.coverImage}
-    alt={article.title}
-    style={{
-      width: '100%',
-      maxHeight: '420px',
-      objectFit: article.coverFit || 'cover',
-      backgroundColor: colors.bgTertiary,
-      borderRadius: '14px',
-      marginBottom: '36px',
-      boxShadow: `0 12px 32px ${colors.shadowColor}`
-    }}
-  
-        />
-      )}
+  article.category === 'Poetry' ? (
+    <img
+      src={article.coverImage}
+      alt={article.title}
+      style={{
+        width: '100%',
+        maxHeight: '220px',
+        objectFit: article.coverFit || 'cover',
+        marginBottom: '36px',
+        filter: 'saturate(0.85) contrast(0.95)',
+        maskImage: 'linear-gradient(to bottom, black 45%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 45%, transparent 100%)',
+        display: 'block'
+
+      }}
+    />
+  ) : (
+    <img
+      src={article.coverImage}
+      alt={article.title}
+      style={{
+        width: '100%',
+        maxHeight: '420px',
+        objectFit: article.coverFit || 'cover',
+        backgroundColor: colors.bgTertiary,
+        borderRadius: '14px',
+        marginBottom: '36px',
+        boxShadow: `0 12px 32px ${colors.shadowColor}`
+      }}
+    />
+  )
+)}
 
       {/* Article body: raw HTML from src/data/articles.js, styled by the
           .article-body rules in src/styles/App.css. CSS custom properties
           below let those rules follow the current light/dark theme. */}
       <div
-        className="article-body"
+  className={article.category === 'Poetry' ? 'article-body poem-body' : 'article-body'}
         style={{
           '--accent': colors.accentPrimary,
           '--text': colors.text,

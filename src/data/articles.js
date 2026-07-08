@@ -37,6 +37,72 @@
 // content      the article body, as HTML
 
 export const articlesData = [
+  { slug: 'Echoes-of-the-past',
+    title: 'Echoes of the Past',
+    category: 'Poetry',
+    excerpt: 'A poem by Navajit Pamegam, originally published in the 12th issue (2025) of LOLAD, the annual souvenier of the Mising Students\' Association, Dehli (MiSAd)', 
+    author: 'Navajit Pamegam ',
+    date: '2026-07-08',
+    coverImage: '/images/articles/echeos-of-past.jpg',
+    featured: true,
+    sourceUrl: null,
+    sourceLabel: null,
+    content: `
+    <p>Oh my Mising people, what have we led our culture to?</p>
+
+    <p>Where our faith has changed,<br>
+    rituals remain, but so do the beliefs and stories behind them too?</p>
+
+    <p>We kept preaching about the stories others had shared, putting our faith in them while forgetting<br>
+    to preserve our own.</p>
+
+    <p>Can you share with me at least one folk tale of ours, or do you have any idea at all of your own?</p>
+
+    <p>The threads that once wove our culture, the clothes our ancestors wore, withered with time.</p>
+
+    <p>The <em>gapa galé</em>, once a woman’s pride, is now forgotten,<br>
+    replaced by the mere replica of another’s design.</p>
+
+    <p>Have you any idea about the history of our tribe?</p>
+
+    <p>Or the legend of Abu Tani, the father of the past?</p>
+
+    <p>The Mibu Abu who guided us for generations to the ray of light,<br>
+    is now unknown to the young—am I right?</p>
+
+    <p>Has any child even witnessed the glorious Mibu Dagnam folk dance?</p>
+
+    <p>Or are you only busy with the “Paksong” at a glance?</p>
+
+    <p>The language we speak is not even pure at all,</p>
+
+    <p>What we call cow, goat, cat in our language,<br>
+    do you even recall?</p>
+
+    <p>We might now be educated, going to schools and colleges,<br>
+    but the children aren’t taught their own language now.</p>
+
+  <section class="poem">
+    <p>The language once spoken in villages<br>
+    isn’t even spoken within a household—ever wondered how?</p>
+
+    <p>The language is only remaining as a tool for spite,<br>
+    to speak ill in front of others,<br>
+    as they do not understand the words we hide.</p>
+
+    <p>How can we criticize and discriminate against others,<br>
+    hold biases and pride in communal achievements,<br>
+    while we ourselves run after their culture,<br>
+    neglecting the responsibility of ours?</p>
+
+    <p>Why do we feel embarrassed to identify?<br>
+    Why do we look down on our own roots?</p>
+
+    <p>Would there be anything left for the generation of the future?</p>
+
+    <p>Or will they be destined to live, struggling to identify?</p>
+ `
+  },
   { slug: 'Are-Mising-People-Really-Assamese',
     title: 'Are Mising People Really Assamese?',
     category: 'Culture',

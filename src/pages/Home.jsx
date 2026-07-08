@@ -118,7 +118,7 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
                 onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)' }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)' }}
               >
-                Read Articles →
+                Read Community Writings →
               </Link>
             </div>
           </div>
@@ -200,17 +200,17 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
           marginBottom: '28px'
         }}>
           <div>
-            <span style={eyebrow}>Notes & Essays</span>
-            <h2 style={{ fontSize: '28px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>
-              From the Articles
-            </h2>
-            <p style={{ fontSize: '14px', color: colors.textSecondary, maxWidth: '520px' }}>
-              Shorter reads on Mising language, culture, and history.
-            </p>
-          </div>
-          <Link to="/articles" style={{ fontSize: '13px', fontWeight: '700', color: colors.accentPrimary, textDecoration: 'none', whiteSpace: 'nowrap' }}>
-            View All Articles →
-          </Link>
+  <span style={eyebrow}>From the Community</span>
+  <h2 style={{ fontSize: '28px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>
+    Community Writings
+  </h2>
+  <p style={{ fontSize: '14px', color: colors.textSecondary, maxWidth: '520px' }}>
+    Shorter reads on Mising language, culture, history, and poetry.
+  </p>
+</div>
+<Link to="/articles" style={{ fontSize: '13px', fontWeight: '700', color: colors.accentPrimary, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+  View All →
+</Link>
         </div>
 
       {featuredArticles.length > 0 && (

@@ -122,7 +122,7 @@ export default function ArticleCard({ article, size = 'normal' }) {
           fontWeight: '700',
           color: colors.accentPrimary
         }}>
-          Read article →
+          Read full text →
         </span>
       </div>
     </Link>
