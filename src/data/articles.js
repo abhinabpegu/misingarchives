@@ -122,7 +122,7 @@ The question, "Are the Mising people really Assamese?" has become a topic of dis
 <h2>Who Are the Mising People?</h2>
 
 <p>
-The Mising people are one of the largest indigenous communities of Assam. Believed to have migrated centuries ago from the hills of present-day Arunachal Pradesh, they mainly live along the banks of the Brahmaputra River. They have their own language, traditional dress, customs, folk songs, dances, and festivals such as Ali-Aye-Ligang. These cultural traditions make the Mising community unique among the many ethnic groups of Assam.
+The Mising people are one of the largest indigenous communities of Assam. Believed to have migrated centuries ago from the hills of present-day Arunachal Pradesh, they mainly live along the banks of the Brahmaputra River. They have their own language, traditional dress, customs, folk songs, dances, and festivals such as Ali-Ayé Lígang. These cultural traditions make the Mising community unique among the many ethnic groups of Assam.
 </p>
 
 <h2>The Debate</h2>
@@ -210,7 +210,7 @@ The question should not be whether the Mising people are "really Assamese." Inst
       Tibeto-Burman language family.
     </li>
     <li>
-      Most families traditionally live in <strong>Chang Ghar</strong> (stilt houses),
+      Most families traditionally live in <strong>Taléng okum</strong> (stilt houses),
       which protect them from floods.
     </li>
     <li>
@@ -229,7 +229,7 @@ The question should not be whether the Mising people are "really Assamese." Inst
   <p><strong>Major festivals include:</strong></p>
 
   <ul>
-    <li><strong>Ali-Aye-Ligang</strong> – celebrated before sowing crops.</li>
+    <li><strong>Ali-Ayé Lígang</strong> – celebrated before sowing crops.</li>
     <li><strong>Po:rag</strong> – a harvest festival.</li>
     <li>Other traditional religious and cultural ceremonies.</li>
   </ul>
