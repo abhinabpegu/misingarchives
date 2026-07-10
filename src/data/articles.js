@@ -229,7 +229,7 @@ The question should not be whether the Mising people are "really Assamese." Inst
   <p><strong>Major festivals include:</strong></p>
 
   <ul>
-    <li><strong>Ali-Ayé Lígang</strong> – celebrated before sowing crops.</li>
+    <li><strong>Ali-A:yé Lígang</strong> – celebrated before sowing crops.</li>
     <li><strong>Po:rag</strong> – a harvest festival.</li>
     <li>Other traditional religious and cultural ceremonies.</li>
   </ul>
