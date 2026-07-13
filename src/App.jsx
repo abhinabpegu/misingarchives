@@ -10,6 +10,9 @@ import ArticleDetail from './pages/ArticleDetail'
 import './styles/App.css'
 import DonationBanner from './components/DonationBanner'
 import Donations from './pages/Donations'
+import Contact from './pages/Contact'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfUse from './pages/TermsOfUse'
 
 function Layout() {
   const { colors } = useTheme()
@@ -33,6 +36,9 @@ function Layout() {
           <Route path="/articles" element={<Articles />} />
           <Route path="/article/:slug" element={<ArticleDetail />} />
           <Route path="/donations" element={<Donations />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
         </Routes>
       </main>
       <Footer />

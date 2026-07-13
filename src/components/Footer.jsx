@@ -99,6 +99,11 @@ export default function Footer() {
         <p style={{ margin: 0, opacity: 0.8, maxWidth: '1200px', marginLeft: 'auto', marginRight: 'auto' }}>
           ©{new Date().getFullYear()} Mising Archives. Original articles, documentation, and website content are licensed under CC BY-SA 4.0. The Digital Book Library contains works made available under their respective copyright permissions, licences, or public domain status, as indicated for each item.
         </p>
+        <p style={{ margin: '10px 0 0', opacity: 0.8 }}>
+  <Link to="/privacy-policy" style={{ color: 'inherit', textDecoration: 'underline' }}>Privacy Policy</Link>
+  {' · '}
+  <Link to="/terms-of-use" style={{ color: 'inherit', textDecoration: 'underline' }}>Terms of Use</Link>
+</p>
       </div>
     </footer>
   )
