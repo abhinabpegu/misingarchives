@@ -44,7 +44,7 @@ export default function ContactModal() {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: isDarkMode ? 'rgba(15, 14, 12, 0.7)' : 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: isDarkMode ? 'rgba(16, 14, 12, 0.7)' : 'rgba(0, 0, 0, 0.5)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
