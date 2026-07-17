@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from '../context/ThemeContext'
-import ContactForm from '../components/ContactForm'
+import ContactForm from '../components/Contactform'
 
 export default function Contact() {
   const { colors } = useTheme()

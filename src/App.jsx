@@ -13,6 +13,7 @@ import Donations from './pages/Donations'
 import Contact from './pages/Contact'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfUse from './pages/TermsOfUse'
+import Clans from './pages/learn/Clans'
 
 function Layout() {
   const { colors } = useTheme()
@@ -39,6 +40,7 @@ function Layout() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
+          <Route path="/learn/clans" element={<Clans />} />
         </Routes>
       </main>
       <Footer />

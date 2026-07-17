@@ -1,13 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
-import { Moon, Sun, Menu, X } from 'lucide-react'
+import { Moon, Sun, Menu, X, ChevronDown } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
+
+// Add future /learn pages here — nothing else in this file needs to change.
+const LEARN_LINKS = [
+  { to: '/learn/clans', label: 'Clans' },
+  // { to: '/learn/numerals', label: 'Numerals' },
+  // { to: '/learn/kinshipterms', label: 'Kinship Terms' },
+]
 
 export default function Header() {
   const { isDarkMode, setIsDarkMode, colors } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [learnOpen, setLearnOpen] = useState(false)
+  const [mobileLearnOpen, setMobileLearnOpen] = useState(false)
+  const learnRef = useRef(null)
   const navigate = useNavigate()
   const location = useLocation()
+
+  const isLearnActive = location.pathname.startsWith('/learn')
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (learnRef.current && !learnRef.current.contains(e.target)) {
+        setLearnOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   const scrollToMission = (e) => {
     e.preventDefault()
@@ -32,6 +54,22 @@ export default function Header() {
     transition: 'all 0.2s ease',
     whiteSpace: 'nowrap'
   })
+
+  const learnButtonStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    fontFamily: 'inherit',
+    color: isLearnActive ? colors.accentPrimary : colors.textSecondary,
+    fontWeight: isLearnActive ? '700' : '600',
+    fontSize: '14px',
+    padding: '8px 4px',
+    borderBottom: isLearnActive ? `2px solid ${colors.accentPrimary}` : '2px solid transparent',
+    transition: 'all 0.2s ease'
+  }
 
   return (
     <header style={{
@@ -74,6 +112,60 @@ export default function Header() {
           <NavLink to="/" style={navLinkStyle} end>Home</NavLink>
           <NavLink to="/digital-book-library" style={navLinkStyle}>Digital Book Library</NavLink>
           <NavLink to="/articles" style={navLinkStyle}>Community Writings</NavLink>
+
+          {/* Learn dropdown */}
+          <div ref={learnRef} style={{ position: 'relative' }}>
+            <button
+              onClick={() => setLearnOpen((o) => !o)}
+              style={learnButtonStyle}
+              aria-expanded={learnOpen}
+              aria-haspopup="true"
+            >
+              Learn more
+              <ChevronDown
+                size={14}
+                style={{ transition: 'transform 0.2s ease', transform: learnOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+              />
+            </button>
+
+            {learnOpen && (
+              <div style={{
+                position: 'absolute',
+                top: 'calc(100% + 10px)',
+                left: 0,
+                minWidth: '170px',
+                backgroundColor: colors.bgSecondary,
+                border: `1px solid ${colors.border}`,
+                borderRadius: '10px',
+                boxShadow: `0 12px 28px ${colors.shadowColor}`,
+                backdropFilter: 'blur(10px)',
+                padding: '6px',
+                zIndex: 200
+              }}>
+                {LEARN_LINKS.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setLearnOpen(false)}
+                    style={({ isActive }) => ({
+                      display: 'block',
+                      padding: '9px 12px',
+                      borderRadius: '6px',
+                      fontSize: '13px',
+                      fontWeight: isActive ? '700' : '600',
+                      color: isActive ? colors.accentPrimary : colors.text,
+                      backgroundColor: isActive ? colors.accentLight : 'transparent',
+                      textDecoration: 'none',
+                      whiteSpace: 'nowrap'
+                    })}
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </div>
+
           <NavLink to="/article/About-Mising-Archives" style={navLinkStyle}>About</NavLink>
           <NavLink to="/contact" style={navLinkStyle}>Contact</NavLink>
         </nav>
@@ -141,9 +233,52 @@ export default function Header() {
           <NavLink to="/" onClick={() => setMenuOpen(false)} style={navLinkStyle} end>Home</NavLink>
           <NavLink to="/digital-book-library" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Digital Book Library</NavLink>
           <NavLink to="/articles" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Community Writings</NavLink>
+
+          {/* Learn - expandable on mobile instead of a dropdown */}
+          <div>
+            <button
+              onClick={() => setMobileLearnOpen((o) => !o)}
+              aria-expanded={mobileLearnOpen}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                width: '100%',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontFamily: 'inherit',
+                padding: '8px 4px',
+                color: isLearnActive ? colors.accentPrimary : colors.textSecondary,
+                fontWeight: isLearnActive ? '700' : '600',
+                fontSize: '14px'
+              }}
+            >
+              Learn
+              <ChevronDown
+                size={16}
+                style={{ transition: 'transform 0.2s ease', transform: mobileLearnOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+              />
+            </button>
+
+            {mobileLearnOpen && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingLeft: '16px', marginTop: '10px' }}>
+                {LEARN_LINKS.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => { setMenuOpen(false); setMobileLearnOpen(false) }}
+                    style={navLinkStyle}
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </div>
+
           <NavLink to="/article/About-Mising-Archives" onClick={() => setMenuOpen(false)} style={navLinkStyle}>About</NavLink>
           <NavLink to="/contact" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Contact</NavLink>
-      
         </nav>
       )}
     </header>

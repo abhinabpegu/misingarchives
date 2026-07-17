@@ -71,7 +71,7 @@ export default function ContactForm() {
         <label style={labelStyle}>What is your question or comment?</label>
         <textarea
           name="message"
-          placeholder="Enter your message... (for takedown requests, include the book title/code and proof of copyright ownership)"
+          placeholder="Enter your message..."
           rows={5}
           required
           maxLength={1000}

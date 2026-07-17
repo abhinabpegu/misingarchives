@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { HelpCircle, X } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
-import ContactForm from './ContactForm'
+import ContactForm from './Contactform'
 
 export default function ContactModal() {
   const { isDarkMode, colors } = useTheme()
