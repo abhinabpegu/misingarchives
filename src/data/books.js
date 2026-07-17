@@ -119,4 +119,14 @@ export const booksData = [
     archivedBy: 'Public.Resource.Org',
     coverImage: '/images/book0012.png',
   },
+  {
+    code: '0013',
+    title: 'The Pronouncing Mishing - English - Assamese Dictionary',
+    author: 'Jitmal Doley',
+    language: 'Multilingual',
+    tags: ['Language', 'Reference'],
+    driveLink: 'https://drive.google.com/file/d/13N4Z_uDuzhKaLR6ooA7MKLnNKwnaT5Ca/view?usp=sharing',
+    archivedBy: 'Mising Archives',
+    coverImage: '/images/book0013.png',
+  }
 ]

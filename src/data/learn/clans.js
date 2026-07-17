@@ -60,5 +60,6 @@ export const clansData = [
   { misingName: 'Pa:yeng', legalSpelling: 'Payeng', ipa: '/paːyeŋ/', voice: '/audio/clans/payeng.ogg' },
   { misingName: 'Taye', legalSpelling: 'Taye', ipa: '/taye/', voice: '/audio/clans/taye.ogg' },
   { misingName: 'Pao', legalSpelling: 'Paw, Pawo, Pao', ipa: '/paɔ/', voice: '/audio/clans/pao.ogg' },
-  { misingName: 'Noro', legalSpelling: 'Narah, Noroh, Noro', ipa: '/nɔɾɔ/', voice: '/audio/clans/noro.ogg' }
+  { misingName: 'Noro:', legalSpelling: 'Narah, Noroh, Noro', ipa: '/nɔɾɔː/', voice: '/audio/clans/noro.ogg' },
+  { misingName: 'Mili', legalSpelling: 'Mili', ipa: '/mili/', voice: '/audio/clans/mili.ogg' }
 ]
