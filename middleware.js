@@ -18,7 +18,6 @@ export const config = {
 const SITE_NAME = 'Mising Archives'
 const DEFAULT_DESCRIPTION =
   'Mising Archives is an independent, community-led initiative to preserve and share knowledge about the Mising Tribe.'
-const DEFAULT_IMAGE_PATH = '/images/logo.png'
 
 function escapeHtml(str = '') {
   return str
@@ -28,6 +27,12 @@ function escapeHtml(str = '') {
     .replace(/"/g, '&quot;')
 }
 
+// `image: null` means "don't show a preview image at all" — used for every
+// page that doesn't have its own specific cover (the logo used to be used
+// as a fallback here, which made link previews for the homepage, library,
+// articles list, donations, contact, privacy, terms, and clans pages all
+// show the site logo. Only pages with a real, specific image — articles
+// and individual books — get an og:image now.
 function getMeta(url) {
   const { pathname, searchParams, origin } = url
   const abs = (path) => new URL(path, origin).toString()
@@ -40,7 +45,7 @@ function getMeta(url) {
       return {
         title: `${article.title} — ${SITE_NAME}`,
         description: article.excerpt || DEFAULT_DESCRIPTION,
-        image: article.coverImage ? abs(article.coverImage) : abs(DEFAULT_IMAGE_PATH),
+        image: article.coverImage ? abs(article.coverImage) : null,
       }
     }
   }
@@ -53,13 +58,13 @@ function getMeta(url) {
       return {
         title: `${book.title} — ${SITE_NAME}`,
         description: `By ${book.author}. ${book.tags.join(', ')}.`,
-        image: book.coverImage ? abs(book.coverImage) : abs(DEFAULT_IMAGE_PATH),
+        image: book.coverImage ? abs(book.coverImage) : null,
       }
     }
     return {
       title: `Digital Book Library — ${SITE_NAME}`,
       description: 'Browse the Mising Archives digital book collection.',
-      image: abs(DEFAULT_IMAGE_PATH),
+      image: null,
     }
   }
 
@@ -67,7 +72,7 @@ function getMeta(url) {
     return {
       title: `Community Writings — ${SITE_NAME}`,
       description: 'Community writings on Mising language, culture, history, and poetry.',
-      image: abs(DEFAULT_IMAGE_PATH),
+      image: null,
     }
   }
 
@@ -75,7 +80,7 @@ function getMeta(url) {
     return {
       title: `Donations — ${SITE_NAME}`,
       description: 'See how Mising Archives is funded and where donations go.',
-      image: abs(DEFAULT_IMAGE_PATH),
+      image: null,
     }
   }
 
@@ -83,7 +88,7 @@ function getMeta(url) {
     return {
       title: `Contact Us — ${SITE_NAME}`,
       description: 'Get in touch with Mising Archives.',
-      image: abs(DEFAULT_IMAGE_PATH),
+      image: null,
     }
   }
 
@@ -91,7 +96,7 @@ function getMeta(url) {
     return {
       title: `Privacy Policy — ${SITE_NAME}`,
       description: DEFAULT_DESCRIPTION,
-      image: abs(DEFAULT_IMAGE_PATH),
+      image: null,
     }
   }
 
@@ -99,7 +104,7 @@ function getMeta(url) {
     return {
       title: `Terms of Use — ${SITE_NAME}`,
       description: DEFAULT_DESCRIPTION,
-      image: abs(DEFAULT_IMAGE_PATH),
+      image: null,
     }
   }
 
@@ -107,7 +112,7 @@ function getMeta(url) {
     return {
       title: `Mising Opín Amin (Clans) — ${SITE_NAME}`,
       description: 'Standard Mising clan spellings alongside their common legal respellings, pronunciation, and IPA.',
-      image: abs(DEFAULT_IMAGE_PATH),
+      image: null,
     }
   }
 
@@ -115,7 +120,7 @@ function getMeta(url) {
   return {
     title: SITE_NAME,
     description: DEFAULT_DESCRIPTION,
-    image: abs(DEFAULT_IMAGE_PATH),
+    image: null,
   }
 }
 
@@ -131,12 +136,25 @@ export default async function middleware(request) {
     .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(title)}</title>`)
     .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${escapeHtml(title)}$2`)
     .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${escapeHtml(description)}$2`)
-    .replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${image}$2`)
     .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${pageUrl}$2`)
     .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${escapeHtml(title)}$2`)
     .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${escapeHtml(description)}$2`)
-    .replace(/(<meta name="twitter:image" content=")[^"]*(")/, `$1${image}$2`)
     .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${pageUrl}$2`)
+
+  if (image) {
+    // Has a real, specific image (an article or a book) — set it.
+    html = html
+      .replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${image}$2`)
+      .replace(/(<meta name="twitter:image" content=")[^"]*(")/, `$1${image}$2`)
+  } else {
+    // No specific image for this page — strip the tags entirely instead of
+    // falling back to the logo, so link previews just show title + text.
+    html = html
+      .replace(/\s*<meta property="og:image" content="[^"]*">\n?/, '')
+      .replace(/\s*<meta name="twitter:image" content="[^"]*">\n?/, '')
+      // twitter:card "summary" expects an image; without one, "summary" is fine,
+      // but if you had summary_large_image anywhere it'd look broken without an image.
+  }
 
   return new Response(html, {
     headers: { 'content-type': 'text/html; charset=utf-8' },
