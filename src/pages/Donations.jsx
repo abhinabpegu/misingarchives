@@ -4,12 +4,14 @@ import { donationsData, expensesData } from '../data/donations'
 import { useTheme } from '../context/ThemeContext'
 import { useCardStyle } from '../utils/cardStyle'
 import { formatDate } from '../utils/formatDate'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function formatRupees(amount) {
   return `₹${amount.toLocaleString('en-IN')}`
 }
 
 export default function Donations() {
+  usePageTitle('Donations')
   const { colors } = useTheme()
   const { cardBase, hoverIn, hoverOut } = useCardStyle()
 

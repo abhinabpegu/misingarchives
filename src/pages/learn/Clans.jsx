@@ -4,8 +4,10 @@ import { clansData } from '../../data/learn/clans'
 import { useTheme } from '../../context/ThemeContext'
 import { useCardStyle } from '../../utils/cardStyle'
 import AudioButton from '../../components/AudioButton'
-
+import { usePageTitle } from '../../hooks/usePageTitle'
+  
 export default function Clans() {
+  usePageTitle('Mising Clans')  
   const { colors } = useTheme()
   const { cardBase } = useCardStyle()
   const [sortDir, setSortDir] = useState('asc') // 'asc' | 'desc'

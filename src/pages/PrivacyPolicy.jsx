@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 export default function PrivacyPolicy() {
+    usePageTitle('Privacy Policy')
+
   const { colors } = useTheme()
 
   const sectionWrap = {

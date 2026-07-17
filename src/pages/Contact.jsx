@@ -1,11 +1,14 @@
 import React from 'react'
 import { useTheme } from '../context/ThemeContext'
 import ContactForm from '../components/ContactForm'
+import { usePageTitle } from '../hooks/usePageTitle'   // ← new
 
 export default function Contact() {
+  usePageTitle('Contact Us')                            // ← new
   const { colors } = useTheme()
 
   return (
+    
     <div style={{ maxWidth: '560px', margin: '0 auto', padding: '48px clamp(20px, 5vw, 40px) 80px' }}>
       <span style={{
         fontSize: '12px',

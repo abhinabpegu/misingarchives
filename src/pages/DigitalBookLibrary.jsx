@@ -5,8 +5,10 @@ import { booksData } from '../data/books'
 import { useTheme } from '../context/ThemeContext'
 import BookDetailModal from '../components/BookDetailModal'
 import ContributeCard from '../components/ContributeCard'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 export default function DigitalBookLibrary() {
+  usePageTitle('Digital Book Library')
   const { isDarkMode, colors } = useTheme()
   const [searchParams] = useSearchParams()
 

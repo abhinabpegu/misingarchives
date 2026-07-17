@@ -4,8 +4,10 @@ import { articlesData } from '../data/articles'
 import { useTheme } from '../context/ThemeContext'
 import ArticleCard from '../components/ArticleCard'
 import ContributeCard from '../components/ContributeCard'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 export default function Articles() {
+  usePageTitle('Community Writings')
   const { isDarkMode, colors } = useTheme()
   const [filterCategory, setFilterCategory] = useState('All')
 

@@ -4,12 +4,13 @@ import { ArrowLeft } from 'lucide-react'
 import { articlesData } from '../data/articles'
 import { useTheme } from '../context/ThemeContext'
 import { formatDate } from '../utils/formatDate'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 export default function ArticleDetail() {
   const { slug } = useParams()
   const { colors } = useTheme()
   const article = articlesData.find(a => a.slug === slug)
-
+  usePageTitle(article?.title)  
   if (!article) {
     return (
       <div style={{ maxWidth: '700px', margin: '0 auto', padding: '80px 24px', textAlign: 'center' }}>
