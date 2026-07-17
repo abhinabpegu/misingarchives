@@ -97,9 +97,11 @@ export default function Clans() {
         </button>
       </section>
 
-      {/* Table */}
+      {/* Desktop: table. Mobile: stacked cards (see .clans-table-wrap /
+          .clans-cards in App.css — only one of the two is shown at a time,
+          so mobile never needs to scroll sideways). */}
       <section style={{ ...sectionWrap, padding: '20px clamp(20px, 5vw, 40px) 60px' }}>
-        <div style={{ ...cardBase, padding: 0, overflow: 'hidden' }}>
+        <div className="clans-table-wrap" style={{ ...cardBase, padding: 0, overflow: 'hidden' }}>
           <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
             <table style={{ width: '100%', minWidth: '600px', borderCollapse: 'collapse' }}>
               <thead>
@@ -134,6 +136,46 @@ export default function Clans() {
               </tbody>
             </table>
           </div>
+        </div>
+
+        {/* Mobile card list — hidden on desktop via CSS */}
+        <div className="clans-cards" style={{ display: 'none', flexDirection: 'column', gap: '10px' }}>
+          {sortedClans.map((row) => (
+            <div
+              key={row.misingName}
+              style={{
+                ...cardBase,
+                padding: '16px'
+              }}
+            >
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                gap: '12px',
+                marginBottom: '10px'
+              }}>
+                <div>
+                  <p style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: '700', color: colors.text }}>
+                    {row.misingName}
+                  </p>
+                  <p style={{ margin: 0, fontSize: '13px', color: colors.textSecondary }}>
+                    {row.legalSpelling}
+                  </p>
+                </div>
+                <span style={{
+                  fontSize: '13px',
+                  color: colors.textSecondary,
+                  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0
+                }}>
+                  {row.ipa}
+                </span>
+              </div>
+              <AudioButton src={row.voice} />
+            </div>
+          ))}
         </div>
 
         <p style={{ fontSize: '12px', color: colors.textTertiary, marginTop: '16px' }}>

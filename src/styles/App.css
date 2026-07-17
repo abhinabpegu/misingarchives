@@ -104,6 +104,20 @@ button:active {
 /* the site regardless of theme.      */
 /* ---------------------------------- */
 
+/* ---------------------------------- */
+/* Clans page — table vs mobile cards */
+/* ---------------------------------- */
+
+@media (max-width: 768px) {
+  .clans-table-wrap {
+    display: none !important;
+  }
+
+  .clans-cards {
+    display: flex !important;
+  }
+}
+
 .article-body {
   font-size: 16px;
   line-height: 1.8;
