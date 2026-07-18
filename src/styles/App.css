@@ -44,6 +44,35 @@ button:active {
 }
 
 /* ---------------------------------- */
+/* Page transitions                   */
+/* The routed content div is re-keyed */
+/* by pathname in App.jsx, so this    */
+/* animation replays on every page    */
+/* change, not just first load.       */
+/* ---------------------------------- */
+
+.page-transition {
+  animation: pageEnter 0.45s ease;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+}
+
+/* ---------------------------------- */
 /* Header / Navigation                */
 /* ---------------------------------- */
 

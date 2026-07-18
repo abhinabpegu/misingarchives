@@ -1,8 +1,9 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import DigitalBookLibrary from './pages/DigitalBookLibrary'
 import Articles from './pages/Articles'
@@ -17,6 +18,7 @@ import Clans from './pages/learn/Clans'
 
 function Layout() {
   const { colors } = useTheme()
+  const location = useLocation()
 
   return (
     <div style={{
@@ -28,20 +30,23 @@ function Layout() {
       display: 'flex',
       flexDirection: 'column'
     }}>
+      <ScrollToTop />
       <DonationBanner />
       <Header />
       <main style={{ flex: 1 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/digital-book-library" element={<DigitalBookLibrary />} />
-          <Route path="/articles" element={<Articles />} />
-          <Route path="/article/:slug" element={<ArticleDetail />} />
-          <Route path="/donations" element={<Donations />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-use" element={<TermsOfUse />} />
-          <Route path="/learn/clans" element={<Clans />} />
-        </Routes>
+        <div key={location.pathname} className="page-transition">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/digital-book-library" element={<DigitalBookLibrary />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/article/:slug" element={<ArticleDetail />} />
+            <Route path="/donations" element={<Donations />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-use" element={<TermsOfUse />} />
+            <Route path="/learn/clans" element={<Clans />} />
+          </Routes>
+        </div>
       </main>
       <Footer />
     </div>
