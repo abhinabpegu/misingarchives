@@ -134,6 +134,7 @@ export default async function middleware(request) {
 
   html = html
     .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(title)}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${escapeHtml(description)}$2`)
     .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${escapeHtml(title)}$2`)
     .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${escapeHtml(description)}$2`)
     .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${pageUrl}$2`)

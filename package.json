@@ -5,6 +5,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "prebuild": "node scripts/generate-sitemap.js",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
