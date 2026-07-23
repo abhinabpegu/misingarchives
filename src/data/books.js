@@ -128,5 +128,15 @@ export const booksData = [
     driveLink: 'https://drive.google.com/file/d/13N4Z_uDuzhKaLR6ooA7MKLnNKwnaT5Ca/view?usp=sharing',
     archivedBy: 'Mising Archives',
     coverImage: '/images/book0013.png',
+  },
+  {
+    code: '0014',
+    title: 'Mising Folklore - 2nd Edition (2014)',
+    author: 'Jawahar Jyoti Kuli',
+    language: 'English',
+    tags: ['Folklore', 'Culture'],
+    driveLink: 'https://drive.google.com/file/d/1_hRYC8-e-Yg3AuOiFEUG-1YXHclM-UfU/view?usp=sharing',
+    archivedBy: 'Mising Archives',
+    coverImage: '/images/book0014.png',
   }
 ]
