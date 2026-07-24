@@ -75,4 +75,10 @@ export const expensesData = [
     date: '2026-07-02', // TODO: replace with actual registration date
     category: 'Infrastructure',
   },
+  {
+    description: 'Bought a physical copy of Mising Folklore by Jahawar Jyoti Kuli+shipping',
+    amount: 142,
+    date: '2026-07-24',
+    category: 'Archival',
+  }
 ]
