@@ -11,6 +11,7 @@ export const config = {
     '/contact',
     '/privacy-policy',
     '/terms-of-use',
+    '/copyright-policy',
     '/learn/clans',
   ],
 }
@@ -30,9 +31,9 @@ function escapeHtml(str = '') {
 // `image: null` means "don't show a preview image at all" — used for every
 // page that doesn't have its own specific cover (the logo used to be used
 // as a fallback here, which made link previews for the homepage, library,
-// articles list, donations, contact, privacy, terms, and clans pages all
-// show the site logo. Only pages with a real, specific image — articles
-// and individual books — get an og:image now.
+// articles list, donations, contact, privacy, terms, copyright, and clans
+// pages all show the site logo. Only pages with a real, specific image —
+// articles and individual books — get an og:image now.
 function getMeta(url) {
   const { pathname, searchParams, origin } = url
   const abs = (path) => new URL(path, origin).toString()
@@ -108,6 +109,14 @@ function getMeta(url) {
     }
   }
 
+  if (pathname === '/copyright-policy') {
+    return {
+      title: `Copyright Policy — ${SITE_NAME}`,
+      description: 'How copyright works across Mising Archives — original site content, and books in the Digital Book Library.',
+      image: null,
+    }
+  }
+
   if (pathname === '/learn/clans') {
     return {
       title: `Mising Opín Amin (Clans) — ${SITE_NAME}`,
@@ -153,8 +162,6 @@ export default async function middleware(request) {
     html = html
       .replace(/\s*<meta property="og:image" content="[^"]*">\n?/, '')
       .replace(/\s*<meta name="twitter:image" content="[^"]*">\n?/, '')
-      // twitter:card "summary" expects an image; without one, "summary" is fine,
-      // but if you had summary_large_image anywhere it'd look broken without an image.
   }
 
   return new Response(html, {

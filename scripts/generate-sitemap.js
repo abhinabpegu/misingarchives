@@ -17,6 +17,7 @@ const staticRoutes = [
   '/contact',
   '/privacy-policy',
   '/terms-of-use',
+  '/copyright-policy',
   '/learn/clans',
 ]
 

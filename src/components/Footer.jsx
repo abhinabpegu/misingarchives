@@ -35,30 +35,33 @@ export default function Footer() {
         margin: '0 auto',
         padding: '48px 40px 32px',
         display: 'grid',
-        gridTemplateColumns: '1.3fr 1fr 1fr 1fr',
+        gridTemplateColumns: '1.3fr 1fr 1fr 1fr 1fr',
         gap: '32px',
         boxSizing: 'border-box'
       }}>
         <div style={colStyle}>
           <h3 style={{
-  margin: 0,
-  fontSize: '17px',
-  fontWeight: '700',
-  color: colors.accentPrimary,
-  display: 'flex',
-  alignItems: 'center',
-  gap: '8px'
-}}>
-  <img
-    src="/images/logo.png"
-    alt=""
-    style={{ height: '24px', width: '24px', objectFit: 'contain', borderRadius: '5px' }}
-    onError={(e) => { e.target.style.display = 'none' }}
-  />
-  Mising Archives
-</h3>
+            margin: 0,
+            fontSize: '17px',
+            fontWeight: '700',
+            color: colors.accentPrimary,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+            <img
+              src="/images/logo.png"
+              alt=""
+              style={{ height: '24px', width: '24px', objectFit: 'contain', borderRadius: '5px' }}
+              onError={(e) => { e.target.style.display = 'none' }}
+            />
+            Mising Archives
+          </h3>
           <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary, lineHeight: '1.6', maxWidth: '320px' }}>
             A community-led initiative to preserve and share knowledge about Mising culture, tradition, history, and language.
+          </p>
+          <p style={{ margin: 0, fontSize: '12px', color: colors.textTertiary }}>
+            Jorhat, Assam, India
           </p>
         </div>
 
@@ -81,6 +84,13 @@ export default function Footer() {
         </div>
 
         <div style={colStyle}>
+          <span style={headingStyle}>Legal</span>
+          <Link to="/privacy-policy" style={linkStyle}>Privacy Policy</Link>
+          <Link to="/terms-of-use" style={linkStyle}>Terms of Use</Link>
+          <Link to="/copyright-policy" style={linkStyle}>Copyright Policy</Link>
+        </div>
+
+        <div style={colStyle}>
           <span style={headingStyle}>Contact</span>
           <a href="mailto:contact@misingarchives.co.in" style={linkStyle}>contact@misingarchives.co.in</a>
           <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={linkStyle}>@misingarchives on Instagram</a>
@@ -96,14 +106,9 @@ export default function Footer() {
         width: '100%',
         boxSizing: 'border-box'
       }}>
-        <p style={{ margin: 0, opacity: 0.8, maxWidth: '1200px', marginLeft: 'auto', marginRight: 'auto' }}>
-          ©{new Date().getFullYear()} Mising Archives. Original articles, documentation, and website content are licensed under CC BY-SA 4.0. The Digital Book Library contains works made available under their respective copyright permissions, licences, or public domain status, as indicated for each item.
+        <p style={{ margin: 0, opacity: 0.8 }}>
+          ©{new Date().getFullYear()} Mising Archives
         </p>
-        <p style={{ margin: '10px 0 0', opacity: 0.8 }}>
-  <Link to="/privacy-policy" style={{ color: 'inherit', textDecoration: 'underline' }}>Privacy Policy</Link>
-  {' · '}
-  <Link to="/terms-of-use" style={{ color: 'inherit', textDecoration: 'underline' }}>Terms of Use</Link>
-</p>
       </div>
     </footer>
   )
