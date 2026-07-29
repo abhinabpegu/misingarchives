@@ -162,7 +162,7 @@ export default function BookDetailModal({ book, onClose }) {
               Tags
             </label>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              {book.tags.map(tag => (
+              {(book.tags || []).map(tag => (
                 <span key={tag} style={{
                   display: 'inline-block',
                   padding: '8px 12px',
@@ -221,7 +221,7 @@ export default function BookDetailModal({ book, onClose }) {
 
           {/* Download Button */}
           <a
-            href={book.driveLink}
+            href={book.driveLink || '#'}
             target="_blank"
             rel="noopener noreferrer"
             style={{

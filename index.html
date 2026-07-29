@@ -22,6 +22,22 @@
     <meta name="twitter:title" content="Mising Archives">
     <meta name="twitter:description" content="Mising Archives is an independent, community-led initiative to preserve and share knowledge about the Mising Tribe.">
     <meta name="twitter:image" content="https://www.misingarchives.co.in/images/logo.png">
+
+    <!-- Site-wide structured data. Page-specific Article/Book/CollectionPage
+         JSON-LD is added on top of this per-request for bots by middleware.js. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Mising Archives",
+      "url": "https://www.misingarchives.co.in",
+      "logo": "https://www.misingarchives.co.in/images/logo.png",
+      "description": "Mising Archives is an independent, community-led initiative to preserve and share knowledge about the Mising Tribe.",
+      "email": "contact@misingarchives.co.in",
+      "sameAs": ["https://instagram.com/misingarchives"]
+    }
+    </script>
+
     <style>
         * {
             margin: 0;

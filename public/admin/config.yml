@@ -1,0 +1,47 @@
+backend:
+  name: github
+  repo: abhinabpegu/misingarchives   # confirm this matches owner/repo exactly
+  branch: main                        # confirm this is your default branch
+  base_url: https://sveltia-cms-auth.abheepegu.workers.dev   # set after deploying the Cloudflare Worker (step 3)
+
+media_folder: public/images/mimang
+public_folder: /images/mimang
+
+collections:
+  - name: mimang
+    label: Mimang (Weaving Patterns)
+    folder: content/mimang
+    create: true
+    format: json
+    identifier_field: code
+    slug: '{{code}}'
+    fields:
+      - label: Code
+        name: code
+        widget: string
+        hint: '4-digit id, e.g. 0002'
+        pattern: ['^\d{4}$', 'Must be exactly 4 digits, e.g. 0002']
+
+      - label: Gamig Name
+        name: gamigName
+        widget: string
+
+      - label: English Description
+        name: englishDesc
+        widget: text
+        required: false
+        hint: 'Leave blank to show "Description coming soon" on the site'
+
+      - label: Pattern Image
+        name: image
+        widget: image
+        required: false
+        choose_url: false
+        hint: 'Square (1:1) image of the pattern itself'
+
+      - label: Cloth Example
+        name: clothExample
+        widget: image
+        required: false
+        choose_url: false
+        hint: 'Photo of the pattern woven onto cloth'

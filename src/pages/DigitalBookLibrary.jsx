@@ -96,8 +96,8 @@ export default function DigitalBookLibrary() {
       giving permission for your book to be archived, fill out our short form:
     </p>
 
-    <a
-      href="https://docs.google.com/forms/d/e/1FAIpQLScahQG34BhG6t03j8lXFSNiqpmnlHhdvWIe8UpisYbBFrOqpg/viewform"
+    
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScahQG34BhG6t03j8lXFSNiqpmnlHhdvWIe8UpisYbBFrOqpg/viewform"
       target="_blank"
       rel="noopener noreferrer"
       style={{

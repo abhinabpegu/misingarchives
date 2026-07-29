@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import DigitalBookLibrary from './pages/DigitalBookLibrary'
 import Articles from './pages/Articles'
 import ArticleDetail from './pages/ArticleDetail'
+import BookDetail from './pages/BookDetail'
 import './styles/App.css'
 import DonationBanner from './components/DonationBanner'
 import Donations from './pages/Donations'
@@ -16,6 +17,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfUse from './pages/TermsOfUse'
 import CopyrightPolicy from './pages/CopyrightPolicy'
 import Clans from './pages/learn/Clans'
+import Mimang from './pages/learn/Mimang'
 
 function Layout() {
   const { colors } = useTheme()
@@ -39,6 +41,7 @@ function Layout() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/digital-book-library" element={<DigitalBookLibrary />} />
+            <Route path="/book/:code" element={<BookDetail />} />
             <Route path="/articles" element={<Articles />} />
             <Route path="/article/:slug" element={<ArticleDetail />} />
             <Route path="/donations" element={<Donations />} />
@@ -47,6 +50,7 @@ function Layout() {
             <Route path="/terms-of-use" element={<TermsOfUse />} />
             <Route path="/copyright-policy" element={<CopyrightPolicy />} />
             <Route path="/learn/clans" element={<Clans />} />
+            <Route path="/learn/mimang" element={<Mimang />} />
           </Routes>
         </div>
       </main>

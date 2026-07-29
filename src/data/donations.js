@@ -76,7 +76,7 @@ export const expensesData = [
     category: 'Infrastructure',
   },
   {
-    description: 'Bought a physical copy of Mising Folklore by Jahawar Jyoti Kuli+shipping',
+    description: 'Mising Folklore by Jahawar Jyoti Kuli + shipping',
     amount: 142,
     date: '2026-07-24',
     category: 'Archival',

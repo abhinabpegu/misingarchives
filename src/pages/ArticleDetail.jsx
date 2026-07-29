@@ -10,6 +10,17 @@ export default function ArticleDetail() {
   const { slug } = useParams()
   const { colors } = useTheme()
   const article = articlesData.find(a => a.slug === slug)
+const jsonLd = article ? {
+  '@context': 'https://schema.org',
+  '@type': article.category === 'Poetry' ? 'CreativeWork' : 'Article',
+  headline: article.title,
+  description: article.excerpt,
+  author: { '@type': 'Person', name: article.author },
+  datePublished: article.date,
+  inLanguage: 'en',
+  publisher: { '@type': 'Organization', name: 'Mising Archives', url: 'https://www.misingarchives.co.in' },
+  license: 'https://creativecommons.org/licenses/by-sa/4.0/',
+} : null
   usePageTitle(article?.title)  
   if (!article) {
     return (
@@ -28,6 +39,7 @@ export default function ArticleDetail() {
 
   return (
     <article style={{ maxWidth: '760px', margin: '0 auto', padding: '40px clamp(20px, 5vw, 40px) 80px' }}>
+      {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
       <Link to="/articles" style={{
         display: 'inline-flex',
         alignItems: 'center',
