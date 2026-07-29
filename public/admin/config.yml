@@ -2,7 +2,7 @@ backend:
   name: github
   repo: abhinabpegu/misingarchives   # confirm this matches owner/repo exactly
   branch: main                        # confirm this is your default branch
-  base_url: https://sveltia-cms-auth.abheepegu.workers.dev   # set after deploying the Cloudflare Worker (step 3)
+  base_url: https://sveltia-cms-auth.abheepegu.workers.dev/   # set after deploying the Cloudflare Worker (step 3)
 
 media_folder: public/images/mimang
 public_folder: /images/mimang
