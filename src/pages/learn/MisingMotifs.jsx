@@ -3,7 +3,7 @@ import { Shirt, LayoutGrid, Maximize2, X, ArrowUpDown } from 'lucide-react'
 import { mimangData } from '../../data/learn/mimang'
 import { useTheme } from '../../context/ThemeContext'
 import { usePageTitle } from '../../hooks/usePageTitle'
-
+import LazyImage from '../../components/LazyImage'
 // Given '/images/mimang/0001.jpeg', returns '/images/mimang/thumbs/0001.jpeg'
 // — the compressed preview generated at build time by
 // scripts/generate-thumbnails.js. Falls back to the original path if the
@@ -97,10 +97,9 @@ function MimangCard({ mimang, onExpand }) {
       <div style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', backgroundColor: colors.accentLight }}>
         {displayedThumb ? (
           <>
-            <img
+            <LazyImage
               src={displayedThumb}
               alt={displayedAlt}
-              loading="lazy"
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               onError={(e) => {
                 // Thumb missing (e.g. build hasn't generated it yet) —

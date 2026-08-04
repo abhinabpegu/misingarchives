@@ -299,3 +299,58 @@ button:active {
 .poem-body p {
   margin: 0 0 30px;
 }
+
+/* ---------------------------------- */
+/* Reusable animation utilities       */
+/* Shared across the site — image     */
+/* skeletons, fade-ins, scroll-reveal.*/
+/* Kept as plain CSS (no JS libs) so  */
+/* it stays fast on slow connections. */
+/* ---------------------------------- */
+
+/* Shimmer skeleton — shown by LazyImage.jsx while an image loads */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* Generic fade-in-up — attach to any element via className="fade-in-up" */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer::after {
+    animation: none;
+  }
+  .fade-in-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

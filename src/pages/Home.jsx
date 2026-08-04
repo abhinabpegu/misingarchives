@@ -8,6 +8,7 @@ import ArticleCard from '../components/ArticleCard'
 import DonateButton from '../components/DonateButton'
 import InstagramCard from '../components/InstagramCard'
 import { donationStatus } from '../data/donations'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const CATEGORIES = [
   { tag: 'History', icon: '', desc: 'Historic accounts of the Mising people' },
@@ -31,7 +32,13 @@ export default function Home() {
 
   const sortedArticles = [...articlesData].sort((a, b) => b.date.localeCompare(a.date))
 
-// Up to 2 articles marked featured: true get the big side-by-side cards.
+  // Scroll-reveal refs — one per section you want to animate in.
+  const [categoriesRef, categoriesVisible] = useScrollReveal()
+  const [latestRef, latestVisible] = useScrollReveal()
+  const [missionRef, missionVisible] = useScrollReveal()
+  const [supportRef, supportVisible] = useScrollReveal()
+
+  // Up to 2 articles marked featured: true get the big side-by-side cards.
 // If fewer than 2 are marked featured, fill the remaining slot(s) with the
 // next most recent articles so the row is never lopsided or empty.
 const markedFeatured = sortedArticles.filter(a => a.featured).slice(0, 2)
@@ -232,7 +239,11 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
 
 
       {/* Explore by category */}
-      <section style={{ ...sectionWrap, padding: '72px clamp(20px, 5vw, 40px) 0' }}>
+       <section
+        ref={categoriesRef}
+        className={`fade-in-up ${categoriesVisible ? 'is-visible' : ''}`}
+        style={{ ...sectionWrap, padding: '72px clamp(20px, 5vw, 40px) 0' }}
+      >
         <span style={eyebrow}>Explore the Archive</span>
         <h2 style={{ fontSize: '28px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>
           Browse by Category
@@ -284,7 +295,11 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
       </section>
 
       {/* Recently archived */}
-      <section style={{ ...sectionWrap, padding: '72px clamp(20px, 5vw, 40px) 0' }}>
+      <section
+        ref={latestRef}
+        className={`fade-in-up ${latestVisible ? 'is-visible' : ''}`}
+        style={{ ...sectionWrap, padding: '72px clamp(20px, 5vw, 40px) 0' }}
+      >
         <span style={eyebrow}>Latest Additions</span>
         <h2 style={{ fontSize: '28px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>
           Recently Archived
@@ -324,7 +339,12 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
       
 
       {/* Mission */}
-      <section id="mission" style={{ ...sectionWrap, padding: '88px clamp(20px, 5vw, 40px) 80px' }}>
+      <section
+        id="mission"
+        ref={missionRef}
+        className={`fade-in-up ${missionVisible ? 'is-visible' : ''}`}
+        style={{ ...sectionWrap, padding: '88px clamp(20px, 5vw, 40px) 80px' }}
+      >
         <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 40px' }}>
           <span style={eyebrow}>Our Mission</span>
           <h2 style={{ fontSize: '28px', fontWeight: '700', margin: '10px 0 14px', color: colors.text }}>
@@ -352,7 +372,12 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
   <InstagramCard />
 </section>
       {/* Support the Archive */}
-      <section id="support" style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}></section>
+      <section
+        id="support"
+        ref={supportRef}
+        className={`fade-in-up ${supportVisible ? 'is-visible' : ''}`}
+        style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}
+      ></section>
       <section style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}>
         <div style={{
           ...cardBase,

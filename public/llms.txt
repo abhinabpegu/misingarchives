@@ -1,0 +1,42 @@
+# Mising Archives
+
+> Mising Archives is an independent, community-led initiative to preserve and share knowledge about the Mising Tribe — free digitised books, community-written articles, and language reference material.
+
+Mising Archives is community-funded and non-commercial. Original articles and writing are licensed CC BY-SA 4.0. Books in the library each carry their own copyright status (public domain, partner-archive terms, or direct rights-holder permission) — see /copyright-policy for details.
+
+## Digital Book Library
+https://www.misingarchives.co.in/digital-book-library — full collection, searchable and sortable
+- [The Miris or The Mishings of the Brahmaputra-Valley](https://www.misingarchives.co.in/book/0001): by Nomal C. Pegu. English. History, Language, Culture, Folklore.
+- [The Mishings (Miris) of Assam: Development of A New Lifestyle](https://www.misingarchives.co.in/book/0002): by Jatin Mipun. English. Culture, History, Sociology.
+- [Folk Literature of the Misings](https://www.misingarchives.co.in/book/0003): by Jawahar Jyoti Kuli. English. Culture, Folklore, Literature.
+- [Ngoluk Moman](https://www.misingarchives.co.in/book/0004): by P.N Dutta Baruah, Nahendra Padun. Mising. Folksongs, Songs, Culture.
+- [Mising Grammar](https://www.misingarchives.co.in/book/0005): by Bal Ram Prasad. English. Language, Grammar.
+- [Economic History of The Miris](https://www.misingarchives.co.in/book/0006): by Peter Pegu. English. History, Economics.
+- [Mising Gomlab Do:pín](https://www.misingarchives.co.in/book/0007): by Dipok Kr. Doley. Mising. History, Literature.
+- [Mising Gomlam Gomseng](https://www.misingarchives.co.in/book/0008): by Dipok Kr. Doley. Mising. Language, Grammar, Essay.
+- [Mitpanla:ma:nam Mising Tani:](https://www.misingarchives.co.in/book/0009): by Dipok Kr. Doley. Mising. Biography, History.
+- [Mising Bhasha Aru Xanxkriti](https://www.misingarchives.co.in/book/0010): by Dipok Kr. Doley. Assamese. Culture, Language, History.
+- [Mising Bhasha - Shrenibhittik Shabdakosh](https://www.misingarchives.co.in/book/0011): by Dipok Kr. Doley. Assamese. Language, Reference.
+- [Brahmaputra Upatyakar Mising Janajati](https://www.misingarchives.co.in/book/0012): by Gonesh Pegu. Assamese. Culture, Folklore, History.
+- [The Pronouncing Mishing - English - Assamese Dictionary](https://www.misingarchives.co.in/book/0013): by Jitmal Doley. Multilingual. Language, Reference.
+- [Mising Folklore - 2nd Edition (2014)](https://www.misingarchives.co.in/book/0014): by Jawahar Jyoti Kuli. English. Folklore, Culture.
+
+## Community Writings
+https://www.misingarchives.co.in/articles — full collection, filterable by category
+- [Echoes of the Past](https://www.misingarchives.co.in/article/Echoes-of-the-past): A poem by Navajit Pamegam, originally published in the 12th issue (2025) of LOLAD, the annual souvenier of the Mising Students' Association, Dehli (MiSAd)
+- [Are Mising People Really Assamese?](https://www.misingarchives.co.in/article/Are-Mising-People-Really-Assamese): The question, "Are the Mising people really Assamese?" has become a topic of discussion in Assam, especially on social media and in public debates. While some believe that the Mising community is an integral part of Assamese society, others argue that the Misings have a separate ethnic identity that should not be merged with the Assamese identity.
+- [A Brief Introduction to the Mising Community](https://www.misingarchives.co.in/article/A-Brief-Introduction-to-the-Mising-Community): The Mising community is one of the largest indigenous tribal communities of Assam. Today, Misings mainly live in the districts of Lakhimpur, Dhemaji, Dibrugarh,Sivasagar, Jorhat, Golaghat, Sonitpur, and Tinsukia, though they are also found in other parts of Assam
+- [Is Assam Losing Its Linguistic Diversity? The Hindi Language Move in the Assembly and the Fight for Indigenous Identity](https://www.misingarchives.co.in/article/Is-Assam-Losing-Its-Linguistic-Diversity): The decision of the Assam Legislative Assembly in July 2026 to introduce Hindi as an official language for Assembly proceedings has triggered one of the most emotionally charged debates in recent Assamese public discourse. On the surface, the decision was presented as an administrative and practical step meant to make legislative functioning more inclusive and accessible. Hindi, after all, is widely understood across India and is spoken or understood by a considerable section of Assam’s population either as a first, second, or third language. Supporters of the decision therefore argued that allowing legislators to use Hindi inside the Assembly was merely an expansion of linguistic convenience and should not be interpreted as a threat to Assamese identity or to indigenous cultures. However, the reaction across large sections of Assamese society, especially among indigenous and tribal communities, revealed that the issue was never simply about communication. For many people in Assam, the move symbolized a deeper and long-growing anxiety regarding demographic change, cultural assimilation, institutional imbalance, and the fear that the political and cultural space of indigenous communities is slowly shrinking under the pressure of migration and centralization.
+- [The Mising Tribe: Between Assimilation and Preservation](https://www.misingarchives.co.in/article/The-Mising-Tribe-Between-Assimilation-and-Preservation): The Mising tribe, one of the prominent indigenous groups of Northeast India and part of the broader Tani cultural family, possesses a rich cultural heritage shaped by language, traditions, and close ties to nature.
+- [About Mising Archives](https://www.misingarchives.co.in/article/About-Mising-Archives): A brief introduction to Mising Archives, its purpose, and how to contribute.
+
+## Learn
+- [Mising Opín Amin — Clan names](https://www.misingarchives.co.in/learn/clans): standard spellings, legal respellings, IPA, and pronunciation audio for 45 Mising clans.
+
+## About & Policies
+- [About Mising Archives](https://www.misingarchives.co.in/article/About-Mising-Archives)
+- [Donations & transparency](https://www.misingarchives.co.in/donations)
+- [Contact](https://www.misingarchives.co.in/contact)
+- [Copyright Policy](https://www.misingarchives.co.in/copyright-policy)
+- [Terms of Use](https://www.misingarchives.co.in/terms-of-use)
+- [Privacy Policy](https://www.misingarchives.co.in/privacy-policy)
