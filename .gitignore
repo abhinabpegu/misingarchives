@@ -28,3 +28,6 @@ Thumbs.db
 # Misc
 .cache
 .parcel-cache
+#
+# Generated at build time — see scripts/generate-thumbnails.js
+public/images/mimang/thumbs/

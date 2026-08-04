@@ -9,7 +9,7 @@ public_folder: /images/mimang
 
 collections:
   - name: mimang
-    label: Mimang (Weaving Patterns)
+    label: Mising Motifs (Weaving Patterns)
     folder: content/mimang
     create: true
     format: json
@@ -25,6 +25,18 @@ collections:
       - label: Gamig Name
         name: gamigName
         widget: string
+
+      - label: Category
+        name: category
+        widget: select
+        required: false
+        options:
+          - Geometric
+          - Floral
+          - Animal
+          - Nature
+          - Other
+        hint: 'Shown as a small tag on the pattern card. Leave blank to hide it.'
 
       - label: English Description
         name: englishDesc

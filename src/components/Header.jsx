@@ -6,7 +6,8 @@ import { useTheme } from '../context/ThemeContext'
 // Add future /learn pages here — nothing else in this file needs to change.
 const LEARN_LINKS = [
   { to: '/learn/clans', label: 'Clans' },
-  { to: '/learn/mimang', label: 'Mimang' },
+  { to: '/learn/mising-motifs', label: 'Mising Motifs' }
+ 
   // { to: '/learn/numerals', label: 'Numerals' },
   // { to: '/learn/kinshipterms', label: 'Kinship Terms' },
 ]

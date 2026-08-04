@@ -17,8 +17,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfUse from './pages/TermsOfUse'
 import CopyrightPolicy from './pages/CopyrightPolicy'
 import Clans from './pages/learn/Clans'
-import Mimang from './pages/learn/Mimang'
-
+import MisingMotifs from './pages/learn/MisingMotifs'
 function Layout() {
   const { colors } = useTheme()
   const location = useLocation()
@@ -50,7 +49,7 @@ function Layout() {
             <Route path="/terms-of-use" element={<TermsOfUse />} />
             <Route path="/copyright-policy" element={<CopyrightPolicy />} />
             <Route path="/learn/clans" element={<Clans />} />
-            <Route path="/learn/mimang" element={<Mimang />} />
+            <Route path="/learn/mising-motifs" element={<MisingMotifs />} />
           </Routes>
         </div>
       </main>

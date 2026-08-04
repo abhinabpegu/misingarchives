@@ -14,7 +14,7 @@ const staticRoutes = [
   '/terms-of-use',
   '/copyright-policy',
   '/learn/clans',
-  '/learn/mimang',
+  '/learn/mising-motifs',
 ]
 const urls = [
   ...staticRoutes.map((path) => ({ loc: `${SITE_URL}${path}` })),

@@ -147,10 +147,10 @@ function getMeta(url) {
     }
   }
 
-  if (pathname === '/learn/mimang') {
+  if (pathname === '/learn/mising-motifs') {
     return {
-      title: `Mimang (Weaving Patterns) — ${SITE_NAME}`,
-      description: 'A library of Mising weaving patterns (gai-gamig) — arrangements of lines, shapes, and colours following the alam system.',
+      title: `Mising Motifs (Weaving Patterns) — ${SITE_NAME}`,
+      description: 'A library of Mising weaving patterns (Gamig) — arrangements of lines, shapes, and colours used in traditional Mising textiles.',
       image: null,
     }
   }
