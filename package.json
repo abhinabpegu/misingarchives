@@ -5,7 +5,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/generate-sitemap.js && node scripts/generate-llms.js && node scripts/generate-thumbnails.js",
+    "prebuild": "node scripts/generate-sitemap.js && node scripts/generate-llms.js",
     "thumbnails": "node scripts/generate-thumbnails.js",
     "dev": "vite",
     "build": "vite build",

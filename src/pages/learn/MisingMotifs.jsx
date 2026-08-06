@@ -11,11 +11,13 @@ import LazyImage from '../../components/LazyImage'
 // onError handler on each <img>, rather than failing to load at all.
 function toThumbUrl(path) {
   if (!path) return path
+  // Cloudinary (or any absolute) URLs are already CDN-optimized — don't
+  // rewrite them into the old local /thumbs/ path.
+  if (/^https?:\/\//i.test(path)) return path
   const idx = path.lastIndexOf('/')
   if (idx === -1) return path
   return `${path.slice(0, idx)}/thumbs${path.slice(idx)}`
 }
-
 // Fullscreen lightbox for viewing the currently displayed image at full
 // size. Always shown at ORIGINAL resolution, not the compressed preview —
 // shared by every card via the page-level `lightboxImage` state below,

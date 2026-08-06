@@ -31,3 +31,5 @@ Thumbs.db
 #
 # Generated at build time — see scripts/generate-thumbnails.js
 public/images/mimang/thumbs/
+
+scripts/.cloudinary-migration-map.json

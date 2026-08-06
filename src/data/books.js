@@ -7,7 +7,7 @@ export const booksData = [
     tags: ['History', 'Language', 'Culture', 'Folklore'],
     driveLink: 'https://drive.google.com/file/d/1eB3pS6ZP9n2j3a_bqsc2bGPw9CnvsE23/view?usp=drive_link',
     archivedBy: 'Pahar.in',
-    coverImage: '/images/book0001.png', // Will be populated when images are added
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996331/misingarchives/book0001.png', // Will be populated when images are added
   },
   {
     code: '0002',
@@ -17,7 +17,7 @@ export const booksData = [
     tags: ['Culture', 'History', 'Sociology'],
     driveLink: 'https://drive.google.com/file/d/1au1pTo3_J_qwzN3lb1R_9AyrXceFdFSb/view?usp=drive_link',
     archivedBy: 'pahar.in',
-    coverImage: '/images/book0002.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996332/misingarchives/book0002.png',
   },
   {
     code: '0003',
@@ -27,7 +27,7 @@ export const booksData = [
     tags: ['Culture', 'Folklore', 'Literature'],
     driveLink: 'https://drive.google.com/file/d/1DmVvt9eOo9Qup17JCYZ_0yIyhK5bMRfP/view?usp=sharing',
     archivedBy: 'Public.Resource.Org',
-    coverImage: '/images/book0003.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996333/misingarchives/book0003.png',
   },
   {
     code: '0004',
@@ -37,7 +37,7 @@ export const booksData = [
     tags: ['Folksongs', 'Songs', 'Culture'],
     driveLink: 'https://drive.google.com/file/d/1J4B6pqbXVOPox5WEQz4L2rOTmW9ygjJJ/view?usp=drive_link',
     archivedBy: 'Public.Resource.Org',
-    coverImage: '/images/book0004.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996335/misingarchives/book0004.png',
   },
   {
     code: '0005',
@@ -47,7 +47,7 @@ export const booksData = [
     tags: ['Language', 'Grammar'],
     driveLink: 'https://drive.google.com/file/d/1qUR0AqrZSbeO8XgXKULnMFcQaf1Of_zy/view?usp=sharing',
     archivedBy: 'Public.Resource.Org',
-    coverImage: '/images/book0005.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996335/misingarchives/book0005.png',
   },
   {
     code: '0006',
@@ -57,7 +57,7 @@ export const booksData = [
     tags: ['History', 'Economics'],
     driveLink: 'https://drive.google.com/file/d/1u9BQW7HEb3EBLtskLFixlhYG3eepVXc6/view?usp=drive_link',
     archivedBy: 'pegubhai (Internet Archive)',
-    coverImage: '/images/book0006.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996336/misingarchives/book0006.png',
   },
   {
     code: '0007',
@@ -67,7 +67,7 @@ export const booksData = [
     tags: ['History', 'Literature'],
     driveLink: 'https://drive.google.com/file/d/1d7YJut7SGXtJBWAdNHlkZIGVNBbBDjV1/view?usp=drive_link',
     archivedBy: 'Author',
-    coverImage: '/images/book0007.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996337/misingarchives/book0007.png',
   },
   {
     code: '0008',
@@ -77,7 +77,7 @@ export const booksData = [
     tags: ['Language', 'Grammar', 'Essay'],
     driveLink: 'https://drive.google.com/file/d/1GObntJtSAHBRKzZGqG94TlB8ifZG1OyA/view?usp=drive_link',
     archivedBy: 'Author',
-    coverImage: '/images/book0008.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996338/misingarchives/book0008.png',
   },
   {
     code: '0009',
@@ -87,7 +87,7 @@ export const booksData = [
     tags: ['Biography', 'History'],
     driveLink: 'https://drive.google.com/file/d/1Zf2D16gc4Ot0irjOmlABMaw2zwaff0kg/view?usp=drive_link',
     archivedBy: 'Author',
-    coverImage: '/images/book0009.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996339/misingarchives/book0009.png',
   },
   {
     code: '0010',
@@ -97,7 +97,7 @@ export const booksData = [
     tags: ['Culture', 'Language', 'History'],
     driveLink: 'https://drive.google.com/file/d/1N-cn4wv7jv7daixRODk64wv0aDGsq5P4/view?usp=drive_link',
     archivedBy: 'Author',
-    coverImage: '/images/book0010.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996340/misingarchives/book0010.png',
   },
   {
     code: '0011',
@@ -107,7 +107,7 @@ export const booksData = [
     tags: ['Language', 'Reference'],
     driveLink: 'https://drive.google.com/file/d/1QTayHw9I_Z9gV_Qv5mFBXo3qusfCQq7E/view?usp=drive_link',
     archivedBy: 'Author',
-    coverImage: '/images/book0011.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996341/misingarchives/book0011.png',
   },
   {
     code: '0012',
@@ -117,7 +117,7 @@ export const booksData = [
     tags: ['Culture', 'Folklore', 'History'],
     driveLink: 'https://drive.google.com/file/d/1jJLUzkza_TXTV7L5CgdolxydeuRrXm6F/view?usp=drive_link',
     archivedBy: 'Public.Resource.Org',
-    coverImage: '/images/book0012.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996342/misingarchives/book0012.png',
   },
   {
     code: '0013',
@@ -127,7 +127,7 @@ export const booksData = [
     tags: ['Language', 'Reference'],
     driveLink: 'https://drive.google.com/file/d/13N4Z_uDuzhKaLR6ooA7MKLnNKwnaT5Ca/view?usp=sharing',
     archivedBy: 'Mising Archives',
-    coverImage: '/images/book0013.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996343/misingarchives/book0013.png',
   },
   {
     code: '0014',
@@ -137,6 +137,6 @@ export const booksData = [
     tags: ['Folklore', 'Culture'],
     driveLink: 'https://drive.google.com/file/d/1_hRYC8-e-Yg3AuOiFEUG-1YXHclM-UfU/view?usp=sharing',
     archivedBy: 'Mising Archives',
-    coverImage: '/images/book0014.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996343/misingarchives/book0014.jpg',
   }
 ]

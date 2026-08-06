@@ -1,11 +1,22 @@
 backend:
   name: github
-  repo: abhinabpegu/misingarchives   # confirm this matches owner/repo exactly
-  branch: main                        # confirm this is your default branch
-  base_url: https://sveltia-cms-auth.abheepegu.workers.dev/   # set after deploying the Cloudflare Worker (step 3)
+  repo: abhinabpegu/misingarchives
+  branch: main
+  base_url: https://sveltia-cms-auth.abheepegu.workers.dev/
 
+# Kept as a fallback reference; Cloudinary below is what actually handles uploads now
 media_folder: public/images/mimang
 public_folder: /images/mimang
+
+media_libraries:
+  cloudinary:
+    config:
+      cloud_name: cysxatpe
+      api_key: 932546822114154
+      default_transformations:
+        - - quality: auto
+            fetch_format: auto
+    output_filename_only: false
 
 collections:
   - name: mimang
@@ -48,12 +59,10 @@ collections:
         name: image
         widget: image
         required: false
-        choose_url: false
         hint: 'Square (1:1) image of the pattern itself'
 
       - label: Cloth Example
         name: clothExample
         widget: image
         required: false
-        choose_url: false
         hint: 'Photo of the pattern woven onto cloth'

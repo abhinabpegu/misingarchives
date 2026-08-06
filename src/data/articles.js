@@ -43,7 +43,7 @@ export const articlesData = [
     excerpt: 'A poem by Navajit Pamegam, originally published in the 12th issue (2025) of LOLAD, the annual souvenier of the Mising Students\' Association, Dehli (MiSAd)', 
     author: 'Navajit Pamegam ',
     date: '2026-07-08',
-    coverImage: '/images/articles/echeos-of-past.jpg',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996322/misingarchives/articles/echeos-of-past.jpg',
     featured: true,
     sourceUrl: null,
     sourceLabel: null,
@@ -109,7 +109,7 @@ export const articlesData = [
     excerpt: 'The question, "Are the Mising people really Assamese?" has become a topic of discussion in Assam, especially on social media and in public debates. While some believe that the Mising community is an integral part of Assamese society, others argue that the Misings have a separate ethnic identity that should not be merged with the Assamese identity.',
     author: 'Jeshmin Pegu',
     date: '2026-07-07',
-    coverImage: '/images/articles/jeshminpegu-07july26.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996324/misingarchives/articles/jeshminpegu-07july26.png',
     coverFit: 'cover',
     featured: true,
     sourceUrl: null,
@@ -161,7 +161,7 @@ The question should not be whether the Mising people are "really Assamese." Inst
     excerpt: 'The Mising community is one of the largest indigenous tribal communities of Assam. Today, Misings mainly live in the districts of Lakhimpur, Dhemaji, Dibrugarh,Sivasagar, Jorhat, Golaghat, Sonitpur, and Tinsukia, though they are also found in other parts of Assam',
     author: 'Nepoleon Pegu',
     date: '2026-07-06',
-    coverImage: '/images/articles/misingpeople.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996326/misingarchives/articles/misingpeople.jpg',
     coverFit: 'cover',
     featured: true,
     sourceUrl: null,
@@ -320,7 +320,7 @@ The question should not be whether the Mising people are "really Assamese." Inst
 
     author: 'Somyo Doley',
     date: '2026-07-06',
-    coverImage: '/images/articles/sumyodoley-06july26.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996327/misingarchives/articles/sumyodoley-06july26.jpg',
     featured: true,
     coverFit: 'contain',
     content: `
@@ -354,7 +354,7 @@ The question should not be whether the Mising people are "really Assamese." Inst
     excerpt: 'The Mising tribe, one of the prominent indigenous groups of Northeast India and part of the broader Tani cultural family, possesses a rich cultural heritage shaped by language, traditions, and close ties to nature.',
     author: 'Sumyo Doley',
     date: '2026-07-05',
-    coverImage: '/images/articles/sumyodoley-05july26.png',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996329/misingarchives/articles/sumyodoley-05july26.jpg',
     featured: false,
     sourceUrl: null,
     sourceLabel: null,
@@ -396,7 +396,7 @@ Ultimately, the future of the Mising identity lies in balance: preserving langua
     excerpt: 'A brief introduction to Mising Archives, its purpose, and how to contribute.',
     author: 'Abhinab Pegu',
     date: '2026-07-03',
-    coverImage: '/images/articles/welcome.jpg',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996330/misingarchives/articles/welcome.jpg',
     featured: false,
     content: `
 <p> This project is an independent archival initiative led by the Mising tribal community to preserve and promote its heritage through a freely accessible digital platform.
