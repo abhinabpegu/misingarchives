@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTheme } from '../context/ThemeContext'
 
 // Drop-in replacement for a plain <img> that shows a shimmering skeleton
@@ -11,6 +11,15 @@ import { useTheme } from '../context/ThemeContext'
 export default function LazyImage({ src, alt, style = {}, onClick, className, ...rest }) {
   const { colors } = useTheme()
   const [loaded, setLoaded] = useState(false)
+
+  // Reset the skeleton whenever the image being shown changes (e.g. the
+  // pattern/cloth toggle on the motifs page) — without this, `loaded`
+  // stays true from the previous image and the new one just sits there
+  // invisible-but-rendered while it downloads, which reads as the UI
+  // freezing instead of loading.
+  useEffect(() => {
+    setLoaded(false)
+  }, [src])
 
   return (
     <div

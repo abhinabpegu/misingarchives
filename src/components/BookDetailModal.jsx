@@ -213,8 +213,8 @@ export default function BookDetailModal({ book, onClose }) {
     lineHeight: '1.6'
   }}>
     Copyright holder? If you'd like this book taken down, email{' '}
-    <a href="mailto:misingarchives@gmail.com" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
-      misingarchives@gmail.com
+    <a href="mailto:contact@misingarchives.co.in" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+      contact@misingarchives.co.in
     </a>.
   </div>
 )}

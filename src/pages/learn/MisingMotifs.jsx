@@ -1,23 +1,20 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { Shirt, LayoutGrid, Maximize2, X, ArrowUpDown } from 'lucide-react'
 import { mimangData } from '../../data/learn/mimang'
 import { useTheme } from '../../context/ThemeContext'
 import { usePageTitle } from '../../hooks/usePageTitle'
 import LazyImage from '../../components/LazyImage'
-// Given '/images/mimang/0001.jpeg', returns '/images/mimang/thumbs/0001.jpeg'
-// — the compressed preview generated at build time by
-// scripts/generate-thumbnails.js. Falls back to the original path if the
-// thumb doesn't exist yet (e.g. local dev before a build has run) via the
-// onError handler on each <img>, rather than failing to load at all.
+import { cloudinaryUrl } from '../../utils/cloudinaryUrl'
+
+// Card-sized preview. w_500 is plenty for the grid; q_auto/f_auto let
+// Cloudinary pick the smallest good-looking format (webp/avif) per browser
+// instead of shipping the full original (which can be several MB for an
+// unedited phone photo). No-ops safely on any non-Cloudinary URL.
 function toThumbUrl(path) {
   if (!path) return path
-  // Cloudinary (or any absolute) URLs are already CDN-optimized — don't
-  // rewrite them into the old local /thumbs/ path.
-  if (/^https?:\/\//i.test(path)) return path
-  const idx = path.lastIndexOf('/')
-  if (idx === -1) return path
-  return `${path.slice(0, idx)}/thumbs${path.slice(idx)}`
+  return cloudinaryUrl(path, 'w_500,q_auto,f_auto')
 }
+
 // Fullscreen lightbox for viewing the currently displayed image at full
 // size. Always shown at ORIGINAL resolution, not the compressed preview —
 // shared by every card via the page-level `lightboxImage` state below,
@@ -78,10 +75,23 @@ function Lightbox({ src, alt, onClose }) {
 // name/description, and a separate pattern/cloth-example toggle icon.
 //
 // The card itself always displays the COMPRESSED thumb, not the original
-// 5-6MB upload — that's what keeps the grid fast to load.
+// upload — that's what keeps the grid fast to load. It also silently
+// preloads the OTHER thumb (the one you'd see if you hit the toggle) as
+// soon as it mounts, so by the time someone actually clicks the toggle
+// button the image is already sitting in the browser cache instead of
+// triggering a fresh multi-second download.
 function MimangCard({ mimang, onExpand }) {
   const { colors } = useTheme()
   const [showExample, setShowExample] = useState(false)
+
+  useEffect(() => {
+    const other = showExample ? mimang.image : mimang.clothExample
+    const otherThumb = toThumbUrl(other)
+    if (otherThumb) {
+      const img = new Image()
+      img.src = otherThumb
+    }
+  }, [showExample, mimang.image, mimang.clothExample])
 
   const displayedFull = showExample ? mimang.clothExample : mimang.image
   const displayedThumb = toThumbUrl(displayedFull)
@@ -104,7 +114,7 @@ function MimangCard({ mimang, onExpand }) {
               alt={displayedAlt}
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               onError={(e) => {
-                // Thumb missing (e.g. build hasn't generated it yet) —
+                // Thumb transform failed to resolve for some reason —
                 // fall back to the original once, rather than a broken image.
                 if (e.target.dataset.fallback) return
                 e.target.dataset.fallback = 'true'
