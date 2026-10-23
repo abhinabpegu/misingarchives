@@ -1,3 +1,4 @@
+import { namingSystemContent } from './articleContent/naming-system.js'
 // Articles for Mising Archives.
 //
 // HOW THIS WORKS
@@ -434,4 +435,33 @@ I decided to keep the entire codebase open source. It is publicly available on G
     `,
   },
   
+    {
+    slug: 'The-Traditional-Naming-System-of-the-Mising-People',
+    title: 'The Traditional Naming System of the Mising People',
+    category: 'Research',
+    type: 'research',
+    excerpt: 'An exploratory study of whether traditional Mising personal names followed a two-syllable pattern, with the last syllable of a father’s name becoming the first syllable of his child’s name.',
+    abstract: `This study explores the possibility of a traditional syllable-based naming system among the Mising people, an indigenous community belonging to the wider Tani ethnolinguistic group of Northeast India. It investigates the hypothesis that traditional personal names commonly consisted of two syllables, with the final syllable of a father’s name becoming the initial syllable of his child’s name. Using a qualitative, exploratory, and comparative approach, the study examines selected genealogical traditions associated with the Kepang and Longgíng clans, alongside linguistic observations, oral traditions, and comparative evidence from other Tani communities. It also considers the tradition of Pédong Na:né to explore questions of ancestry, kinship, and possible exceptions to the proposed pattern. The findings reveal several apparent syllabic correspondences between successive names, although other transitions require further linguistic examination. The study also discusses how social change, cultural contact, and religious influences may have affected naming practices over time. However, the available evidence is insufficient to establish the proposed pattern as a widespread or historically confirmed Mising naming rule. By documenting these observations and identifying areas requiring further investigation, this study contributes to the discussion of Mising naming traditions and highlights the importance of oral histories, genealogical documentation, and linguistic research in understanding the community’s cultural heritage.`,
+    keywords: [
+      'Anthroponymy',
+      'Mising traditional naming system',
+      'Onomastics',
+      'Intergenerational syllable transmission',
+      'Genealogical naming patterns',
+      'Oral traditions',
+      'Mising language',
+      'Changing naming practices',
+    ],
+    author: 'Navajit Pamegam and Dishan Doley',
+    authors: ['Navajit Pamegam', 'Dishan Doley'],
+    affiliation: 'Independent Researchers',
+    date: '2026-10-23',
+    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/f_auto/q_auto/hans-tree-693807_ksb06b.jpg',
+    featured: true,
+    // Same-origin file in public/papers/. A Cloudinary URL also works.
+    pdfUrl: '/papers/The-Traditional-Naming-System-of-the-Mising-People.pdf',
+    sourceUrl: null,
+    sourceLabel: null,
+    content: namingSystemContent,
+  },
 ]

@@ -175,7 +175,7 @@ function getBotContent(url) {
     if (article) {
       const jsonLd = {
         '@context': 'https://schema.org',
-        '@type': article.category === 'Poetry' ? 'CreativeWork' : 'Article',
+        '@type': article.type === 'research' ? 'ScholarlyArticle' : (article.category === 'Poetry' ? 'CreativeWork' : 'Article'),
         headline: article.title,
         description: article.excerpt,
         author: { '@type': 'Person', name: article.author },

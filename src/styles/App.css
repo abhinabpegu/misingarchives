@@ -354,3 +354,55 @@ button:active {
     transition: none;
   }
 }
+/* ---------------------------------- */
+/* Research articles                  */
+/* Applied when an article has        */
+/* type: 'research' (ArticleDetail).  */
+/* ---------------------------------- */
+
+.article-body h2,
+.article-body h3 {
+  scroll-margin-top: 90px; /* clears the sticky header on #anchor jumps */
+}
+
+.research-body h2 {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+}
+
+/* Genealogy chains like Do:ni → Nibo → Bomi */
+.research-body .lineage {
+  margin: 0 0 22px;
+  padding: 14px 18px;
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* Wide tables scroll sideways instead of breaking the layout */
+.research-body .table-wrap {
+  overflow-x: auto;
+  margin: 24px 0;
+}
+
+.research-body .table-wrap table {
+  margin: 0;
+  min-width: 420px;
+}
+
+/* Hanging-indent reference list */
+.research-body .references {
+  list-style: none;
+  padding-left: 0;
+}
+
+.research-body .references li {
+  padding-left: 28px;
+  text-indent: -28px;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+  overflow-wrap: anywhere;
+}
