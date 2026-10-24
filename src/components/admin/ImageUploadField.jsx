@@ -3,19 +3,22 @@ import { Upload, X } from 'lucide-react'
 import { useTheme } from '../../context/ThemeContext'
 import { uploadImage, uploadConfigured } from '../../utils/cloudinaryUpload'
 import { cloudinaryUrl } from '../../utils/cloudinaryUrl'
+import CropModal from './CropModal'
 
-// Upload button + preview + (optional) manual URL box.
+const isHeic = (file) => /heic|heif/i.test(file.type) || /\.(heic|heif)$/i.test(file.name)
+
+// Upload button + crop/rotate step + preview.
 // value = current image URL ('' if none); onChange(newUrl)
-export default function ImageUploadField({ label, value, onChange, folder }) {
-  const { isDarkMode, colors } = useTheme()
+// aspect = starting crop shape (1 = square)
+export default function ImageUploadField({ label, value, onChange, folder, aspect = 1 }) {
+  const { colors } = useTheme()
   const inputRef = useRef(null)
   const [progress, setProgress] = useState(null) // null = idle
   const [error, setError] = useState('')
+  const [pending, setPending] = useState(null) // file waiting in the cropper
 
-  const handleFile = async (e) => {
-    const file = e.target.files?.[0]
-    e.target.value = '' // lets you pick the same file again later
-    if (!file) return
+  const startUpload = async (file) => {
+    setPending(null)
     setError('')
     setProgress(0)
     try {
@@ -25,6 +28,18 @@ export default function ImageUploadField({ label, value, onChange, folder }) {
       setError(err.message)
     }
     setProgress(null)
+  }
+
+  const handleFile = (e) => {
+    const file = e.target.files?.[0]
+    e.target.value = '' // lets you pick the same file again later
+    if (!file) return
+    setError('')
+    // Browsers can't open HEIC for cropping, so those upload as-is.
+    // Anything that isn't an image goes straight to the upload check,
+    // which shows a clear error message.
+    if (file.type.startsWith('image/') && !isHeic(file)) setPending(file)
+    else startUpload(file)
   }
 
   const uploading = progress !== null
@@ -75,6 +90,16 @@ export default function ImageUploadField({ label, value, onChange, folder }) {
           {error && <p style={{ margin: '8px 0 0', fontSize: '12px', color: '#c0392b' }}>{error}</p>}
         </div>
       </div>
+
+      {pending && (
+        <CropModal
+          file={pending}
+          initialAspect={aspect}
+          onCancel={() => setPending(null)}
+          onSkip={() => startUpload(pending)}
+          onDone={startUpload}
+        />
+      )}
     </div>
   )
 }
