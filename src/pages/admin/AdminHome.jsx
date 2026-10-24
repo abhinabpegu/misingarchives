@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { LogOut } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
@@ -10,7 +11,7 @@ export default function AdminHome() {
   usePageTitle('Admin')
   useNoIndex()
   const { colors } = useTheme()
-  const { cardBase } = useCardStyle()
+  const { cardBase, hoverIn, hoverOut } = useCardStyle()
   const { profile, signOut } = useAuth()
 
   return (
@@ -49,12 +50,17 @@ export default function AdminHome() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
-        <div style={{ ...cardBase, padding: '24px', opacity: 0.7 }}>
+        <Link
+          to="/manage/mimang"
+          style={{ ...cardBase, display: 'block', padding: '24px', textDecoration: 'none' }}
+          onMouseEnter={hoverIn}
+          onMouseLeave={hoverOut}
+        >
           <h3 style={{ margin: '0 0 8px', fontSize: '16px', color: colors.text }}>Mising Motifs</h3>
           <p style={{ margin: 0, fontSize: '13px', color: colors.textSecondary, lineHeight: '1.6' }}>
-            Add, edit and remove weaving patterns. Coming in the next step.
+            Add, edit and remove weaving patterns.
           </p>
-        </div>
+        </Link>
       </div>
     </div>
   )

@@ -22,6 +22,7 @@ import Clans from './pages/learn/Clans'
 import MisingMotifs from './pages/learn/MisingMotifs'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminHome from './pages/admin/AdminHome'
+import MimangAdmin from './pages/admin/MimangAdmin'
 
 function Layout() {
   const { colors } = useTheme()
@@ -59,6 +60,7 @@ function Layout() {
             {/* Admin (new Supabase-based). /admin is still the old Sveltia CMS. */}
             <Route path="/manage/login" element={<AdminLogin />} />
             <Route path="/manage" element={<RequireStaff><AdminHome /></RequireStaff>} />
+            <Route path="/manage/mimang" element={<RequireStaff><MimangAdmin /></RequireStaff>} />
           </Routes>
         </div>
       </main>
