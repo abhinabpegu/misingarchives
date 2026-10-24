@@ -1,9 +1,11 @@
 import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
+import { AuthProvider } from './context/AuthContext'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import RequireStaff from './components/RequireStaff'
 import Home from './pages/Home'
 import DigitalBookLibrary from './pages/DigitalBookLibrary'
 import Articles from './pages/Articles'
@@ -18,6 +20,9 @@ import TermsOfUse from './pages/TermsOfUse'
 import CopyrightPolicy from './pages/CopyrightPolicy'
 import Clans from './pages/learn/Clans'
 import MisingMotifs from './pages/learn/MisingMotifs'
+import AdminLogin from './pages/admin/AdminLogin'
+import AdminHome from './pages/admin/AdminHome'
+
 function Layout() {
   const { colors } = useTheme()
   const location = useLocation()
@@ -50,6 +55,10 @@ function Layout() {
             <Route path="/copyright-policy" element={<CopyrightPolicy />} />
             <Route path="/learn/clans" element={<Clans />} />
             <Route path="/learn/mising-motifs" element={<MisingMotifs />} />
+
+            {/* Admin (new Supabase-based). /admin is still the old Sveltia CMS. */}
+            <Route path="/manage/login" element={<AdminLogin />} />
+            <Route path="/manage" element={<RequireStaff><AdminHome /></RequireStaff>} />
           </Routes>
         </div>
       </main>
@@ -61,7 +70,9 @@ function Layout() {
 export default function App() {
   return (
     <ThemeProvider>
-      <Layout />
+      <AuthProvider>
+        <Layout />
+      </AuthProvider>
     </ThemeProvider>
   )
 }
