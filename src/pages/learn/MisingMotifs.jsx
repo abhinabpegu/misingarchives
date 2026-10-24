@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react'
 import { Shirt, LayoutGrid, Maximize2, X, ArrowUpDown } from 'lucide-react'
-import { mimangData } from '../../data/learn/mimang'
+import { useMimang } from '../../hooks/useMimang'
 import { useTheme } from '../../context/ThemeContext'
 import { usePageTitle } from '../../hooks/usePageTitle'
 import LazyImage from '../../components/LazyImage'
@@ -234,6 +234,7 @@ function MimangCard({ mimang, onExpand }) {
 
 export default function MisingMotifs() {
   usePageTitle('Mising Motifs')
+  const { mimang: mimangData } = useMimang()
   const { colors } = useTheme()
   const [lightbox, setLightbox] = useState(null) // { src, alt } | null
   const [sortDir, setSortDir] = useState('asc') // 'asc' | 'desc'
@@ -245,7 +246,7 @@ export default function MisingMotifs() {
       a.gamigName.localeCompare(b.gamigName, 'en', { sensitivity: 'base' })
     )
     return sortDir === 'asc' ? sorted : sorted.reverse()
-  }, [sortDir])
+  }, [sortDir, mimangData])
 
   const eyebrow = {
     fontSize: '12px',

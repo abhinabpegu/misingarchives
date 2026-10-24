@@ -8,6 +8,7 @@ import { usePageTitle } from '../../hooks/usePageTitle'
 import { useNoIndex } from '../../hooks/useNoIndex'
 import { cloudinaryUrl } from '../../utils/cloudinaryUrl'
 import ImageUploadField from '../../components/admin/ImageUploadField'
+import { mimangData as legacyData } from '../../data/learn/mimang'
 
 const CATEGORIES = ['Geometric', 'Floral', 'Animal', 'Nature', 'Other']
 
@@ -39,6 +40,8 @@ export default function MimangAdmin() {
   const [form, setForm] = useState(null) // null = closed, object = open
   const [saving, setSaving] = useState(false)
   const [formError, setFormError] = useState('')
+  const [notice, setNotice] = useState('')
+  const [importing, setImporting] = useState(false)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -105,6 +108,33 @@ export default function MimangAdmin() {
     load()
   }
 
+  const handleImport = async () => {
+    const ok = window.confirm(
+      `Import ${legacyData.length} patterns from the old JSON files?\n\n` +
+      'Patterns with the same code will be overwritten with the JSON version.'
+    )
+    if (!ok) return
+    setImporting(true)
+    setNotice('')
+    const payload = legacyData.map((m) => ({
+      code: m.code,
+      gamig_name: m.gamigName,
+      category: m.category || null,
+      english_desc: m.englishDesc || null,
+      image_url: m.image || null,
+      cloth_example_url: m.clothExample || null,
+      published: true,
+    }))
+    const { error } = await supabase.from('mimang').upsert(payload, { onConflict: 'code' })
+    setImporting(false)
+    if (error) setListError('Import failed: ' + error.message)
+    else {
+      setListError('')
+      setNotice(`Imported ${payload.length} patterns.`)
+      load()
+    }
+  }
+
   const handleDelete = async (row) => {
     if (!window.confirm(`Delete "${row.gamig_name}" (${row.code}) permanently?`)) return
     const { error } = await supabase.from('mimang').delete().eq('id', row.id)
@@ -150,11 +180,17 @@ export default function MimangAdmin() {
           <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>{rows.length} patterns</p>
         </div>
         {!form && (
-          <button onClick={openNew} style={primaryBtn}><Plus size={15} /> New pattern</button>
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <button onClick={handleImport} disabled={importing} style={ghostBtn}>
+              {importing ? 'Importing…' : 'Import from old JSON files'}
+            </button>
+            <button onClick={openNew} style={primaryBtn}><Plus size={15} /> New pattern</button>
+          </div>
         )}
       </div>
 
       {listError && <p style={{ color: '#c0392b', fontSize: '13px' }}>{listError}</p>}
+      {notice && <p style={{ color: colors.accentPrimary, fontSize: '13px', fontWeight: '600' }}>{notice}</p>}
 
       {form && (
         <form onSubmit={handleSave} style={{ ...cardBase, padding: '24px', marginBottom: '28px' }}>
