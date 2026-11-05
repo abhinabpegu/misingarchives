@@ -24,6 +24,11 @@ import AdminLogin from './pages/admin/AdminLogin'
 import AdminHome from './pages/admin/AdminHome'
 import MimangAdmin from './pages/admin/MimangAdmin'
 import ArtisansAdmin from './pages/admin/ArtisansAdmin'
+import RequireArtisan from './components/RequireArtisan'
+import ArtisanLogin from './pages/artisan/ArtisanLogin'
+import ArtisanHome from './pages/artisan/ArtisanHome'
+import ArtisanProfile from './pages/artisan/ArtisanProfile'
+import ArtisanProducts from './pages/artisan/ArtisanProducts'
 
 function Layout() {
   const { colors } = useTheme()
@@ -63,6 +68,11 @@ function Layout() {
             <Route path="/manage" element={<RequireStaff><AdminHome /></RequireStaff>} />
             <Route path="/manage/mimang" element={<RequireStaff><MimangAdmin /></RequireStaff>} />
             <Route path="/manage/artisans" element={<RequireStaff><ArtisansAdmin /></RequireStaff>} />
+            {/* Artisan portal */}
+<Route path="/artisan/login" element={<ArtisanLogin />} />
+<Route path="/artisan" element={<RequireArtisan><ArtisanHome /></RequireArtisan>} />
+<Route path="/artisan/profile" element={<RequireArtisan><ArtisanProfile /></RequireArtisan>} />
+<Route path="/artisan/products" element={<RequireArtisan><ArtisanProducts /></RequireArtisan>} />
           </Routes>
         </div>
       </main>
