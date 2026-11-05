@@ -61,6 +61,18 @@ export default function AdminHome() {
             Add, edit and remove weaving patterns.
           </p>
         </Link>
+
+        <Link
+          to="/manage/artisans"
+          style={{ ...cardBase, display: 'block', padding: '24px', textDecoration: 'none' }}
+          onMouseEnter={hoverIn}
+          onMouseLeave={hoverOut}
+        >
+          <h3 style={{ margin: '0 0 8px', fontSize: '16px', color: colors.text }}>Artisans</h3>
+          <p style={{ margin: 0, fontSize: '13px', color: colors.textSecondary, lineHeight: '1.6' }}>
+            Register shop artisans and manage their logins.
+          </p>
+        </Link>
       </div>
     </div>
   )

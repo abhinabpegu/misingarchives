@@ -23,6 +23,7 @@ import MisingMotifs from './pages/learn/MisingMotifs'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminHome from './pages/admin/AdminHome'
 import MimangAdmin from './pages/admin/MimangAdmin'
+import ArtisansAdmin from './pages/admin/ArtisansAdmin'
 
 function Layout() {
   const { colors } = useTheme()
@@ -61,6 +62,7 @@ function Layout() {
             <Route path="/manage/login" element={<AdminLogin />} />
             <Route path="/manage" element={<RequireStaff><AdminHome /></RequireStaff>} />
             <Route path="/manage/mimang" element={<RequireStaff><MimangAdmin /></RequireStaff>} />
+            <Route path="/manage/artisans" element={<RequireStaff><ArtisansAdmin /></RequireStaff>} />
           </Routes>
         </div>
       </main>
