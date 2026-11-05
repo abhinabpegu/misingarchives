@@ -8,6 +8,7 @@ const staticRoutes = [
   '/',
   '/digital-book-library',
   '/articles',
+  '/shop',
   '/donations',
   '/contact',
   '/privacy-policy',

@@ -113,6 +113,7 @@ export default function Header() {
           <NavLink to="/" style={navLinkStyle} end>Home</NavLink>
           <NavLink to="/digital-book-library" style={navLinkStyle}>Digital Book Library</NavLink>
           <NavLink to="/articles" style={navLinkStyle}>Community Writings</NavLink>
+          <NavLink to="/shop" style={navLinkStyle}>Shop</NavLink>
 
           {/* Learn dropdown */}
           <div ref={learnRef} style={{ position: 'relative' }}>
@@ -234,6 +235,7 @@ export default function Header() {
           <NavLink to="/" onClick={() => setMenuOpen(false)} style={navLinkStyle} end>Home</NavLink>
           <NavLink to="/digital-book-library" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Digital Book Library</NavLink>
           <NavLink to="/articles" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Community Writings</NavLink>
+          <NavLink to="/shop" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Shop</NavLink>
 
           {/* Learn - expandable on mobile instead of a dropdown */}
           <div>

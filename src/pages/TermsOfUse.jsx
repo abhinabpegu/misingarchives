@@ -40,7 +40,7 @@ export default function TermsOfUse() {
         Terms of Use
       </h1>
       <p style={{ fontSize: '13px', color: colors.textTertiary, marginBottom: '32px' }}>
-        Last updated: 24 July 2026
+        Last updated: 6 November 2026
       </p>
 
       <p style={p}>
@@ -67,12 +67,13 @@ export default function TermsOfUse() {
       </p>
       <p style={p}>
         The Website is provided free of charge, for informational, educational, and
-        cultural-preservation purposes. It is not operated as a commercial venture, and
-        nothing on it should be understood as a commercial offer of goods or services
-        in the sense used by the Consumer Protection Act, 2019 or the rules made under
-        it — the Digital Book Library and the Community Writings section are provided
-        without charge, and donations made through the Website are voluntary
-        contributions, not payment for any product or service.
+        cultural-preservation purposes. The Digital Book Library and the Community
+        Writings section are provided without charge, and donations made through the
+        Website are voluntary contributions, not payment for any product or service.
+        The Website also hosts an Artisan Shop, a directory where independent Mising
+        artisans list their own handmade goods. Mising Archives does not itself sell
+        those goods and earns no commission from them; Section 4A explains how the shop
+        works and where responsibility lies.
       </p>
 
       <h2 style={h2}>2. Acceptance of Terms &amp; Eligibility</h2>
@@ -124,11 +125,70 @@ export default function TermsOfUse() {
         necessary rights from its actual copyright holder.
       </p>
 
+      <h2 style={h2}>4A. Artisan Shop &amp; Listings</h2>
+      <h3 style={h3}>What the shop is</h3>
+      <p style={p}>
+        The Artisan Shop is a directory that helps buyers find and contact independent
+        Mising artisans. Each artisan is an independent person or business. Mising
+        Archives registers artisans and provides the pages on which they show their
+        profile and products, but we are <strong>not</strong> the seller, agent,
+        manufacturer or employer of any artisan. We do not take orders, handle payments,
+        hold money, arrange delivery, or guarantee any sale.
+      </p>
+      <h3 style={h3}>Buying from an artisan</h3>
+      <p style={p}>
+        Any contract to buy goods is solely between you and the artisan. Price,
+        availability, customisation, payment method, delivery, returns, refunds and any
+        warranty are agreed directly with the artisan, and any dispute about a purchase
+        must be taken up with them. We do not verify every listing, and the appearance of
+        a product or artisan on the Website is not a guarantee of its quality,
+        authenticity, safety, suitability or delivery. Please use your own judgment,
+        confirm details before paying, and prefer payment methods that offer some
+        protection. Nothing in these Terms limits any rights you may have against a
+        seller under the Consumer Protection Act, 2019 or the rules made under it.
+      </p>
+      <h3 style={h3}>What artisans agree to</h3>
+      <p style={p}>If you are an artisan listed in the shop, you agree that:</p>
+      <ol style={numbered}>
+        <li style={li}>Your profile and product information is accurate, and any claim such as "handloom," "handmade," "silver" or "customisable" is true;</li>
+        <li style={li}>You will list only goods that you may lawfully sell, and you are responsible for any licences, registrations and taxes (including GST, where applicable) that apply to your business;</li>
+        <li style={li}>You own, or have permission to use, every photo and piece of text you upload, and it does not infringe anyone else's rights;</li>
+        <li style={li}>You are responsible for fulfilling the orders you accept, for your prices, and for your dealings with buyers;</li>
+        <li style={li}>You consent to the contact details you provide (such as phone, WhatsApp, email and social media links) being shown publicly in the shop. You can leave any field blank, and can ask us to hide or remove it at any time;</li>
+        <li style={li}>You will keep your username and password private and are responsible for activity under your login.</li>
+      </ol>
+      <h3 style={h3}>Your content stays yours</h3>
+      <p style={p}>
+        Artisans keep ownership of their profile text, photos and product listings. By
+        publishing them in the shop, you give Mising Archives a non-exclusive,
+        royalty-free, worldwide licence to host and display them on the Website and to
+        show them on our social media channels to promote the shop. You can end this
+        licence by removing a listing or by asking us to remove your profile; we will
+        take it down within a reasonable time. Shop content is <strong>not</strong>{' '}
+        licensed under CC BY-SA 4.0, and the Copyright Policy's open licence for
+        community writings does not apply to it.
+      </p>
+      <h3 style={h3}>Using artisan contact details</h3>
+      <p style={p}>
+        Contact details shown in the shop may be used only to make genuine enquiries
+        and orders. You may not use them to send spam, advertising or unwanted messages,
+        to harass anyone, or to collect them in bulk.
+      </p>
+      <h3 style={h3}>Our right to remove</h3>
+      <p style={p}>
+        We may hide, edit or remove any artisan, listing or photo, or suspend an
+        artisan's login, at any time and without notice, including where we receive a
+        complaint, suspect a listing is misleading or unlawful, or an artisan stops
+        responding to buyers. If you have a complaint about a listing or an artisan,
+        write to our Grievance Officer as described in Section 15.
+      </p>
+
       <h2 style={h2}>5. User-Submitted Content</h2>
       <p style={p}>
         The Website accepts submissions from the community, including but not limited
         to: article and writing submissions, book archival requests and permissions,
-        and messages sent through the contact form (collectively, "User Content").
+        artisan profiles and product listings, and messages sent through the contact
+        form (collectively, "User Content").
         Where you submit User Content to us, you represent and warrant that:
       </p>
       <ol style={numbered}>
@@ -142,7 +202,8 @@ export default function TermsOfUse() {
         royalty-free, non-exclusive licence to host, reproduce, edit for clarity or
         length, and publish that content on the Website and its associated social
         media channels, consistent with the licensing terms described in our{' '}
-        <Link to="/copyright-policy" style={link}>Copyright Policy</Link>. All
+        <Link to="/copyright-policy" style={link}>Copyright Policy</Link> (and, for
+        artisan shop content, Section 4A above). All
         submissions are reviewed before publication, and we reserve the sole
         discretion to accept, reject, edit, or later remove any submission, without
         being obliged to give reasons.
@@ -163,7 +224,9 @@ export default function TermsOfUse() {
         <li style={li}>Introduce viruses, malware, or any other code intended to disrupt, damage, or gain unauthorised access to the Website;</li>
         <li style={li}>Scrape, harvest, or systematically extract data from the Website for a competing or commercial archive without our prior written permission;</li>
         <li style={li}>Use the Website in any manner that could disable, overburden, or impair its functioning, or interfere with any other person's use of it;</li>
-        <li style={li}>Use the donation mechanism for any fraudulent purpose, including payment fraud or money laundering.</li>
+        <li style={li}>Use the donation mechanism for any fraudulent purpose, including payment fraud or money laundering;</li>
+        <li style={li}>List goods in the shop that are unlawful, counterfeit or misdescribed, or use the shop to mislead or defraud buyers;</li>
+        <li style={li}>Collect or misuse artisan contact details, as described in Section 4A.</li>
       </ul>
 
       <h2 style={h2}>7. Intellectual Property</h2>
@@ -175,7 +238,8 @@ export default function TermsOfUse() {
         part of these Terms by reference. In summary: original articles and writing
         published by Mising Archives are licensed under CC BY-SA 4.0; books in the
         library carry their own individual copyright status as indicated on each
-        title; and the Mising Archives name, logo, and website design remain the
+        title; artisan shop content remains the property of the artisan, as described
+        in Section 4A; and the Mising Archives name, logo, and website design remain the
         property of the Project and may not be used to imply endorsement without
         permission.
       </p>
@@ -188,6 +252,8 @@ export default function TermsOfUse() {
       <ul style={numbered}>
         <li style={li}><strong>Vercel</strong> — website hosting and deployment;</li>
         <li style={li}><strong>Cloudflare</strong> — domain name resolution (DNS);</li>
+        <li style={li}><strong>Supabase</strong> — database and login for the artisan shop and admin tools;</li>
+        <li style={li}><strong>Cloudinary</strong> — image hosting;</li>
         <li style={li}><strong>Web3Forms</strong> — contact form delivery;</li>
         <li style={li}><strong>Google Forms</strong> — book archival and article submission intake;</li>
         <li style={li}><strong>Razorpay</strong> — donation payment processing;</li>
@@ -256,7 +322,8 @@ export default function TermsOfUse() {
         <li style={li}>Any content obtained from the Website, including any error, inaccuracy, or omission in it;</li>
         <li style={li}>Any unauthorised access to or alteration of your submissions or data;</li>
         <li style={li}>Any conduct or content of any third party using the Website, including any User Content;</li>
-        <li style={li}>Any transaction conducted through, or facilitated by, any third-party service linked from the Website; or</li>
+        <li style={li}>Any transaction conducted through, or facilitated by, any third-party service linked from the Website;</li>
+        <li style={li}>Any goods, listing, statement or conduct of any artisan, or any purchase, payment, delivery or dispute between you and an artisan; or</li>
         <li style={li}>Any other matter relating to the Website,</li>
       </ol>
       <p style={p}>
@@ -288,7 +355,7 @@ export default function TermsOfUse() {
       <p style={p}>
         To the extent the Website hosts, stores, or transmits User Content or
         third-party information (such as submissions through our contact and
-        submission forms), Mising Archives functions as an "intermediary" as defined
+        submission forms, and artisan profiles and listings), Mising Archives functions as an "intermediary" as defined
         under Section 2(1)(w) of the Information Technology Act, 2000, and is entitled
         to the safe-harbour protections available to intermediaries under Section 79
         of that Act and the Information Technology (Intermediary Guidelines and
@@ -301,8 +368,8 @@ export default function TermsOfUse() {
       <p style={p}>
         In accordance with Rule 3(2) of the IT Rules, 2021, we have appointed a
         Grievance Officer to address complaints regarding content on the Website,
-        including complaints relating to copyright infringement, defamation, or any
-        content that violates these Terms or applicable law.
+        including complaints relating to copyright infringement, defamation, shop
+        listings, or any content that violates these Terms or applicable law.
       </p>
       <div style={noteBox}>
         <strong>Grievance Officer</strong><br />
@@ -329,7 +396,8 @@ export default function TermsOfUse() {
       <p style={p}>
         We reserve the right, at our sole discretion, to restrict, suspend, or
         terminate your access to the Website — or any feature of it, such as the
-        ability to submit content or make donations — at any time, without notice, if
+        ability to submit content, make donations, or list in the shop — and to remove
+        any artisan profile or product listing, at any time, without notice, if
         we believe you have violated these Terms or engaged in conduct that is
         unlawful or harmful to the Project or other users.
       </p>
@@ -363,7 +431,9 @@ export default function TermsOfUse() {
         the parties. The seat and venue of arbitration shall be Jorhat, Assam, India,
         and the proceedings shall be conducted in English. Nothing in this clause
         prevents either party from seeking urgent interim relief from a court of
-        competent jurisdiction.
+        competent jurisdiction. This clause governs disputes with Mising Archives
+        only; disputes between a buyer and an artisan are dealt with as set out in
+        Section 4A.
       </p>
 
       <h2 style={h2}>21. Severability</h2>

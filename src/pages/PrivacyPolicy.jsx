@@ -4,7 +4,7 @@ import { useTheme } from '../context/ThemeContext'
 import { usePageTitle } from '../hooks/usePageTitle'
 
 export default function PrivacyPolicy() {
-    usePageTitle('Privacy Policy')
+  usePageTitle('Privacy Policy')
 
   const { colors } = useTheme()
 
@@ -28,7 +28,7 @@ export default function PrivacyPolicy() {
         Privacy Policy
       </h1>
       <p style={{ fontSize: '13px', color: colors.textTertiary, marginBottom: '32px' }}>
-        Last updated: July 2026
+        Last updated: 6 November 2026
       </p>
 
       <p style={p}>
@@ -69,6 +69,30 @@ export default function PrivacyPolicy() {
           </a>.
         </li>
         <li style={li}>
+          <strong>Artisan profiles (the shop).</strong> If you are an artisan listed in
+          our <Link to="/shop" style={link}>Shop</Link>, we hold the details you or we
+          enter for you: your name, business name, village/town, district and state,
+          photo, biography, languages, the crafts you make, delivery information, and
+          the contact details you choose to give (phone, WhatsApp, email, Instagram,
+          Facebook, website), plus the product listings and photos you add. Your
+          profile and listings, <strong>including the contact details you provide</strong>,
+          are shown publicly on the shop pages, with your agreement. Leave a field blank
+          if you don't want it shown.
+        </li>
+        <li style={li}>
+          <strong>Artisan and staff logins.</strong> Artisans sign in with a username and
+          password; project staff sign in with an email address and password. Passwords
+          are handled by our authentication provider, Supabase, which stores them in a
+          form we cannot read. We cannot see your password and can only set a new one.
+        </li>
+        <li style={li}>
+          <strong>Shop visitors.</strong> You don't need an account to browse the shop.
+          When you tap WhatsApp, Call, Email or Instagram on an artisan's page, your device
+          opens that app or service and any conversation is between you and the artisan.
+          We do not see, receive or store those messages. Each service handles your data
+          under its own privacy policy.
+        </li>
+        <li style={li}>
           <strong>Analytics.</strong> We use Google Analytics to understand how the
           site is used — pages visited, approximate location, device/browser type, and
           similar usage patterns. Google Analytics uses cookies to do this. See{' '}
@@ -80,21 +104,24 @@ export default function PrivacyPolicy() {
         <li style={li}>
           <strong>Local browser storage.</strong> We use your browser's session
           storage to remember if you've dismissed the donation banner. This stays on
-          your device and isn't sent to us.
+          your device and isn't sent to us. If you sign in as an artisan or staff member,
+          our authentication provider also keeps a login session token in your browser's
+          local storage so you stay signed in until you sign out.
         </li>
       </ul>
 
       <h2 style={h2}>Why We Collect It</h2>
       <p style={p}>
         To respond to your messages, process book/article contributions, maintain
-        public accountability for donated funds, and understand how people use the
+        public accountability for donated funds, run the artisan shop and let buyers
+        reach artisans, keep artisan accounts secure, and understand how people use the
         site so we can improve it. We don't sell personal data, and we don't use it
         for advertising.
       </p>
 
       <h2 style={h2}>Third Parties We Rely On</h2>
       <p style={p}>
-        As a small, no-backend community project, we rely on the following services to
+        As a small community project, we rely on the following services to
         operate. Each processes data under its own privacy policy:
       </p>
       <ul style={{ paddingLeft: '22px', margin: '0 0 14px' }}>
@@ -102,15 +129,24 @@ export default function PrivacyPolicy() {
         <li style={li}>Razorpay — donation payment processing</li>
         <li style={li}>Google Forms — book/article submission intake</li>
         <li style={li}>Google Analytics — site usage analytics</li>
+        <li style={li}>Supabase — database and login for the artisan shop and admin tools</li>
+        <li style={li}>Cloudinary — image hosting for the website and shop photos</li>
         <li style={li}>Vercel — website hosting</li>
         <li style={li}>Cloudflare — domain name resolution (DNS)</li>
       </ul>
+      <p style={p}>
+        Some of these providers may store or process data on servers outside India.
+      </p>
 
       <h2 style={h2}>How Long We Keep Data</h2>
       <p style={p}>
         Contact form messages are kept only as long as needed to respond to your
         query. Donation records are kept indefinitely as part of our public financial
-        transparency log, unless you request removal (see below).
+        transparency log, unless you request removal (see below). Artisan profiles,
+        listings and logins are kept while the artisan is part of the shop. When an
+        artisan is removed, their profile, product listings and login are deleted from
+        our database. Copies of photos on our image host may take longer to disappear,
+        and anything already copied or cached elsewhere is outside our control.
       </p>
 
       <h2 style={h2}>Your Rights</h2>
@@ -118,8 +154,10 @@ export default function PrivacyPolicy() {
         Under India's Digital Personal Data Protection Act, 2023, you have the right
         to access, correct, or request erasure of personal data we hold about you, and
         to withdraw consent where applicable (for example, asking us to remove your
-        name from the public donations log and list you as anonymous instead). To
-        exercise any of these, contact us at{' '}
+        name from the public donations log and list you as anonymous instead, or asking
+        us to hide or delete your artisan profile or any contact detail shown in the
+        shop). Artisans can also edit their own profile and listings after signing in.
+        To exercise any of these rights, contact us at{' '}
         <a href="mailto:contact@misingarchives.co.in" style={link}>
           contact@misingarchives.co.in
         </a>{' '}
