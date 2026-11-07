@@ -29,7 +29,6 @@ export default function ContactButtons({ artisan, message }) {
   return (
     <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
       {wa && <a href={wa} target="_blank" rel="noopener noreferrer" style={primary}><MessageCircle size={15} /> WhatsApp</a>}
-      {tel && <a href={tel} style={ghost}><Phone size={15} /> Call</a>}
       {artisan.email && <a href={`mailto:${artisan.email}`} style={ghost}><Mail size={15} /> Email</a>}
       {ig && <a href={ig} target="_blank" rel="noopener noreferrer" style={ghost}><Instagram size={15} /> Instagram</a>}
     </div>

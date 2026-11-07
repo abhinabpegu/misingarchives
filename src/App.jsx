@@ -13,7 +13,6 @@ import Articles from './pages/Articles'
 import ArticleDetail from './pages/ArticleDetail'
 import BookDetail from './pages/BookDetail'
 import './styles/App.css'
-import DonationBanner from './components/DonationBanner'
 import Donations from './pages/Donations'
 import Contact from './pages/Contact'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -49,7 +48,6 @@ function Layout() {
       flexDirection: 'column'
     }}>
       <ScrollToTop />
-      <DonationBanner />
       <Header />
       <main style={{ flex: 1 }}>
         <div key={location.pathname} className="page-transition">

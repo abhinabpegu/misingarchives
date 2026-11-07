@@ -1,16 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
-import { Moon, Sun, Menu, X, ChevronDown } from 'lucide-react'
+import { Moon, Sun, Menu, X, ChevronDown, Heart } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
+import { donationStatus } from '../data/donations'
 
 // Add future /learn pages here — nothing else in this file needs to change.
 const LEARN_LINKS = [
   { to: '/learn/clans', label: 'Clans' },
   { to: '/learn/mising-motifs', label: 'Mising Motifs' }
- 
+
   // { to: '/learn/numerals', label: 'Numerals' },
   // { to: '/learn/kinshipterms', label: 'Kinship Terms' },
 ]
+
 export default function Header() {
   const { isDarkMode, setIsDarkMode, colors } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -42,6 +44,18 @@ export default function Header() {
       setTimeout(() => {
         document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })
       }, 150)
+    }
+  }
+
+  const goToSupport = () => {
+    setMenuOpen(false)
+    if (location.pathname === '/') {
+      document.getElementById('support')?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/')
+      setTimeout(() => {
+        document.getElementById('support')?.scrollIntoView({ behavior: 'smooth' })
+      }, 200)
     }
   }
 
@@ -168,11 +182,36 @@ export default function Header() {
             )}
           </div>
 
-          <NavLink to="/article/About-Mising-Archives" style={navLinkStyle}>About</NavLink>
+          <NavLink to="/about" style={navLinkStyle}>About</NavLink>
           <NavLink to="/contact" style={navLinkStyle}>Contact</NavLink>
         </nav>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {!donationStatus.paused && (
+            <button
+              onClick={goToSupport}
+              aria-label="Donate to the project"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                backgroundColor: colors.accentPrimary,
+                color: isDarkMode ? colors.bg : '#fff',
+                border: 'none',
+                borderRadius: '12px',
+                fontSize: '13px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                boxShadow: `0 4px 12px ${colors.shadowColor}`,
+                whiteSpace: 'nowrap'
+              }}
+            >
+              <Heart size={15} />
+              <span className="toggle-label">Donate</span>
+            </button>
+          )}
+
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
             aria-label="Toggle dark mode"
@@ -236,8 +275,6 @@ export default function Header() {
           <NavLink to="/digital-book-library" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Digital Book Library</NavLink>
           <NavLink to="/articles" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Community Writings</NavLink>
           <NavLink to="/shop" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Shop</NavLink>
-          <NavLink to="/about" style={navLinkStyle}>About</NavLink>
-<NavLink to="/about" onClick={() => setMenuOpen(false)} style={navLinkStyle}>About</NavLink>
 
           {/* Learn - expandable on mobile instead of a dropdown */}
           <div>
@@ -282,7 +319,7 @@ export default function Header() {
             )}
           </div>
 
-          <NavLink to="/article/About-Mising-Archives" onClick={() => setMenuOpen(false)} style={navLinkStyle}>About</NavLink>
+          <NavLink to="/about" onClick={() => setMenuOpen(false)} style={navLinkStyle}>About</NavLink>
           <NavLink to="/contact" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Contact</NavLink>
         </nav>
       )}
