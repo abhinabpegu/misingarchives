@@ -23,7 +23,7 @@ export default function ProductCard({ product, categoryName, showArtisan = true 
       <div style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', backgroundColor: colors.accentLight, flexShrink: 0 }}>
         {img ? (
           <LazyImage
-  src={cloudinaryUrl(img, 'w_500,h_500,c_fit,q_auto,f_auto')}
+src={cloudinaryUrl(img, 'w_500,h_500,c_pad,b_auto,q_auto,f_auto')}
   alt={product.title}
   style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', opacity: soldOut ? 0.55 : 1 }}
 />
