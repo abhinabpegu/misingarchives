@@ -390,50 +390,7 @@ Ultimately, the future of the Mising identity lies in balance: preserving langua
 
     `,
   },
-  {
-    slug: 'About-Mising-Archives',
-    title: 'About Mising Archives',
-    category: 'General',
-    excerpt: 'A brief introduction to Mising Archives, its purpose, and how to contribute.',
-    author: 'Abhinab Pegu',
-    date: '2026-07-03',
-    coverImage: 'https://res.cloudinary.com/cysxatpe/image/upload/v1785996330/misingarchives/articles/welcome.jpg',
-    featured: false,
-    content: `
-<p> This project is an independent archival initiative led by the Mising tribal community to preserve and promote its heritage through a freely accessible digital platform.
- </p> <p> The idea originally developed from a book archival initiative.
-  I have been an active editor on the English Wikipedia, where I have primarily
-   focused on creating and improving articles about the Mising community.
-    However, I soon realised that we lacked resources that were easily accessible.
-     Without access to reliable sources, it is nearly impossible to improve well established 
-     encyclopaedias such as the English Wikipedia.
-      My original goal was therefore to create a digital repository 
-      for valuable books and other resources relating to the Mising community. </p>
- <p> 
- However, many important books had yet to be digitised, 
- and there was no organised process for carrying this work forward. 
- I believed that creating a proper website for
- the repository would provide a suitable place to 
- keep these resources and make them easier to discover. 
- Whenever possible, the digitised books would first be uploaded
-  to the Internet Archive (But only after obtaining permission 
-  from the relevant copyright holders) </p> 
-  <p> 
-  Later, The idea was discussed with Hemchandra Mili, currently an Assistant Professor in a college in Assam,
-   who expressed his support for the initiative. I began developing the project's infrastructure, that was mainly 
-  the website that would serve as the platform for the archive.
-
-I decided to keep the entire codebase open source. It is publicly available on GitHub at 
-      <a href="https://github.com/abhinabpegu/misingarchives" target="_blank" rel="noopener noreferrer"> github.com/abhinabpegu/misingarchives </a>.
-       </p> <p> On  30 June 2026, 
-       the initial version of the website was deployed,
-       <i> technically </i> marking the beginning of Mising Archives.
-         On 2 July 2026, 
-        I registered the misingarchives.co.in domain,
-          which serves as the project's official website.
-           </p> <h2>Website Sections</h2> <h3>The Digital Book Library</h3> <p> A collection of books for which we have obtained the necessary copyright permissions to make them publicly available, with books digitised and archived by Mising Archives and other publicly available sources. </p> <h3>The Articles Section</h3> <p> A space dedicated to articles related to Mising culture, traditions, history, language, and other relevant topics. Submissions may include research articles, essays, or opinion pieces. Anyone may submit a draft for consideration. All submissions undergo a review process before publication. </p> <p> At present, all original articles published on the website are licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer"> Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) </a> licence. </p> </article>
-    `,
-  },
+  
   
     {
     slug: 'The-Traditional-Naming-System-of-the-Mising-People',

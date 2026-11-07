@@ -5,7 +5,7 @@ import { supabase } from '../../lib/supabase'
 import { useTheme } from '../../context/ThemeContext'
 import { usePageTitle } from '../../hooks/usePageTitle'
 import { cloudinaryUrl } from '../../utils/cloudinaryUrl'
-import { priceLabel, AVAILABILITY_LABELS } from '../../utils/shop'
+import { priceLabel, AVAILABILITY_LABELS, fieldsFor } from '../../utils/shop'
 import ContactButtons from '../../components/shop/ContactButtons'
 
 export default function ShopProduct() {
@@ -13,6 +13,7 @@ export default function ShopProduct() {
   const { colors } = useTheme()
   const [product, setProduct] = useState(undefined) // undefined = loading, null = not found
   const [categoryName, setCategoryName] = useState('')
+  const [categoryGroup, setCategoryGroup] = useState('')
   const [active, setActive] = useState(0)
 
   usePageTitle(product?.title)
@@ -26,9 +27,10 @@ export default function ShopProduct() {
       const { data, error } = await supabase.from('shop_products').select('*, artisans(*)').eq('id', id).maybeSingle()
       if (cancelled) return
       if (error || !data || !data.artisans) return setProduct(null)
-      const { data: c } = await supabase.from('shop_categories').select('name').eq('slug', data.category_slug).maybeSingle()
+      const { data: c } = await supabase.from('shop_categories').select('name, group_name').eq('slug', data.category_slug).maybeSingle()
       if (cancelled) return
       setCategoryName(c?.name || '')
+      setCategoryGroup(c?.group_name || '')
       setProduct(data)
     })()
     return () => { cancelled = true }
@@ -52,16 +54,21 @@ export default function ShopProduct() {
   const images = product.images || []
   const soldOut = product.availability === 'sold_out'
 
-  const details = [
-    ['Material', product.material],
-    ['Technique', product.technique],
-    ['Colours', product.colors],
-    ['Size', product.size_info],
-    ['Ready in', product.lead_time_days != null ? `${product.lead_time_days} days` : null],
-    ['Customisable', product.customisable ? 'Yes: ask the artisan about size, colour or motif' : null],
-    ['Motif codes', (product.motif_codes || []).length ? product.motif_codes.join(', ') : null],
-    ['Care', product.care_instructions],
-  ].filter(([, v]) => v)
+  // Labels depend on the category group (e.g. Food shows "Ingredients")
+  const fields = fieldsFor(categoryGroup)
+  const raw = {
+    material: product.material,
+    technique: product.technique,
+    colors: product.colors,
+    size_info: product.size_info,
+    lead_time_days: product.lead_time_days != null ? `${product.lead_time_days} days` : null,
+    customisable: product.customisable ? 'Yes: ask the artisan about size, colour or motif' : null,
+    motif_codes: (product.motif_codes || []).length ? product.motif_codes.join(', ') : null,
+    care_instructions: product.care_instructions,
+  }
+  const details = Object.entries(raw)
+    .filter(([k, v]) => v && fields[k])
+    .map(([k, v]) => [fields[k].show, v])
 
   const message = `Hi ${artisan.display_name}, I saw "${product.title}" on Mising Archives and I'm interested. ${window.location.href}`
 

@@ -274,7 +274,7 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
         From the Shop
       </h2>
       <p style={{ fontSize: '14px', color: colors.textSecondary, maxWidth: '520px', margin: 0 }}>
-        Handmade clothing and ornaments from Mising weavers and artisans. Order directly from the maker.
+       Handmade clothing, ornaments, food and crafts from Mising artisans. Order directly from the maker.
       </p>
     </div>
     <Link to="/shop" style={{ fontSize: '13px', fontWeight: '700', color: colors.accentPrimary, textDecoration: 'none', whiteSpace: 'nowrap' }}>
@@ -483,8 +483,7 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
             margin: '0 auto 28px',
             lineHeight: '1.7'
           }}>
-            Mising Archives is community-run and free to access. If it's been useful to you,
-            consider supporting the cost of hosting, archiving, and growing the collection.
+           
           </p>
 
          {donationStatus.paused ? (

@@ -9,6 +9,7 @@ import { useFormStyles } from '../../utils/formStyles'
 import { usePageTitle } from '../../hooks/usePageTitle'
 import { useNoIndex } from '../../hooks/useNoIndex'
 import { cloudinaryUrl } from '../../utils/cloudinaryUrl'
+import { fieldsFor } from '../../utils/shop'
 import ImageUploadField from '../../components/admin/ImageUploadField'
 
 const MAX_IMAGES = 6
@@ -55,6 +56,7 @@ export default function ArtisanProducts() {
   useEffect(() => { load() }, [load])
 
   const catName = (slug) => categories.find((c) => c.slug === slug)?.name || slug
+  const groupOf = (slug) => categories.find((c) => c.slug === slug)?.group_name
   const groups = [...new Set(categories.map((c) => c.group_name))]
 
   const openNew = () => { setFormError(''); setForm({ ...EMPTY }) }
@@ -87,7 +89,12 @@ export default function ArtisanProducts() {
     if (form.price_type !== 'on_request' && (form.price === '' || Number(form.price) < 0)) {
       return setFormError('Please enter a price, or choose "Price on request".')
     }
-    const motifs = form.motif_codes.split(',').map((x) => x.trim()).filter(Boolean)
+
+    // Only save the fields that apply to this category; clear the rest.
+    const saveFields = fieldsFor(groupOf(form.category_slug))
+    const motifs = saveFields.motif_codes
+      ? form.motif_codes.split(',').map((x) => x.trim()).filter(Boolean)
+      : []
     if (motifs.some((m) => !/^\d{4}$/.test(m))) return setFormError('Motif codes must be 4 digits each, e.g. 0004, 0006.')
 
     const payload = {
@@ -98,13 +105,13 @@ export default function ArtisanProducts() {
       price: form.price_type === 'on_request' || form.price === '' ? null : Number(form.price),
       availability: form.availability,
       lead_time_days: form.lead_time_days === '' ? null : parseInt(form.lead_time_days, 10),
-      customisable: form.customisable,
-      material: nul(form.material),
-      technique: nul(form.technique),
-      size_info: nul(form.size_info),
-      colors: nul(form.colors),
+      customisable: saveFields.customisable ? form.customisable : false,
+      material: saveFields.material ? nul(form.material) : null,
+      technique: saveFields.technique ? nul(form.technique) : null,
+      size_info: saveFields.size_info ? nul(form.size_info) : null,
+      colors: saveFields.colors ? nul(form.colors) : null,
       motif_codes: motifs,
-      care_instructions: nul(form.care_instructions),
+      care_instructions: saveFields.care_instructions ? nul(form.care_instructions) : null,
       images: form.images.filter(Boolean),
       published: form.published,
     }
@@ -133,12 +140,29 @@ export default function ArtisanProducts() {
   }
 
   const check = { display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: colors.textSecondary, cursor: 'pointer' }
+
+  // Which fields to show for the currently selected category
+  const fields = fieldsFor(groupOf(form?.category_slug))
+
   const field = (name, label, props = {}) => (
     <div>
       <label style={labelStyle}>{label}</label>
       <input style={inputStyle} value={form[name]} onChange={(e) => set(name, e.target.value)} {...props} />
     </div>
   )
+
+  const cfgField = (name) =>
+    fields[name] && (
+      <div key={name}>
+        <label style={labelStyle}>{fields[name].label}</label>
+        <input
+          style={inputStyle}
+          value={form[name]}
+          placeholder={fields[name].placeholder}
+          onChange={(e) => set(name, e.target.value)}
+        />
+      </div>
+    )
 
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '40px clamp(20px, 5vw, 40px) 80px' }}>
@@ -200,24 +224,32 @@ export default function ArtisanProducts() {
                 <option value="sold_out">Sold out</option>
               </select>
             </div>
-            {field('lead_time_days', 'Days to make / dispatch', { type: 'number', min: 0 })}
+            {field('lead_time_days', fields.lead_time_days.label, { type: 'number', min: 0 })}
           </div>
 
           <div style={grid}>
-            {field('material', 'Material', { placeholder: 'cotton, eri silk, silver, beads' })}
-            {field('technique', 'Technique', { placeholder: 'handloom, hand-made' })}
-            {field('colors', 'Colours')}
+            {cfgField('material')}
+            {cfgField('technique')}
+            {cfgField('colors')}
           </div>
 
           <div style={grid}>
-            {field('size_info', 'Size / measurements')}
-            {field('motif_codes', 'Motif codes (optional)', { placeholder: '0004, 0006' })}
+            {cfgField('size_info')}
+            {cfgField('motif_codes')}
           </div>
 
-          <div style={{ marginBottom: '16px' }}>
-            <label style={labelStyle}>Care instructions</label>
-            <textarea style={{ ...inputStyle, resize: 'vertical' }} rows={2} value={form.care_instructions} onChange={(e) => set('care_instructions', e.target.value)} />
-          </div>
+          {fields.care_instructions && (
+            <div style={{ marginBottom: '16px' }}>
+              <label style={labelStyle}>{fields.care_instructions.label}</label>
+              <textarea
+                style={{ ...inputStyle, resize: 'vertical' }}
+                rows={2}
+                value={form.care_instructions}
+                placeholder={fields.care_instructions.placeholder}
+                onChange={(e) => set('care_instructions', e.target.value)}
+              />
+            </div>
+          )}
 
           <p style={{ ...labelStyle, marginBottom: '10px' }}>Photos (up to {MAX_IMAGES}; the first one is the main photo)</p>
           {form.images.map((url, i) => (
@@ -230,7 +262,11 @@ export default function ArtisanProducts() {
           )}
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '4px 0 18px' }}>
-            <label style={check}><input type="checkbox" checked={form.customisable} onChange={(e) => set('customisable', e.target.checked)} /> Can be customised (size, colour, motif)</label>
+            {fields.customisable && (
+              <label style={check}>
+                <input type="checkbox" checked={form.customisable} onChange={(e) => set('customisable', e.target.checked)} /> {fields.customisable.label}
+              </label>
+            )}
             <label style={check}><input type="checkbox" checked={form.published} onChange={(e) => set('published', e.target.checked)} /> Published (untick to keep as a hidden draft)</label>
           </div>
 

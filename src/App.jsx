@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
 import { AuthProvider } from './context/AuthContext'
 import Header from './components/Header'
@@ -32,6 +32,7 @@ import ArtisanProducts from './pages/artisan/ArtisanProducts'
 import Shop from './pages/shop/Shop'
 import ShopArtisan from './pages/shop/ShopArtisan'
 import ShopProduct from './pages/shop/ShopProduct'
+import About from './pages/About'
 
 function Layout() {
   const { colors } = useTheme()
@@ -53,19 +54,20 @@ function Layout() {
       <main style={{ flex: 1 }}>
         <div key={location.pathname} className="page-transition">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/digital-book-library" element={<DigitalBookLibrary />} />
-            <Route path="/book/:code" element={<BookDetail />} />
-            <Route path="/articles" element={<Articles />} />
-            <Route path="/article/:slug" element={<ArticleDetail />} />
-            <Route path="/donations" element={<Donations />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-use" element={<TermsOfUse />} />
-            <Route path="/copyright-policy" element={<CopyrightPolicy />} />
-            <Route path="/learn/clans" element={<Clans />} />
-            <Route path="/learn/mising-motifs" element={<MisingMotifs />} />
-
+           <Route path="/" element={<Home />} />
+<Route path="/digital-book-library" element={<DigitalBookLibrary />} />
+<Route path="/book/:code" element={<BookDetail />} />
+<Route path="/articles" element={<Articles />} />
+<Route path="/article/About-Mising-Archives" element={<Navigate to="/about" replace />} />
+<Route path="/article/:slug" element={<ArticleDetail />} />
+<Route path="/about" element={<About />} />
+<Route path="/donations" element={<Donations />} />
+<Route path="/contact" element={<Contact />} />
+<Route path="/privacy-policy" element={<PrivacyPolicy />} />
+<Route path="/terms-of-use" element={<TermsOfUse />} />
+<Route path="/copyright-policy" element={<CopyrightPolicy />} />
+<Route path="/learn/clans" element={<Clans />} />
+<Route path="/learn/mising-motifs" element={<MisingMotifs />} />
             {/* Public shop */}
             <Route path="/shop" element={<Shop />} />
             <Route path="/shop/artisan/:slug" element={<ShopArtisan />} />

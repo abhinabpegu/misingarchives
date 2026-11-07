@@ -236,6 +236,8 @@ export default function Header() {
           <NavLink to="/digital-book-library" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Digital Book Library</NavLink>
           <NavLink to="/articles" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Community Writings</NavLink>
           <NavLink to="/shop" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Shop</NavLink>
+          <NavLink to="/about" style={navLinkStyle}>About</NavLink>
+<NavLink to="/about" onClick={() => setMenuOpen(false)} style={navLinkStyle}>About</NavLink>
 
           {/* Learn - expandable on mobile instead of a dropdown */}
           <div>

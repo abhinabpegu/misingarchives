@@ -58,8 +58,8 @@ export default function Shop() {
         </span>
         <h1 style={{ fontSize: '34px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>Shop</h1>
         <p style={{ fontSize: '14px', color: colors.textSecondary, lineHeight: '1.7', maxWidth: '640px', margin: 0 }}>
-          Handmade clothing, ornaments and accessories from Mising artisans. Orders and payment are arranged
-          directly with the artisan: open a product and use the contact buttons.
+          Handmade clothing, ornaments, food and crafts from Mising artisans. Orders and payment are arranged
+directly with the artisan: open a product and use the contact buttons.
         </p>
       </section>
 
