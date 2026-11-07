@@ -22,8 +22,15 @@
 // Simple on/off switch for accepting new donations. Flip `paused` to false
 // once the balance runs low again — no other file needs to change.
 export const donationStatus = {
-  paused: true,
-  message: "Thanks to everyone's generosity, current funds are covering our needs — we've paused new donations for now. We'll reopen here as soon as it's needed again.",
+  paused: false,
+  message: '',
+}
+
+// Mising Archives is run by core members of TMSK and shares its treasury.
+export const treasuryPartner = {
+  name: 'Takam Mising Sisang Kebang',
+  short: 'TMSK',
+  url: 'https://sisangkebang.in',
 }
 
 export const donationsData = [
@@ -80,5 +87,11 @@ export const expensesData = [
     amount: 142,
     date: '2026-07-24',
     category: 'Archival',
+  },
+  {
+    description: 'TMSK Art competition spendings',
+    amount: 600,
+    date: '2026-09-07',
+    category: 'organisational',
   }
 ]

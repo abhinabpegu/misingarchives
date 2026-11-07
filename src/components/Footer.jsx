@@ -82,6 +82,7 @@ export default function Footer() {
           <a href="https://archive.org" target="_blank" rel="noopener noreferrer" style={linkStyle}>Internet Archive</a>
           <a href="https://pahar.in" target="_blank" rel="noopener noreferrer" style={linkStyle}>Pahar.in</a>
           <a href="https://public.resource.org" target="_blank" rel="noopener noreferrer" style={linkStyle}>Public.Resource.Org</a>
+          <a href="https://sisangkebang.in" target="_blank" rel="noopener noreferrer" style={linkStyle}>Takam Mising Sisang Kebang</a>
         </div>
 
         <div style={colStyle}>

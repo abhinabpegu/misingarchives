@@ -66,10 +66,9 @@ export default function DonationBanner() {
           justifyContent: 'center'
         }}>
           <Heart size={15} style={{ flexShrink: 0 }} />
-          The Mising Archive Project doesn't run free of cost. It is run through donations like you.
-          Even as little as ₹20 helps develop this project. Donations go toward the website domain,
-          and the rest into book archival, because we sometimes need to obtain a physical book when
-          a direct PDF isn't available.
+          The Mising Archives project runs on community donations, and even ₹20 helps. It is run by core
+members of Takam Mising Sisang Kebang (TMSK) and shares TMSK's treasury, so funds may be used
+for either. Donations go toward hosting, the domain and book archival. 
         </p>
 
         <button

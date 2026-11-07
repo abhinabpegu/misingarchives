@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { booksData } from '../data/books'
 import { articlesData } from '../data/articles'
+import { clansData } from '../data/learn/clans'
+import { useMimang } from '../hooks/useMimang'
+import { supabase } from '../lib/supabase'
 import { useTheme } from '../context/ThemeContext'
 import { useCardStyle } from '../utils/cardStyle'
 import ArticleCard from '../components/ArticleCard'
+import ProductCard from '../components/shop/ProductCard'
 import DonateButton from '../components/DonateButton'
 import InstagramCard from '../components/InstagramCard'
-import { donationStatus } from '../data/donations'
+import { donationStatus, treasuryPartner } from '../data/donations'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const CATEGORIES = [
@@ -25,6 +29,26 @@ const MISSION_PILLARS = [
 ]
 
 export default function Home() {
+  const { mimang } = useMimang()
+  const [shopRef, shopVisible] = useScrollReveal()
+  const [learnRef, learnVisible] = useScrollReveal()
+  const [shopProducts, setShopProducts] = useState([])
+
+  useEffect(() => {
+    if (!supabase) return
+    let cancelled = false
+    supabase
+      .from('shop_products')
+      .select('*, artisans(display_name, slug)')
+      .eq('published', true)
+      .order('created_at', { ascending: false })
+      .limit(4)
+      .then(({ data, error }) => {
+        if (!cancelled && !error && data) setShopProducts(data)
+      })
+    return () => { cancelled = true }
+  }, [])
+
   const { isDarkMode, colors } = useTheme()
   const { cardBase, hoverIn, hoverOut } = useCardStyle()
   const featuredBook = booksData[0]
@@ -237,6 +261,34 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
 
       </section>
 
+      {/* Shop */}
+<section
+  ref={shopRef}
+  className={`fade-in-up ${shopVisible ? 'is-visible' : ''}`}
+  style={{ ...sectionWrap, padding: '72px clamp(20px, 5vw, 40px) 0' }}
+>
+  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px', marginBottom: '28px' }}>
+    <div>
+      <span style={eyebrow}>Mising Artisans</span>
+      <h2 style={{ fontSize: '28px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>
+        From the Shop
+      </h2>
+      <p style={{ fontSize: '14px', color: colors.textSecondary, maxWidth: '520px', margin: 0 }}>
+        Handmade clothing and ornaments from Mising weavers and artisans. Order directly from the maker.
+      </p>
+    </div>
+    <Link to="/shop" style={{ fontSize: '13px', fontWeight: '700', color: colors.accentPrimary, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+      Browse the Shop →
+    </Link>
+  </div>
+
+  {shopProducts.length > 0 && (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '20px' }}>
+      {shopProducts.map((p) => <ProductCard key={p.id} product={p} />)}
+    </div>
+  )}
+</section>
+
 
       {/* Explore by category */}
        <section
@@ -293,6 +345,38 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
           </Link>
         </div>
       </section>
+      {/* Learn */}
+<section
+  ref={learnRef}
+  className={`fade-in-up ${learnVisible ? 'is-visible' : ''}`}
+  style={{ ...sectionWrap, padding: '72px clamp(20px, 5vw, 40px) 0' }}
+>
+  <span style={eyebrow}>Learn</span>
+  <h2 style={{ fontSize: '28px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>
+    Learn More
+  </h2>
+  <p style={{ fontSize: '14px', color: colors.textSecondary, marginBottom: '28px', maxWidth: '520px' }}>
+    Interactive references on Mising clans and weaving patterns.
+  </p>
+  <div className="cards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+    <Link to="/learn/clans" style={{ ...cardBase, display: 'block', padding: '24px', textDecoration: 'none', color: colors.text }}
+      onMouseEnter={hoverIn} onMouseLeave={hoverOut}>
+      <h3 style={{ margin: '0 0 8px', fontSize: '16px', fontWeight: '700' }}>Mising Opín Amin (Clans)</h3>
+      <p style={{ margin: '0 0 14px', fontSize: '13px', color: colors.textSecondary, lineHeight: '1.5' }}>
+        Standard spellings, legal respellings, IPA and pronunciation audio.
+      </p>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: colors.accentPrimary }}>{clansData.length} clans →</span>
+    </Link>
+    <Link to="/learn/mising-motifs" style={{ ...cardBase, display: 'block', padding: '24px', textDecoration: 'none', color: colors.text }}
+      onMouseEnter={hoverIn} onMouseLeave={hoverOut}>
+      <h3 style={{ margin: '0 0 8px', fontSize: '16px', fontWeight: '700' }}>Mising Motifs</h3>
+      <p style={{ margin: '0 0 14px', fontSize: '13px', color: colors.textSecondary, lineHeight: '1.5' }}>
+        A library of traditional weaving patterns (gamig), with cloth examples.
+      </p>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: colors.accentPrimary }}>{mimang.length} patterns →</span>
+    </Link>
+  </div>
+</section>
 
       {/* Recently archived */}
       <section
@@ -373,20 +457,24 @@ const featuredResultSlugs = new Set(featuredArticles.map(a => a.slug))
 </section>
       {/* Support the Archive */}
       <section
-        id="support"
-        ref={supportRef}
-        className={`fade-in-up ${supportVisible ? 'is-visible' : ''}`}
-        style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}
-      ></section>
-      <section style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}>
-        <div style={{
-          ...cardBase,
-          padding: '40px clamp(24px, 5vw, 48px)',
-          textAlign: 'center'
-        }}>
+  id="support"
+  ref={supportRef}
+  className={`fade-in-up ${supportVisible ? 'is-visible' : ''}`}
+  style={{ ...sectionWrap, padding: '0 clamp(20px, 5vw, 40px) 88px' }}
+>
+  <div style={{ ...cardBase, padding: '40px clamp(24px, 5vw, 48px)', textAlign: 'center' }}>
+    
+        
           <span style={eyebrow}>Support the Archive</span>
           <h2 style={{ fontSize: '26px', fontWeight: '700', margin: '10px 0 12px', color: colors.text }}>
-            Help Keep This Archive Free
+            <p style={{ fontSize: '14px', color: colors.textSecondary, maxWidth: '520px', margin: '0 auto 28px', lineHeight: '1.7' }}>
+  Mising Archives is community-run and free to access. It is a project of the core members of{' '}
+  <a href={treasuryPartner.url} target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+    {treasuryPartner.name} ({treasuryPartner.short})
+  </a>
+  , and our treasury is shared with theirs: {treasuryPartner.short} also funds the archive, and
+  donations here may also go to {treasuryPartner.short}. If it's been useful to you, consider supporting.
+</p>
           </h2>
           <p style={{
             fontSize: '14px',

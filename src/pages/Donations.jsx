@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { donationsData, expensesData } from '../data/donations'
+import { donationsData, expensesData, treasuryPartner } from '../data/donations'
 import { useTheme } from '../context/ThemeContext'
 import { useCardStyle } from '../utils/cardStyle'
 import { formatDate } from '../utils/formatDate'
@@ -55,6 +55,28 @@ export default function Donations() {
           here, so anyone can see exactly what's come in and where it's gone.
         </p>
       </section>
+
+      {/* Shared treasury notice */}
+<section style={{ ...sectionWrap, padding: '24px clamp(20px, 5vw, 40px) 0' }}>
+  <div style={{
+    padding: '16px 18px',
+    borderRadius: '10px',
+    border: `1px solid ${colors.border}`,
+    backgroundColor: colors.bgTertiary,
+    fontSize: '13px',
+    color: colors.textSecondary,
+    lineHeight: '1.7'
+  }}>
+    <strong>Shared treasury.</strong> Mising Archives is run by core members of{' '}
+    <a href={treasuryPartner.url} target="_blank" rel="noopener noreferrer"
+       style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+      {treasuryPartner.name} ({treasuryPartner.short})
+    </a>
+    , and our treasury is shared with theirs. {treasuryPartner.short} funds
+    Mising Archives, and money raised here may also be passed to {treasuryPartner.short}.
+    Any transfer between the two is logged below.
+  </div>
+</section>
 
       {/* Summary stats */}
       <section style={{ ...sectionWrap, padding: '32px clamp(20px, 5vw, 40px) 0' }}>
