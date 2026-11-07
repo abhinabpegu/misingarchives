@@ -83,7 +83,7 @@ export default function ShopProduct() {
         <div style={{ flex: '1 1 340px', minWidth: 0 }}>
           <div style={{ width: '100%', aspectRatio: '1 / 1', borderRadius: '14px', overflow: 'hidden', backgroundColor: colors.accentLight, boxShadow: `0 12px 32px ${colors.shadowColor}` }}>
             {images[active] ? (
-              <img src={cloudinaryUrl(images[active], 'w_900,q_auto,f_auto')} alt={product.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src={cloudinaryUrl(images[active], 'w_900,q_auto,f_auto')} alt={product.title} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
             ) : (
               <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', fontStyle: 'italic', color: colors.textTertiary }}>No photo yet</div>
             )}
@@ -92,11 +92,11 @@ export default function ShopProduct() {
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '12px' }}>
               {images.map((url, i) => (
                 <button key={url + i} onClick={() => setActive(i)} aria-label={`Show photo ${i + 1}`} style={{
-                  width: '64px', height: '64px', padding: 0, borderRadius: '8px', overflow: 'hidden', cursor: 'pointer',
-                  border: `2px solid ${i === active ? colors.accentPrimary : 'transparent'}`, background: 'none',
-                }}>
-                  <img src={cloudinaryUrl(url, 'w_140,h_140,c_fill,q_auto,f_auto')} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                </button>
+  width: '64px', height: '64px', padding: 0, borderRadius: '8px', overflow: 'hidden', cursor: 'pointer',
+  border: `2px solid ${i === active ? colors.accentPrimary : 'transparent'}`, background: colors.accentLight,
+}}>
+  <img src={cloudinaryUrl(url, 'w_140,h_140,c_fit,q_auto,f_auto')} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+</button>
               ))}
             </div>
           )}

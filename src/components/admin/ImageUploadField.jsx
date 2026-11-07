@@ -60,9 +60,9 @@ export default function ImageUploadField({ label, value, onChange, folder, aspec
         <div style={{ width: '88px', height: '88px', borderRadius: '10px', overflow: 'hidden', backgroundColor: colors.accentLight, flexShrink: 0, border: `1px solid ${colors.border}` }}>
           {value && (
             <img
-              src={cloudinaryUrl(value, 'w_200,h_200,c_fill,q_auto,f_auto')}
-              alt=""
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+             src={cloudinaryUrl(value, 'w_200,h_200,c_fit,q_auto,f_auto')}
+alt=""
+style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
             />
           )}
         </div>
