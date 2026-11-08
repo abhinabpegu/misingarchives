@@ -7,7 +7,9 @@ import { donationStatus } from '../data/donations'
 // Add future /learn pages here — nothing else in this file needs to change.
 const LEARN_LINKS = [
   { to: '/learn/clans', label: 'Clans' },
-  { to: '/learn/mising-motifs', label: 'Mising Motifs' }
+  { to: '/learn/mising-motifs', label: 'Mising Motifs' },
+  { to: '/learn/mising-terms', label: 'Mising Terms' },
+
 
   // { to: '/learn/numerals', label: 'Numerals' },
   // { to: '/learn/kinshipterms', label: 'Kinship Terms' },

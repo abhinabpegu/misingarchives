@@ -302,6 +302,13 @@ function getBotContent(url) {
     `
     return { html, jsonLd }
   }
+  if (pathname === '/learn/mising-terms') {
+  return {
+    title: `Mising Terms — ${SITE_NAME}`,
+    description: 'Common everyday words in Mising with their English meanings.',
+    image: null,
+  }
+}
 
   return null
 }

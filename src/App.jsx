@@ -32,6 +32,8 @@ import Shop from './pages/shop/Shop'
 import ShopArtisan from './pages/shop/ShopArtisan'
 import ShopProduct from './pages/shop/ShopProduct'
 import About from './pages/About'
+import MisingTerms from './pages/learn/MisingTerms'
+import TermsAdmin from './pages/admin/TermsAdmin'
 
 function Layout() {
   const { colors } = useTheme()
@@ -66,6 +68,8 @@ function Layout() {
 <Route path="/copyright-policy" element={<CopyrightPolicy />} />
 <Route path="/learn/clans" element={<Clans />} />
 <Route path="/learn/mising-motifs" element={<MisingMotifs />} />
+<Route path="/learn/mising-terms" element={<MisingTerms />} />
+
             {/* Public shop */}
             <Route path="/shop" element={<Shop />} />
             <Route path="/shop/artisan/:slug" element={<ShopArtisan />} />
@@ -76,6 +80,7 @@ function Layout() {
             <Route path="/manage" element={<RequireStaff><AdminHome /></RequireStaff>} />
             <Route path="/manage/mimang" element={<RequireStaff><MimangAdmin /></RequireStaff>} />
             <Route path="/manage/artisans" element={<RequireStaff><ArtisansAdmin /></RequireStaff>} />
+            <Route path="/manage/terms" element={<RequireStaff><TermsAdmin /></RequireStaff>} />
 
             {/* Artisan portal */}
             <Route path="/artisan/login" element={<ArtisanLogin />} />

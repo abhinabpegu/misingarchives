@@ -288,7 +288,7 @@ export default function ArtisanProducts() {
           {rows.map((r) => (
             <div key={r.id} style={{ ...cardBase, padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
               <div style={{ width: '56px', height: '56px', borderRadius: '8px', overflow: 'hidden', backgroundColor: colors.accentLight, flexShrink: 0 }}>
-                {r.images?.[0] && <img src={cloudinaryUrl(r.images[0], 'w_120,h_120,c_fill,q_auto,f_auto')} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />}
+               {r.images?.[0] && <img src={cloudinaryUrl(r.images[0], 'w_120,h_120,c_fit,q_auto,f_auto')} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />}
               </div>
               <div style={{ flex: 1, minWidth: '160px' }}>
                 <p style={{ margin: '0 0 3px', fontSize: '14px', fontWeight: '700', color: colors.text }}>{r.title}</p>

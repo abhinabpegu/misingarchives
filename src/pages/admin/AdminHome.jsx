@@ -73,6 +73,13 @@ export default function AdminHome() {
             Register shop artisans and manage their logins.
           </p>
         </Link>
+        <Link to="/manage/terms" style={{ ...cardBase, display: 'block', padding: '24px', textDecoration: 'none' }}
+  onMouseEnter={hoverIn} onMouseLeave={hoverOut}>
+  <h3 style={{ margin: '0 0 8px', fontSize: '16px', color: colors.text }}>Mising Terms</h3>
+  <p style={{ margin: 0, fontSize: '13px', color: colors.textSecondary, lineHeight: '1.6' }}>
+    Add everyday Mising words with English meanings and pictures.
+  </p>
+</Link>
       </div>
     </div>
   )
