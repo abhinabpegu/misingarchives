@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { useCardStyle } from '../utils/cardStyle'
 import { formatDate } from '../utils/formatDate'
+import { useStats, formatCount } from '../lib/stats'
 
 // size: 'featured' (image/placeholder block + larger title) or 'normal' (compact)
 export default function ArticleCard({ article, size = 'normal' }) {
   const { colors } = useTheme()
   const { cardBase, hoverIn, hoverOut } = useCardStyle()
+  const stats = useStats('article')
+  const reads = stats[article.slug]?.views
   const isFeatured = size === 'featured'
 
   return (
@@ -27,19 +30,19 @@ export default function ArticleCard({ article, size = 'normal' }) {
     >
       {(article.coverImage || isFeatured) && (
         article.coverImage ? (
-  <img
-    src={article.coverImage}
-    alt={article.title}
-    style={{
-      width: '100%',
-      height: isFeatured ? '260px' : '160px',
-      objectFit: article.coverFit || 'cover',
-      backgroundColor: colors.bgTertiary,
-      display: 'block',
-      flexShrink: 0
-    }}
-  />
-) : (
+          <img
+            src={article.coverImage}
+            alt={article.title}
+            style={{
+              width: '100%',
+              height: isFeatured ? '260px' : '160px',
+              objectFit: article.coverFit || 'cover',
+              backgroundColor: colors.bgTertiary,
+              display: 'block',
+              flexShrink: 0
+            }}
+          />
+        ) : (
           <div style={{
             width: '100%',
             height: isFeatured ? '260px' : '160px',
@@ -50,7 +53,7 @@ export default function ArticleCard({ article, size = 'normal' }) {
             justifyContent: 'center',
             fontSize: isFeatured ? '40px' : '28px'
           }}>
-            
+
           </div>
         )
       )}
@@ -113,6 +116,7 @@ export default function ArticleCard({ article, size = 'normal' }) {
           color: colors.textTertiary
         }}>
           <span>{article.author} · {formatDate(article.date)}</span>
+          {reads != null && <span>{formatCount(reads)} reads</span>}
         </div>
 
         <span style={{

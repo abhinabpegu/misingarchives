@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { X } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
+import { track, useStats, formatCount } from '../lib/stats'
 
 export default function BookDetailModal({ book, onClose }) {
   const { isDarkMode, colors } = useTheme()
+  const stats = useStats('book')
+  const bookStats = book ? stats[book.code] : null
+
+  // Count one view per session each time a book is opened
+  useEffect(() => {
+    if (book) track('book', book.code, 'view')
+  }, [book?.code])
 
   if (!book) return null
 
@@ -112,8 +120,14 @@ export default function BookDetailModal({ book, onClose }) {
                 margin: '0 auto 16px',
                 boxShadow: `0 8px 24px ${colors.shadowColor}`
               }}>
-                
+                📖
               </div>
+            )}
+
+            {bookStats && (
+              <p style={{ margin: 0, fontSize: '12px', color: colors.textTertiary }}>
+                {formatCount(bookStats.views)} views · {formatCount(bookStats.downloads)} downloads
+              </p>
             )}
           </div>
 
@@ -200,30 +214,32 @@ export default function BookDetailModal({ book, onClose }) {
               {book.archivedBy}
             </p>
           </div>
+
           {/* Takedown notice — only for books archived by Mising Archives itself */}
-{book.archivedBy === 'Mising Archives' && (
-  <div style={{
-    marginBottom: '24px',
-    padding: '14px 16px',
-    borderRadius: '10px',
-    border: `1px solid ${colors.border}`,
-    backgroundColor: colors.bgTertiary,
-    fontSize: '12px',
-    color: colors.textSecondary,
-    lineHeight: '1.6'
-  }}>
-    Copyright holder? If you'd like this book taken down, email{' '}
-    <a href="mailto:contact@misingarchives.co.in" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
-      contact@misingarchives.co.in
-    </a>.
-  </div>
-)}
+          {book.archivedBy === 'Mising Archives' && (
+            <div style={{
+              marginBottom: '24px',
+              padding: '14px 16px',
+              borderRadius: '10px',
+              border: `1px solid ${colors.border}`,
+              backgroundColor: colors.bgTertiary,
+              fontSize: '12px',
+              color: colors.textSecondary,
+              lineHeight: '1.6'
+            }}>
+              Copyright holder? If you'd like this book taken down, email{' '}
+              <a href="mailto:contact@misingarchives.co.in" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+                contact@misingarchives.co.in
+              </a>.
+            </div>
+          )}
 
           {/* Download Button */}
           <a
             href={book.driveLink || '#'}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track('book', book.code, 'download')}
             style={{
               display: 'flex',
               alignItems: 'center',

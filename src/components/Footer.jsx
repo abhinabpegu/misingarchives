@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
+import SiteStats from './SiteStats'
 
 export default function Footer() {
   const { colors } = useTheme()
@@ -98,6 +99,8 @@ export default function Footer() {
           <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={linkStyle}>@misingarchives on Instagram</a>
         </div>
       </div>
+
+      <SiteStats />
 
       <div style={{
         borderTop: `1px solid ${colors.border}`,

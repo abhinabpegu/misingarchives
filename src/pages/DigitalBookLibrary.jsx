@@ -6,11 +6,13 @@ import { useTheme } from '../context/ThemeContext'
 import BookDetailModal from '../components/BookDetailModal'
 import ContributeCard from '../components/ContributeCard'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { useStats, formatCount } from '../lib/stats'
 
 export default function DigitalBookLibrary() {
   usePageTitle('Digital Book Library')
   const { isDarkMode, colors } = useTheme()
   const [searchParams] = useSearchParams()
+  const stats = useStats('book')
 
   const [sortBy, setSortBy] = useState('code')
   const [filterLanguage, setFilterLanguage] = useState('All')
@@ -47,16 +49,20 @@ export default function DigitalBookLibrary() {
       return langMatch && tagMatch && searchMatch
     })
 
+    const num = (book, field) => stats[book.code]?.[field] || 0
+
     filtered.sort((a, b) => {
       if (sortBy === 'code') return a.code.localeCompare(b.code)
       if (sortBy === 'title') return a.title.localeCompare(b.title)
       if (sortBy === 'author') return a.author.localeCompare(b.author)
       if (sortBy === 'language') return a.language.localeCompare(b.language)
+      if (sortBy === 'downloads') return num(b, 'downloads') - num(a, 'downloads')
+      if (sortBy === 'views') return num(b, 'views') - num(a, 'views')
       return 0
     })
 
     return filtered
-  }, [sortBy, filterLanguage, filterTag, searchQuery])
+  }, [sortBy, filterLanguage, filterTag, searchQuery, stats])
 
   return (
     <div>
@@ -83,49 +89,50 @@ export default function DigitalBookLibrary() {
         }}>
            Digital Book Library
         </h1>
-      
-      </section>
-      {/* Request or donate a book */}
-<section style={{ padding: '0 clamp(20px, 5vw, 40px)', maxWidth: '1400px', margin: '0 auto' }}>
-  <ContributeCard
-    title="Have a book to donate, or want one archived?"
-    teaser="Request a title, or give permission to archive one you hold the rights to."
-  >
-    <p style={{ margin: '0 0 14px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6' }}>
-      Whether you're requesting a book for the archive, or you're a copyright holder/author
-      giving permission for your book to be archived, fill out our short form:
-    </p>
 
-    
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScahQG34BhG6t03j8lXFSNiqpmnlHhdvWIe8UpisYbBFrOqpg/viewform"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        display: 'inline-block',
-        padding: '10px 18px',
-        backgroundColor: colors.accentPrimary,
-        color: '#fff',
-        borderRadius: '8px',
-        textDecoration: 'none',
-        fontSize: '13px',
-        fontWeight: '700',
-        marginBottom: '12px'
-      }}
-    >
-      Open the Book Archival Form →
-    </a>
-    <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
-      Prefer email? Reach us at{' '}
-      <a href="mailto:contact@misingarchives.co.in" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
-        contact@misingarchives.co.in
-      </a>{' '}
-      or on Instagram —{' '}
-      <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
-        @misingarchives
-      </a>.
-    </p>
-  </ContributeCard>
-</section>
+      </section>
+
+      {/* Request or donate a book */}
+      <section style={{ padding: '0 clamp(20px, 5vw, 40px)', maxWidth: '1400px', margin: '0 auto' }}>
+        <ContributeCard
+          title="Have a book to donate, or want one archived?"
+          teaser="Request a title, or give permission to archive one you hold the rights to."
+        >
+          <p style={{ margin: '0 0 14px', fontSize: '14px', color: colors.textSecondary, lineHeight: '1.6' }}>
+            Whether you're requesting a book for the archive, or you're a copyright holder/author
+            giving permission for your book to be archived, fill out our short form:
+          </p>
+
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLScahQG34BhG6t03j8lXFSNiqpmnlHhdvWIe8UpisYbBFrOqpg/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              padding: '10px 18px',
+              backgroundColor: colors.accentPrimary,
+              color: '#fff',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              fontSize: '13px',
+              fontWeight: '700',
+              marginBottom: '12px'
+            }}
+          >
+            Open the Book Archival Form →
+          </a>
+          <p style={{ margin: 0, fontSize: '13px', color: colors.textTertiary }}>
+            Prefer email? Reach us at{' '}
+            <a href="mailto:contact@misingarchives.co.in" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+              contact@misingarchives.co.in
+            </a>{' '}
+            or on Instagram —{' '}
+            <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={{ color: colors.accentPrimary, fontWeight: '600' }}>
+              @misingarchives
+            </a>.
+          </p>
+        </ContributeCard>
+      </section>
 
       {/* Filters with Glass Effect */}
       <section style={{
@@ -184,7 +191,8 @@ export default function DigitalBookLibrary() {
         }}>
           {[
             { label: 'Sort By', value: sortBy, onChange: setSortBy, options: [
-              ['code', 'Book Code'], ['title', 'Title'], ['author', 'Author'], ['language', 'Language']
+              ['code', 'Book Code'], ['title', 'Title'], ['author', 'Author'], ['language', 'Language'],
+              ['downloads', 'Most Downloaded'], ['views', 'Most Viewed']
             ]},
             { label: 'Language', value: filterLanguage, onChange: setFilterLanguage, options:
               languages.map(l => [l, l])
@@ -246,158 +254,166 @@ export default function DigitalBookLibrary() {
       }}>
         {displayedBooks.length > 0 ? (
           <div className="books-grid" style={{ marginTop: '32px' }}>
-            {displayedBooks.map((book) => (
-              <div
-                key={book.code}
-                className="book-card"
-                style={{
-                  backgroundColor: colors.bgSecondary,
-                  borderRadius: '12px',
-                  border: `1px solid ${colors.border}`,
-                  padding: '20px',
-                  backdropFilter: 'blur(10px)',
-                  boxShadow: `0 4px 12px ${colors.shadowColor}`,
-                  transition: 'all 0.2s ease',
-                  display: 'flex',
-                  flexDirection: 'column'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = colors.tableHover
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = colors.bgSecondary
-                }}
-              >
-                <div style={{ display: 'flex', gap: '14px', marginBottom: '12px', flex: 1 }}>
-                  {book.coverImage ? (
-                    <img
-                      src={book.coverImage}
-                      alt={book.title}
-                      style={{
-                        width: '64px',
-                        height: '92px',
-                        flexShrink: 0,
-                        objectFit: 'cover',
-                        borderRadius: '6px',
-                        boxShadow: `0 4px 10px ${colors.shadowColor}`
-                      }}
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        width: '64px',
-                        height: '92px',
-                        flexShrink: 0,
-                        borderRadius: '6px',
-                        backgroundColor: colors.accentLight,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '22px'
-                      }}
-                    >
-                      📖
-                    </div>
-                  )}
-
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'start',
-                        marginBottom: '8px'
-                      }}
-                    >
-                      <span
+            {displayedBooks.map((book) => {
+              const s = stats[book.code]
+              return (
+                <div
+                  key={book.code}
+                  className="book-card"
+                  style={{
+                    backgroundColor: colors.bgSecondary,
+                    borderRadius: '12px',
+                    border: `1px solid ${colors.border}`,
+                    padding: '20px',
+                    backdropFilter: 'blur(10px)',
+                    boxShadow: `0 4px 12px ${colors.shadowColor}`,
+                    transition: 'all 0.2s ease',
+                    display: 'flex',
+                    flexDirection: 'column'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = colors.tableHover
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = colors.bgSecondary
+                  }}
+                >
+                  <div style={{ display: 'flex', gap: '14px', marginBottom: '12px', flex: 1 }}>
+                    {book.coverImage ? (
+                      <img
+                        src={book.coverImage}
+                        alt={book.title}
                         style={{
-                          fontSize: '13px',
-                          fontWeight: '700',
-                          color: colors.accentPrimary
+                          width: '64px',
+                          height: '92px',
+                          flexShrink: 0,
+                          objectFit: 'cover',
+                          borderRadius: '6px',
+                          boxShadow: `0 4px 10px ${colors.shadowColor}`
+                        }}
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          width: '64px',
+                          height: '92px',
+                          flexShrink: 0,
+                          borderRadius: '6px',
+                          backgroundColor: colors.accentLight,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '22px'
                         }}
                       >
-                        {book.code}
-                      </span>
+                        📖
+                      </div>
+                    )}
+
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'start',
+                          marginBottom: '8px'
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: '13px',
+                            fontWeight: '700',
+                            color: colors.accentPrimary
+                          }}
+                        >
+                          {book.code}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: '11px',
+                            padding: '4px 8px',
+                            backgroundColor: colors.accentLight,
+                            color: colors.accentPrimary,
+                            borderRadius: '4px',
+                            fontWeight: '600'
+                          }}
+                        >
+                          {book.language}
+                        </span>
+                      </div>
+                      <h3
+                        style={{
+                          margin: '0 0 6px 0',
+                          fontSize: '16px',
+                          fontWeight: '700',
+                          color: colors.text,
+                          lineHeight: '1.35'
+                        }}
+                      >
+                        {book.title}
+                      </h3>
+                      <p
+                        style={{
+                          margin: '0 0 6px 0',
+                          fontSize: '13px',
+                          color: colors.textSecondary
+                        }}
+                      >
+                        {book.author}
+                      </p>
+                      {s && (
+                        <p style={{ margin: '0 0 6px 0', fontSize: '12px', color: colors.textTertiary }}>
+                          {formatCount(s.views)} views · {formatCount(s.downloads)} downloads
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
+                    {book.tags.map((tag) => (
                       <span
+                        key={tag}
                         style={{
                           fontSize: '11px',
                           padding: '4px 8px',
                           backgroundColor: colors.accentLight,
                           color: colors.accentPrimary,
                           borderRadius: '4px',
-                          fontWeight: '600'
+                          fontWeight: '500'
                         }}
                       >
-                        {book.language}
+                        {tag}
                       </span>
-                    </div>
-                    <h3
-                      style={{
-                        margin: '0 0 6px 0',
-                        fontSize: '16px',
-                        fontWeight: '700',
-                        color: colors.text,
-                        lineHeight: '1.35'
-                      }}
-                    >
-                      {book.title}
-                    </h3>
-                    <p
-                      style={{
-                        margin: '0 0 12px 0',
-                        fontSize: '13px',
-                        color: colors.textSecondary
-                      }}
-                    >
-                      {book.author}
-                    </p>
+                    ))}
                   </div>
-                </div>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
-                  {book.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      style={{
-                        fontSize: '11px',
-                        padding: '4px 8px',
-                        backgroundColor: colors.accentLight,
-                        color: colors.accentPrimary,
-                        borderRadius: '4px',
-                        fontWeight: '500'
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  <button
+                    onClick={() => setSelectedBook(book)}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      backgroundColor: colors.accentPrimary,
+                      color: isDarkMode ? colors.bg : '#fff',
+                      border: 'none',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      fontSize: '13px',
+                      fontWeight: '600',
+                      transition: 'all 0.2s ease',
+                      boxShadow: `0 4px 12px ${colors.shadowColor}`
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = colors.accentSecondary
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = colors.accentPrimary
+                    }}
+                  >
+                    View Details
+                  </button>
                 </div>
-
-                <button
-                  onClick={() => setSelectedBook(book)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    backgroundColor: colors.accentPrimary,
-                    color: isDarkMode ? colors.bg : '#fff',
-                    border: 'none',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    fontSize: '13px',
-                    fontWeight: '600',
-                    transition: 'all 0.2s ease',
-                    boxShadow: `0 4px 12px ${colors.shadowColor}`
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = colors.accentSecondary
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = colors.accentPrimary
-                  }}
-                >
-                  View Details
-                </button>
-              </div>
-            ))}
+              )
+            })}
           </div>
         ) : (
           <div style={{

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, Download } from 'lucide-react'
 import { articlesData } from '../data/articles'
@@ -6,6 +6,7 @@ import { useTheme } from '../context/ThemeContext'
 import { formatDate } from '../utils/formatDate'
 import { usePageTitle } from '../hooks/usePageTitle'
 import { cloudinaryUrl } from '../utils/cloudinaryUrl'
+import { track, useStats, formatCount } from '../lib/stats'
 
 const SITE_URL = 'https://www.misingarchives.co.in'
 
@@ -42,6 +43,8 @@ export default function ArticleDetail() {
   const article = articlesData.find(a => a.slug === slug)
   const isResearch = article?.type === 'research'
   const authorNames = article?.authors || (article ? [article.author.trim()] : [])
+  const stats = useStats('article')
+  const reads = article ? stats[article.slug]?.views : null
 
   const jsonLd = article ? {
     '@context': 'https://schema.org',
@@ -57,6 +60,11 @@ export default function ArticleDetail() {
   } : null
 
   usePageTitle(article?.title)
+
+  // Count one read per session (must run before the early return below)
+  useEffect(() => {
+    if (article) track('article', article.slug, 'view')
+  }, [article?.slug])
 
   if (!article) {
     return (
@@ -157,6 +165,7 @@ export default function ArticleDetail() {
         By {article.author}
         {article.affiliation ? ` · ${article.affiliation}` : ''}
         {' · '}{formatDate(article.date)}
+        {reads != null && ` · ${formatCount(reads)} reads`}
       </p>
 
       {isResearch && pdfHref && (
@@ -165,6 +174,7 @@ export default function ArticleDetail() {
           download
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => track('article', article.slug, 'download')}
           style={{
             display: 'inline-flex',
             alignItems: 'center',

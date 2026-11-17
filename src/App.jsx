@@ -34,10 +34,17 @@ import ShopProduct from './pages/shop/ShopProduct'
 import About from './pages/About'
 import MisingTerms from './pages/learn/MisingTerms'
 import TermsAdmin from './pages/admin/TermsAdmin'
+import { useEffect } from 'react'
+import { trackSiteVisit } from './lib/siteStats'
+
 
 function Layout() {
   const { colors } = useTheme()
   const location = useLocation()
+  useEffect(() => {
+  // don't count admin/artisan logins as visitors
+  if (!/^\/(manage|artisan|admin)/.test(window.location.pathname)) trackSiteVisit()
+}, [])
 
   return (
     <div style={{

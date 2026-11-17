@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, Download } from 'lucide-react'
 import { booksData } from '../data/books'
 import { useTheme } from '../context/ThemeContext'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { track, useStats, formatCount } from '../lib/stats'
 
 export default function BookDetail() {
   const { code } = useParams()
   const { isDarkMode, colors } = useTheme()
   const book = booksData.find(b => b.code === code)
+  const stats = useStats('book')
+  const bookStats = book ? stats[book.code] : null
   usePageTitle(book?.title)
+
+  // Count one view per session (must run before the early return below)
+  useEffect(() => {
+    if (book) track('book', book.code, 'view')
+  }, [book?.code])
 
   if (!book) {
     return (
@@ -81,6 +89,7 @@ export default function BookDetail() {
 
       <p style={{ fontSize: '13px', color: colors.textTertiary, marginBottom: '32px' }}>
         By {book.author} · {book.language}
+        {bookStats && ` · ${formatCount(bookStats.views)} views · ${formatCount(bookStats.downloads)} downloads`}
       </p>
 
       <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', marginBottom: '32px' }}>
@@ -149,10 +158,11 @@ export default function BookDetail() {
             </p>
           </div>
 
-          
-            <a href={book.driveLink}
+          <a
+            href={book.driveLink}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track('book', book.code, 'download')}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
