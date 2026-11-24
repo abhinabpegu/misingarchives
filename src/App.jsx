@@ -36,6 +36,7 @@ import MisingTerms from './pages/learn/MisingTerms'
 import TermsAdmin from './pages/admin/TermsAdmin'
 import { useEffect } from 'react'
 import { trackSiteVisit } from './lib/siteStats'
+import BooksAdmin from './pages/admin/BooksAdmin'
 
 
 function Layout() {
@@ -77,6 +78,7 @@ function Layout() {
 <Route path="/learn/mising-motifs" element={<MisingMotifs />} />
 <Route path="/learn/mising-terms" element={<MisingTerms />} />
 
+
             {/* Public shop */}
             <Route path="/shop" element={<Shop />} />
             <Route path="/shop/artisan/:slug" element={<ShopArtisan />} />
@@ -88,6 +90,7 @@ function Layout() {
             <Route path="/manage/mimang" element={<RequireStaff><MimangAdmin /></RequireStaff>} />
             <Route path="/manage/artisans" element={<RequireStaff><ArtisansAdmin /></RequireStaff>} />
             <Route path="/manage/terms" element={<RequireStaff><TermsAdmin /></RequireStaff>} />
+            <Route path="/manage/books" element={<RequireStaff><BooksAdmin /></RequireStaff>} />
 
             {/* Artisan portal */}
             <Route path="/artisan/login" element={<ArtisanLogin />} />

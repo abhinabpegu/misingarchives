@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Search } from 'lucide-react'
-import { booksData } from '../data/books'
+import { useBooks } from '../hooks/useBooks'
 import { useTheme } from '../context/ThemeContext'
 import BookDetailModal from '../components/BookDetailModal'
 import ContributeCard from '../components/ContributeCard'
@@ -10,6 +10,7 @@ import { useStats, formatCount } from '../lib/stats'
 
 export default function DigitalBookLibrary() {
   usePageTitle('Digital Book Library')
+  const { books: booksData } = useBooks()
   const { isDarkMode, colors } = useTheme()
   const [searchParams] = useSearchParams()
   const stats = useStats('book')
@@ -21,6 +22,7 @@ export default function DigitalBookLibrary() {
   const [selectedBook, setSelectedBook] = useState(null)
 
   // Support deep links from the homepage, e.g. /digital-book-library?tag=History or ?book=0001
+  // Runs when the book list changes so ?book=XXXX also works for books loaded from the database.
   useEffect(() => {
     const tagParam = searchParams.get('tag')
     const langParam = searchParams.get('lang')
@@ -33,7 +35,7 @@ export default function DigitalBookLibrary() {
       if (match) setSelectedBook(match)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [booksData])
 
   const languages = ['All', ...new Set(booksData.map(book => book.language))]
   const tags = ['All', ...new Set(booksData.flatMap(book => book.tags))]
@@ -62,7 +64,7 @@ export default function DigitalBookLibrary() {
     })
 
     return filtered
-  }, [sortBy, filterLanguage, filterTag, searchQuery, stats])
+  }, [booksData, sortBy, filterLanguage, filterTag, searchQuery, stats])
 
   return (
     <div>

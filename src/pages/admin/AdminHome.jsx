@@ -80,6 +80,13 @@ export default function AdminHome() {
     Add everyday Mising words with English meanings and pictures.
   </p>
 </Link>
+<Link to="/manage/books" style={{ ...cardBase, display: 'block', padding: '24px', textDecoration: 'none' }}
+  onMouseEnter={hoverIn} onMouseLeave={hoverOut}>
+  <h3 style={{ margin: '0 0 8px', fontSize: '16px', color: colors.text }}>Books</h3>
+  <p style={{ margin: 0, fontSize: '13px', color: colors.textSecondary, lineHeight: '1.6' }}>
+    Add and edit books in the Digital Book Library.
+  </p>
+</Link>
       </div>
     </div>
   )

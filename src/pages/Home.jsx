@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { booksData } from '../data/books'
+import { useBooks } from '../hooks/useBooks'
 import { articlesData } from '../data/articles'
 import { clansData } from '../data/learn/clans'
 import { useMimang } from '../hooks/useMimang'
@@ -29,6 +29,7 @@ const MISSION_PILLARS = [
 ]
 
 export default function Home() {
+  const { books: booksData } = useBooks() 
   const { mimang } = useMimang()
   const [shopRef, shopVisible] = useScrollReveal()
   const [learnRef, learnVisible] = useScrollReveal()
