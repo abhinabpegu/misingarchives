@@ -1,44 +1,47 @@
 import React from 'react'
+import { BookOpen } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 import { useCardStyle } from '../utils/cardStyle'
 import { track, formatCount } from '../lib/stats'
+import { cloudinaryUrl } from '../utils/cloudinaryUrl'
+import LazyImage from './LazyImage'
 
 // Portrait cover, uppercase serif title (max 2 lines), author, "Read PDF" button.
 // Clicking the cover or title opens the details modal.
 export default function BookCard({ book, stats, onOpen }) {
   const { isDarkMode, colors } = useTheme()
-  const { cardBase, hoverIn, hoverOut } = useCardStyle()
+  const { cardBase } = useCardStyle()
+  const thumbSrc = book.coverImage ? cloudinaryUrl(book.coverImage, 'w_450,q_auto,f_auto') : null
 
   return (
     <div
+      className="card-interactive"
       style={{ ...cardBase, padding: '10px 10px 14px', display: 'flex', flexDirection: 'column', height: '100%' }}
-      onMouseEnter={hoverIn}
-      onMouseLeave={hoverOut}
     >
       {/* Cover */}
       <div
         onClick={() => onOpen(book)}
+        className="card-media-zoom"
         style={{
           position: 'relative',
           width: '100%',
           aspectRatio: '2 / 3',
-          borderRadius: '8px',
+          borderRadius: '9px',
           overflow: 'hidden',
           backgroundColor: colors.accentLight,
           cursor: 'pointer',
           flexShrink: 0
         }}
       >
-        {book.coverImage ? (
-          <img
-            src={book.coverImage}
+        {thumbSrc ? (
+          <LazyImage
+            src={thumbSrc}
             alt={book.title}
-            loading="lazy"
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
         ) : (
-          <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '36px' }}>
-            📖
+          <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <BookOpen size={34} color={colors.accentPrimary} />
           </div>
         )}
         <span style={{
@@ -50,9 +53,11 @@ export default function BookCard({ book, stats, onOpen }) {
           textTransform: 'uppercase',
           letterSpacing: '0.6px',
           padding: '4px 8px',
-          borderRadius: '4px',
+          borderRadius: '5px',
           backgroundColor: colors.accentPrimary,
-          color: isDarkMode ? colors.bg : '#fff'
+          color: isDarkMode ? colors.bg : '#fff',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+          zIndex: 2
         }}>
           {book.language}
         </span>
@@ -106,13 +111,14 @@ export default function BookCard({ book, stats, onOpen }) {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => track('book', book.code, 'download')}
+          className="btn-fancy"
           style={{
             display: 'block',
             textAlign: 'center',
             padding: '10px 14px',
             backgroundColor: colors.accentPrimary,
             color: isDarkMode ? colors.bg : '#fff',
-            borderRadius: '6px',
+            borderRadius: '8px',
             textDecoration: 'none',
             fontSize: '13px',
             fontWeight: '700'

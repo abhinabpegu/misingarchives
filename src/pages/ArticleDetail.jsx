@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { ArrowLeft, Download } from 'lucide-react'
+import { ArrowLeft, Download, FileText } from 'lucide-react'
 import { articlesData } from '../data/articles'
 import { useTheme } from '../context/ThemeContext'
 import { formatDate } from '../utils/formatDate'
@@ -69,7 +69,9 @@ export default function ArticleDetail() {
   if (!article) {
     return (
       <div style={{ maxWidth: '700px', margin: '0 auto', padding: '80px 24px', textAlign: 'center' }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>📭</div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+          <FileText size={40} color={colors.textTertiary} />
+        </div>
         <h1 style={{ fontSize: '22px', color: colors.text, marginBottom: '10px' }}>Article not found</h1>
         <p style={{ fontSize: '14px', color: colors.textSecondary, marginBottom: '24px' }}>
           This article may have been moved or doesn't exist.
@@ -175,6 +177,7 @@ export default function ArticleDetail() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => track('article', article.slug, 'download')}
+          className="btn-fancy"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -238,7 +241,7 @@ export default function ArticleDetail() {
       {article.coverImage && (
         article.category === 'Poetry' ? (
           <img
-            src={article.coverImage}
+            src={cloudinaryUrl(article.coverImage, 'w_1200,q_auto,f_auto')}
             alt={article.title}
             style={{
               width: '100%',
@@ -253,7 +256,7 @@ export default function ArticleDetail() {
           />
         ) : (
           <img
-            src={article.coverImage}
+            src={cloudinaryUrl(article.coverImage, 'w_1200,q_auto,f_auto')}
             alt={article.title}
             style={{
               width: '100%',

@@ -1,7 +1,5 @@
 /* Responsive Design */
 
-/* Responsive Design */
-
 /* Book library card grid */
 .books-grid {
   display: grid;
@@ -26,39 +24,48 @@
   }
 }
 
-/* Smooth transitions */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+/* Theme transitions scoped to layout & surfaces for crisp 60fps animations */
+.theme-root {
+  transition: background-color 0.35s ease, color 0.35s ease;
+  position: relative;
 }
 
 button:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
 ::selection {
-  color: inherit;
+  background: var(--accent-light);
+  color: var(--accent-primary);
 }
 
 *:focus-visible {
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
+}
+
+/* Ambient dual-radial backdrop glow */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(60% 45% at 12% 8%, var(--glow-primary), transparent 70%),
+    radial-gradient(50% 40% at 88% 22%, var(--glow-secondary), transparent 70%);
 }
 
 /* ---------------------------------- */
 /* Page transitions                   */
-/* The routed content div is re-keyed */
-/* by pathname in App.jsx, so this    */
-/* animation replays on every page    */
-/* change, not just first load.       */
 /* ---------------------------------- */
-
 .page-transition {
-  animation: pageEnter 0.45s ease;
+  animation: pageEnter 0.42s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes pageEnter {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -66,14 +73,338 @@ button:active {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .page-transition {
-    animation: none;
+/* ---------------------------------- */
+/* Hero staggered mount animations    */
+/* ---------------------------------- */
+.hero-stagger {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: heroEnter 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--stagger, 0) * 85ms);
+}
+
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 /* ---------------------------------- */
-/* Header / Navigation                */
+/* Interactive cards & micro-details  */
+/* ---------------------------------- */
+.card-interactive {
+  position: relative;
+  transition:
+    transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.22s ease,
+    background-color 0.22s ease;
+  will-change: transform;
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover) !important;
+}
+
+.card-interactive .card-media-zoom img {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-interactive:hover .card-media-zoom img {
+  transform: scale(1.03);
+}
+
+.card-interactive .card-arrow {
+  display: inline-block;
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-interactive:hover .card-arrow {
+  transform: translateX(4px);
+}
+
+/* Primary & Ghost interactive buttons (flat) */
+.btn-fancy {
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease;
+}
+
+.btn-fancy:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+.btn-ghost-fancy {
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.22s ease,
+    background-color 0.22s ease;
+}
+
+.btn-ghost-fancy:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-hover) !important;
+  background-color: var(--accent-light) !important;
+}
+
+/* Filter pill buttons */
+.pill-btn {
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.pill-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-hover) !important;
+}
+
+/* Header & navigation polish */
+.header-glass {
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.header-glass.is-scrolled {
+  box-shadow: 0 8px 30px var(--shadow);
+}
+
+.nav-link-fancy {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link-fancy::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--accent-primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link-fancy:hover::after,
+.nav-link-fancy.is-active::after {
+  transform: scaleX(1);
+}
+
+.nav-link-fancy:hover {
+  color: var(--accent-primary) !important;
+}
+
+.dropdown-enter {
+  animation: dropdownIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: top left;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.mobile-menu-enter {
+  animation: mobileMenuIn 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes mobileMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer-link {
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color: var(--accent-primary) !important;
+  transform: translateX(3px);
+}
+
+/* Smooth accordion via CSS grid */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.accordion-panel.is-open {
+  grid-template-rows: 1fr;
+}
+
+.accordion-inner {
+  overflow: hidden;
+}
+
+/* Reading progress bar */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  z-index: 300;
+  pointer-events: none;
+  transform-origin: left center;
+  transition: opacity 0.2s ease;
+}
+
+/* Back-to-top floating button */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--accent-primary);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 90;
+  transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-hover);
+}
+
+/* Audio equalizer bars for AudioButton */
+.audio-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.audio-bars span {
+  width: 2.5px;
+  border-radius: 2px;
+  background: currentColor;
+  animation: eqPulse 0.8s ease-in-out infinite;
+}
+
+.audio-bars span:nth-child(1) { height: 5px; animation-delay: 0ms; }
+.audio-bars span:nth-child(2) { height: 11px; animation-delay: 160ms; }
+.audio-bars span:nth-child(3) { height: 7px; animation-delay: 320ms; }
+
+@keyframes eqPulse {
+  0%, 100% { transform: scaleY(0.45); }
+  50% { transform: scaleY(1); }
+}
+
+/* Live pulse dot */
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background-color: var(--accent-primary);
+  position: relative;
+}
+
+.live-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent-primary);
+  animation: livePulse 2s ease-out infinite;
+}
+
+@keyframes livePulse {
+  0% { opacity: 0.7; transform: scale(0.8); }
+  100% { opacity: 0; transform: scale(1.8); }
+}
+
+/* Modal & Lightbox entrances */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-backdrop-enter {
+  animation: backdropIn 0.22s ease;
+}
+
+.modal-panel-enter {
+  animation: modalIn 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Staggered grid item entrance */
+.stagger-grid > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease;
+}
+
+.stagger-grid.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-grid.is-visible > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-grid.is-visible > *:nth-child(2) { transition-delay: 60ms; }
+.stagger-grid.is-visible > *:nth-child(3) { transition-delay: 120ms; }
+.stagger-grid.is-visible > *:nth-child(4) { transition-delay: 180ms; }
+.stagger-grid.is-visible > *:nth-child(5) { transition-delay: 240ms; }
+.stagger-grid.is-visible > *:nth-child(6) { transition-delay: 300ms; }
+.stagger-grid.is-visible > *:nth-child(n+7) { transition-delay: 340ms; }
+
+/* Once visible and hovered, hover transform shouldn't be delayed by stagger */
+.stagger-grid.is-visible > .card-interactive:hover {
+  transition-delay: 0ms !important;
+  transform: translateY(-2px);
+}
+
+/* ---------------------------------- */
+/* Header / Navigation responsive     */
 /* ---------------------------------- */
 
 @media (max-width: 768px) {
@@ -94,6 +425,11 @@ button:active {
   .toggle-label {
     display: none;
   }
+
+  .back-to-top {
+    right: 16px;
+    bottom: 16px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -102,16 +438,41 @@ button:active {
   .featured-articles-grid {
     grid-template-columns: 1fr !important;
   }
+
+  .hero-top-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
 }
 
-/* ---------------------------------- */
-/* Homepage sections                  */
-/* ---------------------------------- */
+/* Balanced homepage grids — no orphan empty column gaps */
+.home-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
 
-@media (max-width: 900px) {
-  .hero-grid,
-  .articles-grid {
-    grid-template-columns: 1fr !important;
+.home-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 1100px) {
+  .home-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .home-grid-6 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .home-grid-4 {
+    grid-template-columns: 1fr;
+  }
+  .home-grid-6 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -127,13 +488,6 @@ button:active {
 }
 
 /* ---------------------------------- */
-/* Article body                       */
-/* Styles raw HTML pasted into        */
-/* src/data/articles.js so it matches */
-/* the site regardless of theme.      */
-/* ---------------------------------- */
-
-/* ---------------------------------- */
 /* Clans page — table vs mobile cards */
 /* ---------------------------------- */
 
@@ -146,6 +500,10 @@ button:active {
     display: flex !important;
   }
 }
+
+/* ---------------------------------- */
+/* Article body                       */
+/* ---------------------------------- */
 
 .article-body {
   font-size: 16px;
@@ -281,10 +639,6 @@ button:active {
 
 /* ---------------------------------- */
 /* Poem body                          */
-/* Narrower column, serif italic,     */
-/* generous spacing — poem-appropriate*/
-/* variant of .article-body, applied  */
-/* only to category: 'Poetry'.        */
 /* ---------------------------------- */
 
 .poem-body {
@@ -302,13 +656,8 @@ button:active {
 
 /* ---------------------------------- */
 /* Reusable animation utilities       */
-/* Shared across the site — image     */
-/* skeletons, fade-ins, scroll-reveal.*/
-/* Kept as plain CSS (no JS libs) so  */
-/* it stays fast on slow connections. */
 /* ---------------------------------- */
 
-/* Shimmer skeleton — shown by LazyImage.jsx while an image loads */
 .skeleton-shimmer {
   position: relative;
   overflow: hidden;
@@ -332,11 +681,12 @@ button:active {
   to { transform: translateX(100%); }
 }
 
-/* Generic fade-in-up — attach to any element via className="fade-in-up" */
 .fade-in-up {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(16px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .fade-in-up.is-visible {
@@ -345,24 +695,46 @@ button:active {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .skeleton-shimmer::after {
-    animation: none;
+  html {
+    scroll-behavior: auto;
   }
-  .fade-in-up {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .page-transition,
+  .hero-stagger,
+  .dropdown-enter,
+  .mobile-menu-enter,
+  .modal-backdrop-enter,
+  .modal-panel-enter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .skeleton-shimmer::after,
+  .audio-bars span,
+  .live-dot::after {
+    animation: none !important;
+  }
+  .fade-in-up,
+  .stagger-grid > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .card-interactive,
+  .btn-fancy,
+  .btn-ghost-fancy,
+  .pill-btn,
+  .accordion-panel {
+    transition: none !important;
   }
 }
+
 /* ---------------------------------- */
 /* Research articles                  */
-/* Applied when an article has        */
-/* type: 'research' (ArticleDetail).  */
 /* ---------------------------------- */
 
 .article-body h2,
 .article-body h3 {
-  scroll-margin-top: 90px; /* clears the sticky header on #anchor jumps */
+  scroll-margin-top: 90px;
 }
 
 .research-body h2 {
@@ -370,7 +742,6 @@ button:active {
   padding-top: 28px;
 }
 
-/* Genealogy chains like Do:ni → Nibo → Bomi */
 .research-body .lineage {
   margin: 0 0 22px;
   padding: 14px 18px;
@@ -381,7 +752,6 @@ button:active {
   line-height: 1.9;
 }
 
-/* Wide tables scroll sideways instead of breaking the layout */
 .research-body .table-wrap {
   overflow-x: auto;
   margin: 24px 0;
@@ -392,7 +762,6 @@ button:active {
   min-width: 420px;
 }
 
-/* Hanging-indent reference list */
 .research-body .references {
   list-style: none;
   padding-left: 0;

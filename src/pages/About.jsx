@@ -10,9 +10,9 @@ import { supabase } from '../lib/supabase'
 import { useTheme } from '../context/ThemeContext'
 import { useCardStyle } from '../utils/cardStyle'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { useScrollReveal } from '../hooks/useScrollReveal'
+import { useCountUp } from '../hooks/useCountUp'
 
-// Put your photo at public/images/abhinab.jpg and set this to '/images/abhinab.jpg'.
-// While it is null, a placeholder with your initials is shown.
 const FOUNDER_PHOTO = '/images/abhinab.jpg'
 
 const FOUNDER = {
@@ -27,11 +27,33 @@ const FOUNDER = {
   ],
 }
 
+function StatCard({ stat, visible }) {
+  const { colors } = useTheme()
+  const { cardBase } = useCardStyle()
+  const animated = useCountUp(stat.value, visible, 800)
+
+  return (
+    <Link
+      to={stat.to}
+      className="card-interactive"
+      style={{ ...cardBase, padding: '20px 16px', textAlign: 'center', textDecoration: 'none' }}
+    >
+      <p style={{ margin: '0 0 4px', fontSize: '28px', fontWeight: '800', color: colors.accentPrimary, fontVariantNumeric: 'tabular-nums' }}>
+        {animated}
+      </p>
+      <p style={{ margin: 0, fontSize: '12px', fontWeight: '600', color: colors.textSecondary }}>
+        {stat.label}
+      </p>
+    </Link>
+  )
+}
+
 export default function About() {
   usePageTitle('About')
   const { colors } = useTheme()
   const { cardBase } = useCardStyle()
   const { mimang } = useMimang()
+  const [statsRef, statsVisible] = useScrollReveal()
   const [shopCounts, setShopCounts] = useState({ products: null, artisans: null })
 
   useEffect(() => {
@@ -88,21 +110,13 @@ export default function About() {
       </section>
 
       {/* Stats */}
-      <section style={{ ...wrap, padding: '24px clamp(20px, 5vw, 40px) 0' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '14px' }}>
+      <section ref={statsRef} style={{ ...wrap, padding: '24px clamp(20px, 5vw, 40px) 0' }}>
+        <div
+          className={`stagger-grid ${statsVisible ? 'is-visible' : ''}`}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '14px' }}
+        >
           {stats.map((s) => (
-            <Link
-              key={s.label}
-              to={s.to}
-              style={{ ...cardBase, padding: '20px 16px', textAlign: 'center', textDecoration: 'none' }}
-            >
-              <p style={{ margin: '0 0 4px', fontSize: '28px', fontWeight: '800', color: colors.accentPrimary }}>
-                {s.value}
-              </p>
-              <p style={{ margin: 0, fontSize: '12px', fontWeight: '600', color: colors.textSecondary }}>
-                {s.label}
-              </p>
-            </Link>
+            <StatCard key={s.label} stat={s} visible={statsVisible} />
           ))}
         </div>
         <p style={{ fontSize: '12px', color: colors.textTertiary, margin: '12px 0 0' }}>
@@ -160,7 +174,7 @@ export default function About() {
         <span style={eyebrow}>The Person Behind It</span>
         <h2 style={h2}>Founder &amp; Maintainer</h2>
 
-        <div style={{ ...cardBase, padding: '28px', display: 'flex', gap: '28px', flexWrap: 'wrap', alignItems: 'center' }}>
+        <div className="card-interactive" style={{ ...cardBase, padding: '28px', display: 'flex', gap: '28px', flexWrap: 'wrap', alignItems: 'center' }}>
           <div style={{
             width: '140px', height: '140px', borderRadius: '16px', overflow: 'hidden', flexShrink: 0,
             backgroundColor: colors.accentLight, display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -185,10 +199,12 @@ export default function About() {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={handle}
+                  className="pill-btn"
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '9px 14px',
                     fontSize: '13px', fontWeight: '700', textDecoration: 'none',
                     color: colors.accentPrimary, backgroundColor: colors.accentLight, borderRadius: '8px',
+                    border: '1px solid transparent'
                   }}
                 >
                   <Icon size={15} /> {label}

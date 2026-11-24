@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { X } from 'lucide-react'
+import { X, Download, BookOpen } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 import { track, useStats, formatCount } from '../lib/stats'
+import { cloudinaryUrl } from '../utils/cloudinaryUrl'
 
 export default function BookDetailModal({ book, onClose }) {
   const { isDarkMode, colors } = useTheme()
@@ -13,37 +14,54 @@ export default function BookDetailModal({ book, onClose }) {
     if (book) track('book', book.code, 'view')
   }, [book?.code])
 
+  // Close on Escape and prevent background scrolling while open
+  useEffect(() => {
+    if (!book) return
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prevOverflow
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [book, onClose])
+
   if (!book) return null
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: isDarkMode ? 'rgba(15, 14, 12, 0.7)' : 'rgba(0, 0, 0, 0.5)',
-      backdropFilter: 'blur(5px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 1000,
-      padding: '20px'
-    }}
-    onClick={onClose}
+    <div
+      className="modal-backdrop-enter"
+      style={{
+        position: 'fixed',
+        inset: 0,
+        backgroundColor: isDarkMode ? 'rgba(15, 14, 12, 0.72)' : 'rgba(16, 18, 28, 0.5)',
+        backdropFilter: 'blur(8px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000,
+        padding: '20px'
+      }}
+      onClick={onClose}
     >
       <div
+        className="modal-panel-enter"
+        role="dialog"
+        aria-modal="true"
+        aria-label={book.title}
         style={{
           backgroundColor: colors.bgSecondary,
-          borderRadius: '16px',
+          borderRadius: '18px',
           maxWidth: '600px',
           width: '100%',
           maxHeight: '90vh',
           overflow: 'auto',
-          boxShadow: `0 20px 60px ${colors.shadowColor}`,
+          boxShadow: `0 24px 64px ${colors.shadowColor}`,
           border: `1px solid ${colors.border}`,
-          backdropFilter: 'blur(10px)',
-          animation: 'slideUp 0.3s ease'
+          backdropFilter: 'blur(16px)',
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -52,13 +70,16 @@ export default function BookDetailModal({ book, onClose }) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '28px',
+          padding: '22px 28px',
           borderBottom: `1px solid ${colors.border}`,
           backgroundColor: colors.bgTertiary,
-          backdropFilter: 'blur(10px)'
+          backdropFilter: 'blur(10px)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 2
         }}>
           <h3 style={{
-            fontSize: '20px',
+            fontSize: '18px',
             fontWeight: '700',
             margin: 0,
             color: colors.text
@@ -67,60 +88,56 @@ export default function BookDetailModal({ book, onClose }) {
           </h3>
           <button
             onClick={onClose}
+            aria-label="Close modal"
             style={{
-              background: 'none',
+              background: colors.accentLight,
               border: 'none',
+              borderRadius: '8px',
               cursor: 'pointer',
               color: colors.accentPrimary,
-              padding: '4px',
-              transition: 'all 0.2s ease'
+              padding: '6px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'transform 0.25s cubic-bezier(0.22, 1, 0.36, 1)'
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'rotate(90deg)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'rotate(0deg)'
-            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'rotate(90deg)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = 'rotate(0deg)' }}
           >
-            <X size={24} />
+            <X size={20} />
           </button>
         </div>
 
         {/* Modal Content */}
         <div style={{ padding: '28px' }}>
           {/* Book Cover */}
-          <div style={{
-            marginBottom: '28px',
-            textAlign: 'center'
-          }}>
+          <div style={{ marginBottom: '28px', textAlign: 'center' }}>
             {book.coverImage ? (
               <img
-                src={book.coverImage}
+                src={cloudinaryUrl(book.coverImage, 'w_500,q_auto,f_auto')}
                 alt={book.title}
                 style={{
-                  width: '200px',
-                  height: '280px',
+                  width: '190px',
+                  height: '270px',
                   objectFit: 'cover',
                   borderRadius: '12px',
-                  boxShadow: `0 12px 32px ${colors.shadowColor}`,
-                  marginBottom: '16px'
+                  boxShadow: `0 16px 36px ${colors.shadowColor}`,
+                  marginBottom: '14px'
                 }}
               />
             ) : (
               <div style={{
-                width: '200px',
-                height: '280px',
+                width: '190px',
+                height: '270px',
                 backgroundColor: colors.accentLight,
                 borderRadius: '12px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: colors.textTertiary,
-                fontSize: '48px',
-                margin: '0 auto 16px',
-                boxShadow: `0 8px 24px ${colors.shadowColor}`
+                color: colors.accentPrimary,
+                margin: '0 auto 14px'
               }}>
-                📖
+                <BookOpen size={44} />
               </div>
             )}
 
@@ -138,7 +155,7 @@ export default function BookDetailModal({ book, onClose }) {
             { label: 'Author', value: book.author },
             { label: 'Language', value: book.language }
           ].map((item, idx) => (
-            <div key={idx} style={{ marginBottom: '20px' }}>
+            <div key={idx} style={{ marginBottom: '18px' }}>
               <label style={{
                 display: 'block',
                 fontSize: '11px',
@@ -146,14 +163,14 @@ export default function BookDetailModal({ book, onClose }) {
                 textTransform: 'uppercase',
                 letterSpacing: '1px',
                 color: colors.accentPrimary,
-                marginBottom: '8px'
+                marginBottom: '6px'
               }}>
                 {item.label}
               </label>
               <p style={{
                 margin: 0,
-                fontSize: item.isLarge ? '18px' : '16px',
-                fontWeight: item.isBold ? '600' : '400',
+                fontSize: item.isLarge ? '18px' : '15px',
+                fontWeight: item.isBold ? '700' : '500',
                 color: colors.text,
                 lineHeight: '1.4'
               }}>
@@ -163,7 +180,7 @@ export default function BookDetailModal({ book, onClose }) {
           ))}
 
           {/* Tags */}
-          <div style={{ marginBottom: '24px' }}>
+          <div style={{ marginBottom: '22px' }}>
             <label style={{
               display: 'block',
               fontSize: '11px',
@@ -179,7 +196,7 @@ export default function BookDetailModal({ book, onClose }) {
               {(book.tags || []).map(tag => (
                 <span key={tag} style={{
                   display: 'inline-block',
-                  padding: '8px 12px',
+                  padding: '6px 12px',
                   backgroundColor: colors.accentLight,
                   color: colors.accentPrimary,
                   borderRadius: '8px',
@@ -201,7 +218,7 @@ export default function BookDetailModal({ book, onClose }) {
               textTransform: 'uppercase',
               letterSpacing: '1px',
               color: colors.accentPrimary,
-              marginBottom: '8px'
+              marginBottom: '6px'
             }}>
               Archived By
             </label>
@@ -215,7 +232,7 @@ export default function BookDetailModal({ book, onClose }) {
             </p>
           </div>
 
-          {/* Takedown notice — only for books archived by Mising Archives itself */}
+          {/* Takedown notice */}
           {book.archivedBy === 'Mising Archives' && (
             <div style={{
               marginBottom: '24px',
@@ -240,6 +257,7 @@ export default function BookDetailModal({ book, onClose }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track('book', book.code, 'download')}
+            className="btn-fancy"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -255,39 +273,16 @@ export default function BookDetailModal({ book, onClose }) {
               borderRadius: '10px',
               cursor: 'pointer',
               textDecoration: 'none',
-              transition: 'all 0.3s ease',
               textTransform: 'uppercase',
               letterSpacing: '0.5px',
               boxShadow: `0 8px 24px ${colors.shadowColor}`
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = colors.accentSecondary
-              e.currentTarget.style.transform = 'translateY(-3px)'
-              e.currentTarget.style.boxShadow = `0 12px 32px ${colors.shadowColor}`
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = colors.accentPrimary
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = `0 8px 24px ${colors.shadowColor}`
-            }}
           >
-            ⬇️ Download Book
+            <Download size={16} />
+            Download Book
           </a>
         </div>
       </div>
-
-      <style>{`
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   )
 }

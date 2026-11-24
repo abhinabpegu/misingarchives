@@ -14,10 +14,12 @@ export default function ContributeCard({ title, teaser, children }) {
       backdropFilter: 'blur(10px)',
       boxShadow: `0 4px 16px ${colors.shadowColor}`,
       overflow: 'hidden',
-      marginBottom: '32px'
+      marginBottom: '32px',
+      transition: 'border-color 0.25s ease, box-shadow 0.25s ease'
     }}>
       <button
         onClick={() => setExpanded(!expanded)}
+        aria-expanded={expanded}
         style={{
           width: '100%',
           display: 'flex',
@@ -58,21 +60,23 @@ export default function ContributeCard({ title, teaser, children }) {
           color={colors.accentPrimary}
           style={{
             flexShrink: 0,
-            transition: 'transform 0.25s ease',
+            transition: 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
             transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)'
           }}
         />
       </button>
 
-      {expanded && (
-        <div style={{
-          padding: '0 24px 24px',
-          borderTop: `1px solid ${colors.border}`,
-          paddingTop: '20px'
-        }}>
-          {children}
+      <div className={`accordion-panel ${expanded ? 'is-open' : ''}`}>
+        <div className="accordion-inner">
+          <div style={{
+            padding: '0 24px 24px',
+            borderTop: `1px solid ${colors.border}`,
+            paddingTop: '20px'
+          }}>
+            {children}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }

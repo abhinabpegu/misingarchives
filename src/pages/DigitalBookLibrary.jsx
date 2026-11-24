@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Search } from 'lucide-react'
+import { Search, RotateCcw, BookOpen } from 'lucide-react'
 import { useBooks } from '../hooks/useBooks'
 import { useTheme } from '../context/ThemeContext'
 import BookDetailModal from '../components/BookDetailModal'
@@ -12,7 +12,7 @@ import BookCard from '../components/BookCard'
 export default function DigitalBookLibrary() {
   usePageTitle('Digital Book Library')
   const { books: booksData } = useBooks()
-  const { colors } = useTheme()
+  const { isDarkMode, colors } = useTheme()
   const [searchParams] = useSearchParams()
   const stats = useStats('book')
 
@@ -23,7 +23,6 @@ export default function DigitalBookLibrary() {
   const [selectedBook, setSelectedBook] = useState(null)
 
   // Support deep links from the homepage, e.g. /digital-book-library?tag=History or ?book=0001
-  // Runs when the book list changes so ?book=XXXX also works for books loaded from the database.
   useEffect(() => {
     const tagParam = searchParams.get('tag')
     const langParam = searchParams.get('lang')
@@ -41,14 +40,24 @@ export default function DigitalBookLibrary() {
   const languages = ['All', ...new Set(booksData.map(book => book.language))]
   const tags = ['All', ...new Set(booksData.flatMap(book => book.tags))]
 
+  const hasActiveFilter = filterLanguage !== 'All' || filterTag !== 'All' || searchQuery.trim() !== '' || sortBy !== 'code'
+
+  const resetFilters = () => {
+    setSortBy('code')
+    setFilterLanguage('All')
+    setFilterTag('All')
+    setSearchQuery('')
+  }
+
   const displayedBooks = useMemo(() => {
-    let filtered = booksData.filter(book => {
+    const q = searchQuery.trim().toLowerCase()
+    const filtered = booksData.filter(book => {
       const langMatch = filterLanguage === 'All' || book.language === filterLanguage
       const tagMatch = filterTag === 'All' || book.tags.includes(filterTag)
-      const searchMatch =
-        book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        book.code.includes(searchQuery)
+      const searchMatch = !q ||
+        book.title.toLowerCase().includes(q) ||
+        book.author.toLowerCase().includes(q) ||
+        book.code.toLowerCase().includes(q)
       return langMatch && tagMatch && searchMatch
     })
 
@@ -87,12 +96,11 @@ export default function DigitalBookLibrary() {
         <h1 style={{
           fontSize: '34px',
           fontWeight: '700',
-          margin: '10px 0 8px',
+          margin: '10px 0 12px',
           color: colors.text
         }}>
-           Digital Book Library
+          Digital Book Library
         </h1>
-
       </section>
 
       {/* Request or donate a book */}
@@ -110,11 +118,12 @@ export default function DigitalBookLibrary() {
             href="https://docs.google.com/forms/d/e/1FAIpQLScahQG34BhG6t03j8lXFSNiqpmnlHhdvWIe8UpisYbBFrOqpg/viewform"
             target="_blank"
             rel="noopener noreferrer"
+            className="btn-fancy"
             style={{
               display: 'inline-block',
               padding: '10px 18px',
               backgroundColor: colors.accentPrimary,
-              color: '#fff',
+              color: isDarkMode ? colors.bg : '#fff',
               borderRadius: '8px',
               textDecoration: 'none',
               fontSize: '13px',
@@ -139,13 +148,13 @@ export default function DigitalBookLibrary() {
 
       {/* Filters with Glass Effect */}
       <section style={{
-        padding: '32px clamp(20px, 5vw, 40px) 0',
+        padding: '24px clamp(20px, 5vw, 40px) 0',
         maxWidth: '1400px',
         margin: '0 auto'
       }}>
         {/* Search Bar */}
-        <div style={{ marginBottom: '32px' }}>
-          <div style={{ position: 'relative', maxWidth: '450px' }}>
+        <div style={{ marginBottom: '24px', display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ position: 'relative', flex: '1 1 300px', maxWidth: '460px' }}>
             <Search
               size={18}
               color={colors.textTertiary}
@@ -163,7 +172,7 @@ export default function DigitalBookLibrary() {
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 width: '100%',
-                padding: '14px 16px 14px 44px',
+                padding: '13px 16px 13px 44px',
                 fontSize: '14px',
                 border: `1px solid ${colors.border}`,
                 borderRadius: '12px',
@@ -171,8 +180,9 @@ export default function DigitalBookLibrary() {
                 backdropFilter: 'blur(10px)',
                 color: colors.text,
                 outline: 'none',
-                transition: 'all 0.3s ease',
-                boxShadow: `0 4px 12px ${colors.shadowColor}`
+                transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
+                boxShadow: `0 4px 12px ${colors.shadowColor}`,
+                boxSizing: 'border-box'
               }}
               onFocus={(e) => {
                 e.target.style.borderColor = colors.accentPrimary
@@ -184,13 +194,41 @@ export default function DigitalBookLibrary() {
               }}
             />
           </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span style={{ fontSize: '13px', fontWeight: '600', color: colors.textTertiary }}>
+              Showing {displayedBooks.length} of {booksData.length} books
+            </span>
+            {hasActiveFilter && (
+              <button
+                onClick={resetFilters}
+                className="pill-btn"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 12px',
+                  fontSize: '12px',
+                  fontWeight: '700',
+                  borderRadius: '999px',
+                  border: `1px solid ${colors.border}`,
+                  backgroundColor: colors.bgSecondary,
+                  color: colors.accentPrimary,
+                  cursor: 'pointer'
+                }}
+              >
+                <RotateCcw size={13} />
+                Reset
+              </button>
+            )}
+          </div>
         </div>
 
-        {/* Filter Controls with Glass */}
+        {/* Filter Controls */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '20px'
+          gap: '16px'
         }}>
           {[
             { label: 'Sort By', value: sortBy, onChange: setSortBy, options: [
@@ -211,7 +249,7 @@ export default function DigitalBookLibrary() {
                 fontWeight: '700',
                 textTransform: 'uppercase',
                 letterSpacing: '1.2px',
-                marginBottom: '10px',
+                marginBottom: '8px',
                 color: colors.accentPrimary
               }}>
                 {filter.label}
@@ -230,15 +268,11 @@ export default function DigitalBookLibrary() {
                   color: colors.text,
                   cursor: 'pointer',
                   fontFamily: 'inherit',
-                  transition: 'all 0.3s ease',
+                  transition: 'border-color 0.25s ease',
                   boxShadow: `0 4px 12px ${colors.shadowColor}`
                 }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = colors.accentPrimary
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = colors.border
-                }}
+                onFocus={(e) => { e.target.style.borderColor = colors.accentPrimary }}
+                onBlur={(e) => { e.target.style.borderColor = colors.border }}
               >
                 {filter.options.map(([val, label]) => (
                   <option key={val} value={val}>{label}</option>
@@ -249,18 +283,18 @@ export default function DigitalBookLibrary() {
         </div>
       </section>
 
-      {/* Books Grid — unified card layout, 2 columns on desktop, 1 on mobile */}
+      {/* Books Grid */}
       <section className="section-container" style={{
-        padding: '0 40px 60px',
+        padding: '0 clamp(20px, 5vw, 40px) 60px',
         maxWidth: '1400px',
         margin: '0 auto'
       }}>
         {displayedBooks.length > 0 ? (
           <div
-            className="books-grid"
+            className="books-grid stagger-grid is-visible"
             style={{
               marginTop: '32px',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))'
+              gridTemplateColumns: 'repeat(auto-fill, minmax(195px, 1fr))'
             }}
           >
             {displayedBooks.map((book) => (
@@ -278,15 +312,35 @@ export default function DigitalBookLibrary() {
             padding: '80px 40px',
             color: colors.textTertiary,
             backgroundColor: colors.bgSecondary,
-            borderRadius: '12px',
+            borderRadius: '14px',
             border: `1px solid ${colors.border}`,
             backdropFilter: 'blur(10px)',
             boxShadow: `0 8px 32px ${colors.shadowColor}`,
             marginTop: '32px'
           }}>
-            <div style={{ fontSize: '48px', marginBottom: '16px' }}>📭</div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+              <BookOpen size={40} color={colors.textTertiary} />
+            </div>
             <p style={{ fontSize: '18px', fontWeight: '600', marginBottom: '8px', color: colors.text }}>No books found</p>
-            <p style={{ fontSize: '14px' }}>Try adjusting your filters or search terms.</p>
+            <p style={{ fontSize: '14px', marginBottom: '18px' }}>Try adjusting your filters or search terms.</p>
+            {hasActiveFilter && (
+              <button
+                onClick={resetFilters}
+                className="btn-fancy"
+                style={{
+                  padding: '10px 18px',
+                  fontSize: '13px',
+                  fontWeight: '700',
+                  borderRadius: '10px',
+                  border: 'none',
+                  backgroundColor: colors.accentPrimary,
+                  color: isDarkMode ? colors.bg : '#fff',
+                  cursor: 'pointer'
+                }}
+              >
+                Reset Filters
+              </button>
+            )}
           </div>
         )}
       </section>

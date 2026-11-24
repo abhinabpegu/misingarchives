@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FileText } from 'lucide-react'
 import { articlesData } from '../data/articles'
 import { useTheme } from '../context/ThemeContext'
 import ArticleCard from '../components/ArticleCard'
@@ -26,29 +27,29 @@ export default function Articles() {
     <div>
       {/* Page intro */}
       <section style={{
-  padding: '48px clamp(20px, 5vw, 40px) 0',
-  maxWidth: '1400px',
-  margin: '0 auto'
-}}>
-  <span style={{
-    fontSize: '12px',
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: '1.4px',
-    color: colors.accentPrimary
-  }}>
-    From the Community
-  </span>
-  <h1 style={{
-    fontSize: '34px',
-    fontWeight: '700',
-    margin: '10px 0 8px',
-    color: colors.text
-  }}>
-    Community Writings
-  </h1>
-  
-</section>
+        padding: '48px clamp(20px, 5vw, 40px) 0',
+        maxWidth: '1400px',
+        margin: '0 auto'
+      }}>
+        <span style={{
+          fontSize: '12px',
+          fontWeight: '700',
+          textTransform: 'uppercase',
+          letterSpacing: '1.4px',
+          color: colors.accentPrimary
+        }}>
+          From the Community
+        </span>
+        <h1 style={{
+          fontSize: '34px',
+          fontWeight: '700',
+          margin: '10px 0 12px',
+          color: colors.text
+        }}>
+          Community Writings
+        </h1>
+      </section>
+
       {/* Contribute an article */}
       <section style={{ padding: '0 clamp(20px, 5vw, 40px)', maxWidth: '1400px', margin: '0 auto' }}>
         <ContributeCard
@@ -63,11 +64,12 @@ export default function Articles() {
             href="https://docs.google.com/forms/d/e/1FAIpQLSfEnOKDzhTOoSyLdSMKrhy6SE87HK0SlTJj_8YOHOrIgt_v2Q/viewform"
             target="_blank"
             rel="noopener noreferrer"
+            className="btn-fancy"
             style={{
               display: 'inline-block',
               padding: '10px 18px',
               backgroundColor: colors.accentPrimary,
-              color: '#fff',
+              color: isDarkMode ? colors.bg : '#fff',
               borderRadius: '8px',
               textDecoration: 'none',
               fontSize: '13px',
@@ -92,9 +94,14 @@ export default function Articles() {
 
       {/* Category filter */}
       <section style={{
-        padding: '28px clamp(20px, 5vw, 40px) 0',
+        padding: '24px clamp(20px, 5vw, 40px) 0',
         maxWidth: '1400px',
-        margin: '0 auto'
+        margin: '0 auto',
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '14px'
       }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
           {categories.map(cat => {
@@ -103,6 +110,7 @@ export default function Articles() {
               <button
                 key={cat}
                 onClick={() => setFilterCategory(cat)}
+                className="pill-btn"
                 style={{
                   padding: '9px 16px',
                   fontSize: '13px',
@@ -112,7 +120,7 @@ export default function Articles() {
                   backgroundColor: active ? colors.accentPrimary : colors.bgSecondary,
                   color: active ? (isDarkMode ? colors.bg : '#fff') : colors.textSecondary,
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease'
+                  boxShadow: active ? `0 4px 12px ${colors.shadowColor}` : 'none'
                 }}
               >
                 {cat}
@@ -120,20 +128,26 @@ export default function Articles() {
             )
           })}
         </div>
+        <span style={{ fontSize: '13px', fontWeight: '600', color: colors.textTertiary }}>
+          {displayedArticles.length} {displayedArticles.length === 1 ? 'writing' : 'writings'}
+        </span>
       </section>
 
       {/* Articles grid */}
       <section className="section-container" style={{
-        padding: '32px clamp(20px, 5vw, 40px) 60px',
+        padding: '28px clamp(20px, 5vw, 40px) 60px',
         maxWidth: '1400px',
         margin: '0 auto'
       }}>
         {displayedArticles.length > 0 ? (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '24px'
-          }}>
+          <div
+            className="stagger-grid is-visible"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+              gap: '24px'
+            }}
+          >
             {displayedArticles.map(article => (
               <ArticleCard key={article.slug} article={article} />
             ))}
@@ -144,26 +158,26 @@ export default function Articles() {
             padding: '80px 40px',
             color: colors.textTertiary,
             backgroundColor: colors.bgSecondary,
-            borderRadius: '12px',
+            borderRadius: '14px',
             border: `1px solid ${colors.border}`,
             backdropFilter: 'blur(10px)',
             boxShadow: `0 8px 32px ${colors.shadowColor}`
           }}>
-            <div style={{ fontSize: '48px', marginBottom: '16px' }}>📭</div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+              <FileText size={40} color={colors.textTertiary} />
+            </div>
             <p style={{ fontSize: '18px', fontWeight: '600', marginBottom: '8px', color: colors.text }}>No articles found</p>
             <p style={{ fontSize: '14px' }}>Try a different category.</p>
           </div>
         )}
       </section>
 
-     
-
-{/* Quiet pointer to the library for people who landed here looking for books */}
-<section style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 40px) 60px' }}>
-  <p style={{ fontSize: '13px', color: colors.textTertiary, textAlign: 'center' }}>
-    Looking for full books instead? Visit the <Link to="/digital-book-library" style={{ color: colors.accentPrimary, fontWeight: '600' }}>Digital Book Library</Link>.
-  </p>
-</section>
+      {/* Quiet pointer to the library */}
+      <section style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 40px) 60px' }}>
+        <p style={{ fontSize: '13px', color: colors.textTertiary, textAlign: 'center' }}>
+          Looking for full books instead? Visit the <Link to="/digital-book-library" style={{ color: colors.accentPrimary, fontWeight: '600' }}>Digital Book Library</Link>.
+        </p>
+      </section>
     </div>
   )
 }

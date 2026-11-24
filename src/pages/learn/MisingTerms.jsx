@@ -46,51 +46,67 @@ export default function MisingTerms() {
         <span style={{ fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1.4px', color: colors.accentPrimary }}>
           Learn
         </span>
-        <h1 style={{ fontSize: '34px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>Mising Terms</h1>
+        <h1 style={{ fontSize: '34px', fontWeight: '700', margin: '10px 0 10px', color: colors.text }}>Mising Terms</h1>
         <p style={{ fontSize: '14px', color: colors.textSecondary, lineHeight: '1.7', maxWidth: '640px' }}>
           Common everyday words in Mising, with their English meanings.
         </p>
       </section>
 
-      <section style={{ ...wrap, padding: '28px clamp(20px, 5vw, 40px) 0', display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-        <div style={{ position: 'relative', flex: '1 1 280px', maxWidth: '420px' }}>
-          <Search size={18} color={colors.textTertiary} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }} />
-          <input
-            type="text" placeholder="Search in English or Mising…" value={query}
-            onChange={(e) => setQuery(e.target.value)}
+      <section style={{ ...wrap, padding: '24px clamp(20px, 5vw, 40px) 0', display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center', flex: '1 1 320px' }}>
+          <div style={{ position: 'relative', flex: '1 1 260px', maxWidth: '400px' }}>
+            <Search size={18} color={colors.textTertiary} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }} />
+            <input
+              type="text" placeholder="Search in English or Mising…" value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              style={{
+                width: '100%', padding: '12px 16px 12px 44px', fontSize: '14px', border: `1px solid ${colors.border}`,
+                borderRadius: '12px', backgroundColor: colors.bgSecondary, color: colors.text, outline: 'none', boxSizing: 'border-box',
+                boxShadow: `0 4px 12px ${colors.shadowColor}`
+              }}
+              onFocus={(e) => { e.target.style.borderColor = colors.accentPrimary }}
+              onBlur={(e) => { e.target.style.borderColor = colors.border }}
+            />
+          </div>
+          <button
+            onClick={() => setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))}
+            className="pill-btn"
             style={{
-              width: '100%', padding: '13px 16px 13px 44px', fontSize: '14px', border: `1px solid ${colors.border}`,
-              borderRadius: '12px', backgroundColor: colors.bgSecondary, color: colors.text, outline: 'none', boxSizing: 'border-box',
+              display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 16px', fontSize: '13px', fontWeight: '700',
+              color: colors.accentPrimary, backgroundColor: colors.bgSecondary, border: `1px solid ${colors.border}`,
+              borderRadius: '10px', cursor: 'pointer', fontFamily: 'inherit', boxShadow: `0 4px 12px ${colors.shadowColor}`
             }}
-          />
+          >
+            <ArrowUpDown size={14} /> Sort: {sortDir === 'asc' ? 'A → Z' : 'Z → A'}
+          </button>
         </div>
-        <button
-          onClick={() => setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))}
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 16px', fontSize: '13px', fontWeight: '700',
-            color: colors.accentPrimary, backgroundColor: colors.bgSecondary, border: `1px solid ${colors.border}`,
-            borderRadius: '10px', cursor: 'pointer', fontFamily: 'inherit',
-          }}
-        >
-          <ArrowUpDown size={14} /> Sort: {sortDir === 'asc' ? 'A → Z' : 'Z → A'}
-        </button>
+
+        {!loading && !error && (
+          <span style={{ fontSize: '13px', fontWeight: '600', color: colors.textTertiary }}>
+            {shown.length} of {terms.length} terms
+          </span>
+        )}
       </section>
 
       <section style={{ ...wrap, padding: '24px clamp(20px, 5vw, 40px) 60px' }}>
         {loading ? (
-          <p style={{ color: colors.textSecondary }}>Loading…</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '14px' }}>
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="skeleton-shimmer" style={{ height: '240px', borderRadius: '14px', backgroundColor: colors.accentLight }} />
+            ))}
+          </div>
         ) : error ? (
           <p style={{ color: '#c0392b', fontSize: '14px' }}>{error}</p>
         ) : shown.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '80px 40px', color: colors.textTertiary, backgroundColor: colors.bgSecondary, borderRadius: '12px', border: `1px solid ${colors.border}` }}>
+          <div style={{ textAlign: 'center', padding: '80px 40px', color: colors.textTertiary, backgroundColor: colors.bgSecondary, borderRadius: '14px', border: `1px solid ${colors.border}` }}>
             <p style={{ fontSize: '14px', margin: 0 }}>{terms.length === 0 ? 'No terms added yet.' : 'No terms found.'}</p>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '14px' }}>
+          <div className="stagger-grid is-visible" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
             {shown.map((t) => (
-              <div key={t.id} style={{ ...cardBase, overflow: 'hidden' }}>
+              <div key={t.id} className="card-interactive" style={{ ...cardBase, overflow: 'hidden' }}>
                 {t.image_url && (
-                  <div style={{ width: '100%', aspectRatio: '1 / 1', backgroundColor: colors.accentLight }}>
+                  <div className="card-media-zoom" style={{ width: '100%', aspectRatio: '1 / 1', backgroundColor: colors.accentLight, overflow: 'hidden' }}>
                     <LazyImage
                       src={cloudinaryUrl(t.image_url, 'w_400,h_400,c_fill,q_auto,f_auto')}
                       alt={t.english_name}

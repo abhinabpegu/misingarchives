@@ -10,55 +10,56 @@ export default function InstagramCard() {
       href="https://instagram.com/misingarchives"
       target="_blank"
       rel="noopener noreferrer"
+      className="card-interactive"
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '20px',
         flexWrap: 'wrap',
-        padding: '28px clamp(24px, 5vw, 40px)',
-        borderRadius: '14px',
+        padding: '26px clamp(20px, 4vw, 36px)',
+        borderRadius: '12px',
         textDecoration: 'none',
-        background: `linear-gradient(135deg, ${colors.accentPrimary}, ${colors.accentSecondary})`,
-        boxShadow: `0 8px 24px ${colors.shadowColor}`,
-        transition: 'transform 0.25s ease'
+        backgroundColor: colors.accentPrimary,
+        border: `1px solid ${colors.accentPrimary}`,
       }}
-      onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)' }}
-      onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)' }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <div style={{
-          width: '48px',
-          height: '48px',
-          borderRadius: '12px',
-          backgroundColor: 'rgba(255,255,255,0.2)',
+          width: '44px',
+          height: '44px',
+          borderRadius: '10px',
+          backgroundColor: isDarkMode ? 'rgba(15, 14, 12, 0.14)' : 'rgba(255, 255, 255, 0.2)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0
         }}>
-          <Instagram size={24} color="#fff" />
+          <Instagram size={22} color={isDarkMode ? colors.bg : '#fff'} />
         </div>
         <div>
-          <h3 style={{ margin: '0 0 4px', fontSize: '17px', fontWeight: '700', color: '#fff' }}>
+          <h3 style={{ margin: '0 0 4px', fontSize: '17px', fontWeight: '700', color: isDarkMode ? colors.bg : '#fff' }}>
             Follow us on Instagram
           </h3>
-          <p style={{ margin: 0, fontSize: '13px', color: 'rgba(255,255,255,0.9)' }}>
-            New archives, articles, and community updates — @misingarchives
+          <p style={{ margin: 0, fontSize: '13px', color: isDarkMode ? colors.bg : 'rgba(255,255,255,0.92)' }}>
+            New archives, writings, and community updates on @misingarchives
           </p>
         </div>
       </div>
 
       <span style={{
-        padding: '10px 20px',
+        padding: '10px 18px',
         borderRadius: '8px',
-        backgroundColor: '#fff',
-        color: isDarkMode ? colors.bg : colors.accentPrimary,
+        backgroundColor: isDarkMode ? colors.bg : '#fff',
+        color: colors.accentPrimary,
         fontSize: '13px',
         fontWeight: '700',
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '6px'
       }}>
-        Follow →
+        Follow <span className="card-arrow">→</span>
       </span>
     </a>
   )

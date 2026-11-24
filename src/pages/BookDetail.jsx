@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { ArrowLeft, Download } from 'lucide-react'
+import { ArrowLeft, Download, BookOpen } from 'lucide-react'
 import { booksData } from '../data/books'
 import { useTheme } from '../context/ThemeContext'
 import { usePageTitle } from '../hooks/usePageTitle'
 import { track, useStats, formatCount } from '../lib/stats'
+import { cloudinaryUrl } from '../utils/cloudinaryUrl'
 
 export default function BookDetail() {
   const { code } = useParams()
@@ -22,7 +23,9 @@ export default function BookDetail() {
   if (!book) {
     return (
       <div style={{ maxWidth: '700px', margin: '0 auto', padding: '80px 24px', textAlign: 'center' }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>📭</div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+          <BookOpen size={40} color={colors.textTertiary} />
+        </div>
         <h1 style={{ fontSize: '22px', color: colors.text, marginBottom: '10px' }}>Book not found</h1>
         <p style={{ fontSize: '14px', color: colors.textSecondary, marginBottom: '24px' }}>
           This book may have been moved or doesn't exist.
@@ -95,7 +98,7 @@ export default function BookDetail() {
       <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', marginBottom: '32px' }}>
         {book.coverImage ? (
           <img
-            src={book.coverImage}
+            src={cloudinaryUrl(book.coverImage, 'w_500,q_auto,f_auto')}
             alt={book.title}
             style={{
               width: '200px',
@@ -114,10 +117,9 @@ export default function BookDetail() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: colors.textTertiary,
-            fontSize: '48px'
+            color: colors.accentPrimary
           }}>
-            📖
+            <BookOpen size={44} />
           </div>
         )}
 
@@ -163,6 +165,7 @@ export default function BookDetail() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track('book', book.code, 'download')}
+            className="btn-fancy"
             style={{
               display: 'inline-flex',
               alignItems: 'center',

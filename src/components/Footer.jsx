@@ -6,7 +6,7 @@ import SiteStats from './SiteStats'
 export default function Footer() {
   const { colors } = useTheme()
 
-  const colStyle = { display: 'flex', flexDirection: 'column', gap: '10px' }
+  const colStyle = { display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start' }
   const headingStyle = {
     fontSize: '12px',
     fontWeight: '700',
@@ -25,10 +25,12 @@ export default function Footer() {
     <footer style={{
       borderTop: `1px solid ${colors.border}`,
       backgroundColor: colors.bgTertiary,
-      backdropFilter: 'blur(10px)',
+      backdropFilter: 'blur(12px)',
       marginTop: '60px',
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      position: 'relative',
+      zIndex: 1
     }}>
       <div className="footer-grid" style={{
         maxWidth: '1400px',
@@ -68,11 +70,11 @@ export default function Footer() {
 
         <div style={colStyle}>
           <span style={headingStyle}>Explore</span>
-          <Link to="/" style={linkStyle}>Home</Link>
-          <Link to="/digital-book-library" style={linkStyle}>Digital Book Library</Link>
-          <Link to="/articles" style={linkStyle}>Community Writings</Link>
-          <Link to="/shop" style={linkStyle}>Shop</Link>
-          <a href="#mission" style={linkStyle} onClick={(e) => {
+          <Link to="/" className="footer-link" style={linkStyle}>Home</Link>
+          <Link to="/digital-book-library" className="footer-link" style={linkStyle}>Digital Book Library</Link>
+          <Link to="/articles" className="footer-link" style={linkStyle}>Community Writings</Link>
+          <Link to="/shop" className="footer-link" style={linkStyle}>Shop</Link>
+          <a href="#mission" className="footer-link" style={linkStyle} onClick={(e) => {
             e.preventDefault()
             document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })
           }}>Our Mission</a>
@@ -80,23 +82,23 @@ export default function Footer() {
 
         <div style={colStyle}>
           <span style={headingStyle}>Sources & Thanks</span>
-          <a href="https://archive.org" target="_blank" rel="noopener noreferrer" style={linkStyle}>Internet Archive</a>
-          <a href="https://pahar.in" target="_blank" rel="noopener noreferrer" style={linkStyle}>Pahar.in</a>
-          <a href="https://public.resource.org" target="_blank" rel="noopener noreferrer" style={linkStyle}>Public.Resource.Org</a>
-          <a href="https://sisangkebang.in" target="_blank" rel="noopener noreferrer" style={linkStyle}>Takam Mising Sisang Kebang</a>
+          <a href="https://archive.org" target="_blank" rel="noopener noreferrer" className="footer-link" style={linkStyle}>Internet Archive</a>
+          <a href="https://pahar.in" target="_blank" rel="noopener noreferrer" className="footer-link" style={linkStyle}>Pahar.in</a>
+          <a href="https://public.resource.org" target="_blank" rel="noopener noreferrer" className="footer-link" style={linkStyle}>Public.Resource.Org</a>
+          <a href="https://sisangkebang.in" target="_blank" rel="noopener noreferrer" className="footer-link" style={linkStyle}>Takam Mising Sisang Kebang</a>
         </div>
 
         <div style={colStyle}>
           <span style={headingStyle}>Legal</span>
-          <Link to="/privacy-policy" style={linkStyle}>Privacy Policy</Link>
-          <Link to="/terms-of-use" style={linkStyle}>Terms of Use</Link>
-          <Link to="/copyright-policy" style={linkStyle}>Copyright Policy</Link>
+          <Link to="/privacy-policy" className="footer-link" style={linkStyle}>Privacy Policy</Link>
+          <Link to="/terms-of-use" className="footer-link" style={linkStyle}>Terms of Use</Link>
+          <Link to="/copyright-policy" className="footer-link" style={linkStyle}>Copyright Policy</Link>
         </div>
 
         <div style={colStyle}>
           <span style={headingStyle}>Contact</span>
-          <a href="mailto:contact@misingarchives.co.in" style={linkStyle}>contact@misingarchives.co.in</a>
-          <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" style={linkStyle}>@misingarchives on Instagram</a>
+          <a href="mailto:contact@misingarchives.co.in" className="footer-link" style={linkStyle}>contact@misingarchives.co.in</a>
+          <a href="https://instagram.com/misingarchives" target="_blank" rel="noopener noreferrer" className="footer-link" style={linkStyle}>@misingarchives on Instagram</a>
         </div>
       </div>
 

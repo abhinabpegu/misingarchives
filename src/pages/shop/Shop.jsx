@@ -33,7 +33,6 @@ export default function Shop() {
 
   const catName = (slug) => categories.find((c) => c.slug === slug)?.name || ''
 
-  // Only offer filters for categories that actually have products.
   const usedCategories = useMemo(
     () => categories.filter((c) => products.some((p) => p.category_slug === c.slug)),
     [categories, products]
@@ -56,35 +55,52 @@ export default function Shop() {
         <span style={{ fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1.4px', color: colors.accentPrimary }}>
           Mising Artisans
         </span>
-        <h1 style={{ fontSize: '34px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>Shop</h1>
+        <h1 style={{ fontSize: '34px', fontWeight: '700', margin: '10px 0 10px', color: colors.text }}>Shop</h1>
         <p style={{ fontSize: '14px', color: colors.textSecondary, lineHeight: '1.7', maxWidth: '640px', margin: 0 }}>
           Handmade clothing, ornaments, food and crafts from Mising artisans. Orders and payment are arranged
-directly with the artisan: open a product and use the contact buttons.
+          directly with the artisan: open a product and use the contact buttons.
         </p>
       </section>
 
       <section style={{ ...wrap, padding: '28px clamp(20px, 5vw, 40px) 0' }}>
-        <div style={{ position: 'relative', maxWidth: '420px', marginBottom: '20px' }}>
-          <Search size={18} color={colors.textTertiary} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }} />
-          <input
-            type="text" placeholder="Search products or artisans..." value={query} onChange={(e) => setQuery(e.target.value)}
-            style={{
-              width: '100%', padding: '13px 16px 13px 44px', fontSize: '14px', border: `1px solid ${colors.border}`,
-              borderRadius: '12px', backgroundColor: colors.bgSecondary, color: colors.text, outline: 'none', boxSizing: 'border-box',
-            }}
-          />
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+          <div style={{ position: 'relative', flex: '1 1 280px', maxWidth: '420px' }}>
+            <Search size={18} color={colors.textTertiary} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }} />
+            <input
+              type="text" placeholder="Search products or artisans..." value={query} onChange={(e) => setQuery(e.target.value)}
+              style={{
+                width: '100%', padding: '13px 16px 13px 44px', fontSize: '14px', border: `1px solid ${colors.border}`,
+                borderRadius: '12px', backgroundColor: colors.bgSecondary, color: colors.text, outline: 'none', boxSizing: 'border-box',
+                boxShadow: `0 4px 12px ${colors.shadowColor}`
+              }}
+              onFocus={(e) => { e.target.style.borderColor = colors.accentPrimary }}
+              onBlur={(e) => { e.target.style.borderColor = colors.border }}
+            />
+          </div>
+
+          {!loading && !error && (
+            <span style={{ fontSize: '13px', fontWeight: '600', color: colors.textTertiary }}>
+              {shown.length} {shown.length === 1 ? 'item' : 'items'}
+            </span>
+          )}
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
           {[{ slug: 'all', name: 'All' }, ...usedCategories].map((c) => {
             const active = cat === c.slug
             return (
-              <button key={c.slug} onClick={() => setCat(c.slug)} style={{
-                padding: '9px 16px', fontSize: '13px', fontWeight: '600', borderRadius: '999px', cursor: 'pointer',
-                border: `1px solid ${active ? colors.accentPrimary : colors.border}`,
-                backgroundColor: active ? colors.accentPrimary : colors.bgSecondary,
-                color: active ? (isDarkMode ? colors.bg : '#fff') : colors.textSecondary,
-              }}>
+              <button
+                key={c.slug}
+                onClick={() => setCat(c.slug)}
+                className="pill-btn"
+                style={{
+                  padding: '9px 16px', fontSize: '13px', fontWeight: '600', borderRadius: '999px', cursor: 'pointer',
+                  border: `1px solid ${active ? colors.accentPrimary : colors.border}`,
+                  backgroundColor: active ? colors.accentPrimary : colors.bgSecondary,
+                  color: active ? (isDarkMode ? colors.bg : '#fff') : colors.textSecondary,
+                  boxShadow: active ? `0 4px 12px ${colors.shadowColor}` : 'none'
+                }}
+              >
                 {c.name}
               </button>
             )
@@ -94,11 +110,15 @@ directly with the artisan: open a product and use the contact buttons.
 
       <section style={{ ...wrap, padding: '28px clamp(20px, 5vw, 40px) 60px' }}>
         {loading ? (
-          <p style={{ color: colors.textSecondary }}>Loading…</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '20px' }}>
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="skeleton-shimmer" style={{ height: '310px', borderRadius: '14px', backgroundColor: colors.accentLight }} />
+            ))}
+          </div>
         ) : error ? (
           <p style={{ color: '#c0392b', fontSize: '14px' }}>{error}</p>
         ) : shown.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '80px 40px', color: colors.textTertiary, backgroundColor: colors.bgSecondary, borderRadius: '12px', border: `1px solid ${colors.border}` }}>
+          <div style={{ textAlign: 'center', padding: '80px 40px', color: colors.textTertiary, backgroundColor: colors.bgSecondary, borderRadius: '14px', border: `1px solid ${colors.border}` }}>
             <p style={{ fontSize: '16px', fontWeight: '600', margin: '0 0 6px', color: colors.text }}>
               {products.length === 0 ? 'No products yet' : 'No products found'}
             </p>
@@ -107,7 +127,7 @@ directly with the artisan: open a product and use the contact buttons.
             </p>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '20px' }}>
+          <div className="stagger-grid is-visible" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '20px' }}>
             {shown.map((p) => <ProductCard key={p.id} product={p} categoryName={catName(p.category_slug)} />)}
           </div>
         )}

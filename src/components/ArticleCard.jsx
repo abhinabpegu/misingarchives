@@ -4,18 +4,24 @@ import { useTheme } from '../context/ThemeContext'
 import { useCardStyle } from '../utils/cardStyle'
 import { formatDate } from '../utils/formatDate'
 import { useStats, formatCount } from '../lib/stats'
+import { cloudinaryUrl } from '../utils/cloudinaryUrl'
+import LazyImage from './LazyImage'
 
 // size: 'featured' (image/placeholder block + larger title) or 'normal' (compact)
 export default function ArticleCard({ article, size = 'normal' }) {
   const { colors } = useTheme()
-  const { cardBase, hoverIn, hoverOut } = useCardStyle()
+  const { cardBase } = useCardStyle()
   const stats = useStats('article')
   const reads = stats[article.slug]?.views
   const isFeatured = size === 'featured'
+  const coverSrc = article.coverImage
+    ? cloudinaryUrl(article.coverImage, isFeatured ? 'w_900,q_auto,f_auto' : 'w_600,q_auto,f_auto')
+    : null
 
   return (
     <Link
       to={`/article/${article.slug}`}
+      className="card-interactive"
       style={{
         ...cardBase,
         display: 'flex',
@@ -25,36 +31,41 @@ export default function ArticleCard({ article, size = 'normal' }) {
         color: colors.text,
         overflow: 'hidden'
       }}
-      onMouseEnter={hoverIn}
-      onMouseLeave={hoverOut}
     >
-      {(article.coverImage || isFeatured) && (
-        article.coverImage ? (
-          <img
-            src={article.coverImage}
-            alt={article.title}
+      {(coverSrc || isFeatured) && (
+        coverSrc ? (
+          <div
+            className="card-media-zoom"
             style={{
               width: '100%',
-              height: isFeatured ? '260px' : '160px',
-              objectFit: article.coverFit || 'cover',
+              height: isFeatured ? '260px' : '165px',
               backgroundColor: colors.bgTertiary,
-              display: 'block',
+              overflow: 'hidden',
               flexShrink: 0
             }}
-          />
+          >
+            <LazyImage
+              src={coverSrc}
+              alt={article.title}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: article.coverFit || 'cover',
+                display: 'block'
+              }}
+            />
+          </div>
         ) : (
           <div style={{
             width: '100%',
-            height: isFeatured ? '260px' : '160px',
+            height: isFeatured ? '260px' : '165px',
             flexShrink: 0,
-            backgroundColor: colors.accentLight,
+            background: `linear-gradient(135deg, ${colors.accentLight}, transparent)`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: isFeatured ? '40px' : '28px'
-          }}>
-
-          </div>
+          }} />
         )
       )}
 
@@ -82,7 +93,7 @@ export default function ArticleCard({ article, size = 'normal' }) {
 
         <h3 style={{
           margin: '0 0 10px',
-          fontSize: isFeatured ? '20px' : '15px',
+          fontSize: isFeatured ? '20px' : '16px',
           fontWeight: '700',
           lineHeight: '1.35',
           color: colors.text
@@ -94,7 +105,7 @@ export default function ArticleCard({ article, size = 'normal' }) {
           margin: '0 0 14px',
           fontSize: '13px',
           color: colors.textSecondary,
-          lineHeight: '1.55',
+          lineHeight: '1.6',
           display: '-webkit-box',
           WebkitLineClamp: isFeatured ? 3 : 2,
           WebkitBoxOrient: 'vertical',
@@ -103,9 +114,6 @@ export default function ArticleCard({ article, size = 'normal' }) {
           {article.excerpt}
         </p>
 
-        {/* Spacer pushes footer to the bottom when the card is stretched
-            taller than its content (e.g. next to a taller sibling column
-            in a CSS grid), instead of leaving a dead gap under the text. */}
         <div style={{ flex: 1 }} />
 
         <div style={{
@@ -120,13 +128,15 @@ export default function ArticleCard({ article, size = 'normal' }) {
         </div>
 
         <span style={{
-          display: 'inline-block',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '4px',
           marginTop: '12px',
           fontSize: '12px',
           fontWeight: '700',
           color: colors.accentPrimary
         }}>
-          Read full text →
+          Read full text <span className="card-arrow">→</span>
         </span>
       </div>
     </Link>

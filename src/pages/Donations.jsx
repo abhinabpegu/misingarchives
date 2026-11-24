@@ -85,7 +85,7 @@ export default function Donations() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
           gap: '16px'
         }}>
-          <div style={statCard}>
+          <div className="card-interactive" style={statCard}>
             <p style={{ margin: '0 0 6px', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: colors.textTertiary }}>
               Total Raised
             </p>
@@ -93,7 +93,7 @@ export default function Donations() {
               {formatRupees(totalRaised)}
             </p>
           </div>
-          <div style={statCard}>
+          <div className="card-interactive" style={statCard}>
             <p style={{ margin: '0 0 6px', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: colors.textTertiary }}>
               Total Spent
             </p>
@@ -101,7 +101,7 @@ export default function Donations() {
               {formatRupees(totalSpent)}
             </p>
           </div>
-          <div style={statCard}>
+          <div className="card-interactive" style={statCard}>
             <p style={{ margin: '0 0 6px', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: colors.textTertiary }}>
               Current Balance
             </p>

@@ -9,10 +9,6 @@ const LEARN_LINKS = [
   { to: '/learn/clans', label: 'Clans' },
   { to: '/learn/mising-motifs', label: 'Mising Motifs' },
   { to: '/learn/mising-terms', label: 'Mising Terms' },
-
-
-  // { to: '/learn/numerals', label: 'Numerals' },
-  // { to: '/learn/kinshipterms', label: 'Kinship Terms' },
 ]
 
 export default function Header() {
@@ -20,6 +16,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [learnOpen, setLearnOpen] = useState(false)
   const [mobileLearnOpen, setMobileLearnOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const learnRef = useRef(null)
   const navigate = useNavigate()
   const location = useLocation()
@@ -27,27 +24,36 @@ export default function Header() {
   const isLearnActive = location.pathname.startsWith('/learn')
 
   useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    setMenuOpen(false)
+    setLearnOpen(false)
+  }, [location.pathname])
+
+  useEffect(() => {
     function handleClickOutside(e) {
       if (learnRef.current && !learnRef.current.contains(e.target)) {
         setLearnOpen(false)
       }
     }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
-
-  const scrollToMission = (e) => {
-    e.preventDefault()
-    setMenuOpen(false)
-    if (location.pathname === '/') {
-      document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })
-    } else {
-      navigate('/')
-      setTimeout(() => {
-        document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })
-      }, 150)
+    function handleEscape(e) {
+      if (e.key === 'Escape') {
+        setLearnOpen(false)
+        setMenuOpen(false)
+      }
     }
-  }
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [])
 
   const goToSupport = () => {
     setMenuOpen(false)
@@ -61,15 +67,15 @@ export default function Header() {
     }
   }
 
+  const navLinkClass = ({ isActive }) => `nav-link-fancy ${isActive ? 'is-active' : ''}`
+
   const navLinkStyle = ({ isActive }) => ({
     color: isActive ? colors.accentPrimary : colors.textSecondary,
     fontWeight: isActive ? '700' : '600',
     fontSize: '14px',
     textDecoration: 'none',
     padding: '8px 4px',
-    borderBottom: isActive ? `2px solid ${colors.accentPrimary}` : '2px solid transparent',
-    transition: 'all 0.2s ease',
-    whiteSpace: 'nowrap'
+    whiteSpace: 'nowrap',
   })
 
   const learnButtonStyle = {
@@ -84,35 +90,37 @@ export default function Header() {
     fontWeight: isLearnActive ? '700' : '600',
     fontSize: '14px',
     padding: '8px 4px',
-    borderBottom: isLearnActive ? `2px solid ${colors.accentPrimary}` : '2px solid transparent',
-    transition: 'all 0.2s ease'
   }
 
   return (
-    <header style={{
-      borderBottom: `1px solid ${colors.border}`,
-      backgroundColor: colors.bgTertiary,
-      backdropFilter: 'blur(10px)',
-      position: 'sticky',
-      top: 0,
-      zIndex: 100
-    }}>
+    <header
+      className={`header-glass ${scrolled ? 'is-scrolled' : ''}`}
+      style={{
+        borderBottom: `1px solid ${colors.border}`,
+        backgroundColor: colors.bgTertiary,
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100
+      }}
+    >
       <div style={{
         maxWidth: '1400px',
         margin: '0 auto',
-        padding: '16px 40px',
+        padding: '15px 40px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         gap: '24px'
       }} className="header-inner">
         <Link to="/" onClick={() => setMenuOpen(false)} style={{
-          fontSize: '22px',
-          fontWeight: '700',
+          fontSize: '21px',
+          fontWeight: '800',
+          letterSpacing: '-0.02em',
           margin: 0,
           color: colors.accentPrimary,
           textDecoration: 'none',
-          textShadow: isDarkMode ? '0 2px 8px rgba(0,0,0,0.3)' : 'none',
           whiteSpace: 'nowrap'
         }}>
           Mising Archives
@@ -122,19 +130,20 @@ export default function Header() {
         <nav className="nav-links-desktop" style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '28px',
+          gap: '26px',
           flex: 1,
           justifyContent: 'center'
         }}>
-          <NavLink to="/" style={navLinkStyle} end>Home</NavLink>
-          <NavLink to="/digital-book-library" style={navLinkStyle}>Digital Book Library</NavLink>
-          <NavLink to="/articles" style={navLinkStyle}>Community Writings</NavLink>
-          <NavLink to="/shop" style={navLinkStyle}>Shop</NavLink>
+          <NavLink to="/" className={navLinkClass} style={navLinkStyle} end>Home</NavLink>
+          <NavLink to="/digital-book-library" className={navLinkClass} style={navLinkStyle}>Digital Book Library</NavLink>
+          <NavLink to="/articles" className={navLinkClass} style={navLinkStyle}>Community Writings</NavLink>
+          <NavLink to="/shop" className={navLinkClass} style={navLinkStyle}>Shop</NavLink>
 
           {/* Learn dropdown */}
           <div ref={learnRef} style={{ position: 'relative' }}>
             <button
               onClick={() => setLearnOpen((o) => !o)}
+              className={`nav-link-fancy ${isLearnActive ? 'is-active' : ''}`}
               style={learnButtonStyle}
               aria-expanded={learnOpen}
               aria-haspopup="true"
@@ -142,33 +151,37 @@ export default function Header() {
               Learn more
               <ChevronDown
                 size={14}
-                style={{ transition: 'transform 0.2s ease', transform: learnOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                style={{ transition: 'transform 0.25s cubic-bezier(0.22, 1, 0.36, 1)', transform: learnOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
               />
             </button>
 
             {learnOpen && (
-              <div style={{
-                position: 'absolute',
-                top: 'calc(100% + 10px)',
-                left: 0,
-                minWidth: '170px',
-                backgroundColor: colors.bgSecondary,
-                border: `1px solid ${colors.border}`,
-                borderRadius: '10px',
-                boxShadow: `0 12px 28px ${colors.shadowColor}`,
-                backdropFilter: 'blur(10px)',
-                padding: '6px',
-                zIndex: 200
-              }}>
+              <div
+                className="dropdown-enter"
+                style={{
+                  position: 'absolute',
+                  top: 'calc(100% + 12px)',
+                  left: 0,
+                  minWidth: '185px',
+                  backgroundColor: colors.bgSecondary,
+                  border: `1px solid ${colors.border}`,
+                  borderRadius: '12px',
+                  boxShadow: `0 16px 36px ${colors.shadowColor}`,
+                  backdropFilter: 'blur(16px)',
+                  padding: '6px',
+                  zIndex: 200
+                }}
+              >
                 {LEARN_LINKS.map((link) => (
                   <NavLink
                     key={link.to}
                     to={link.to}
                     onClick={() => setLearnOpen(false)}
+                    className="pill-btn"
                     style={({ isActive }) => ({
                       display: 'block',
-                      padding: '9px 12px',
-                      borderRadius: '6px',
+                      padding: '10px 12px',
+                      borderRadius: '8px',
                       fontSize: '13px',
                       fontWeight: isActive ? '700' : '600',
                       color: isActive ? colors.accentPrimary : colors.text,
@@ -184,8 +197,8 @@ export default function Header() {
             )}
           </div>
 
-          <NavLink to="/about" style={navLinkStyle}>About</NavLink>
-          <NavLink to="/contact" style={navLinkStyle}>Contact</NavLink>
+          <NavLink to="/about" className={navLinkClass} style={navLinkStyle}>About</NavLink>
+          <NavLink to="/contact" className={navLinkClass} style={navLinkStyle}>Contact</NavLink>
         </nav>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -193,6 +206,7 @@ export default function Header() {
             <button
               onClick={goToSupport}
               aria-label="Donate to the project"
+              className="btn-fancy"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -217,6 +231,7 @@ export default function Header() {
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
             aria-label="Toggle dark mode"
+            className="btn-ghost-fancy"
             style={{
               background: colors.bgSecondary,
               border: `1px solid ${colors.border}`,
@@ -229,16 +244,7 @@ export default function Header() {
               color: colors.accentPrimary,
               fontSize: '13px',
               fontWeight: '600',
-              transition: 'all 0.3s ease',
               boxShadow: `0 4px 12px ${colors.shadowColor}`
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = colors.accentLight
-              e.currentTarget.style.transform = 'translateY(-2px)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = colors.bgSecondary
-              e.currentTarget.style.transform = 'translateY(0)'
             }}
           >
             {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
@@ -246,9 +252,10 @@ export default function Header() {
           </button>
 
           <button
-            className="menu-toggle-mobile"
+            className="menu-toggle-mobile btn-ghost-fancy"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
             style={{
               display: 'none',
               background: colors.bgSecondary,
@@ -266,7 +273,7 @@ export default function Header() {
 
       {/* Mobile nav dropdown */}
       {menuOpen && (
-        <nav className="nav-links-mobile" style={{
+        <nav className="nav-links-mobile mobile-menu-enter" style={{
           display: 'flex',
           flexDirection: 'column',
           padding: '8px 24px 20px',
@@ -278,7 +285,6 @@ export default function Header() {
           <NavLink to="/articles" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Community Writings</NavLink>
           <NavLink to="/shop" onClick={() => setMenuOpen(false)} style={navLinkStyle}>Shop</NavLink>
 
-          {/* Learn - expandable on mobile instead of a dropdown */}
           <div>
             <button
               onClick={() => setMobileLearnOpen((o) => !o)}

@@ -49,7 +49,6 @@ export default function SiteStats() {
     [stats]
   )
 
-  // [label, value, small note]. Tiles with no value yet are skipped.
   const tiles = [
     stats && [`Visitors in ${monthName}`, fmt(stats.visitors_month)],
     stats && [`Visitors since ${formatDate(TRACKING_SINCE)}`, fmt(stats.visitors_total)],
@@ -69,19 +68,23 @@ export default function SiteStats() {
   return (
     <div style={{
       borderTop: `1px solid ${colors.border}`,
-      padding: '28px 40px',
+      padding: '28px clamp(20px, 5vw, 40px)',
       width: '100%',
       boxSizing: 'border-box',
     }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <div style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           flexWrap: 'wrap', gap: '8px 24px', marginBottom: '16px',
         }}>
           <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
             fontSize: '12px', fontWeight: '700', textTransform: 'uppercase',
             letterSpacing: '1.2px', color: colors.accentPrimary,
           }}>
+            <span className="live-dot" aria-hidden="true" />
             Site Stats
           </span>
           <span
@@ -101,13 +104,17 @@ export default function SiteStats() {
           gap: '12px',
         }}>
           {tiles.map(([label, value, note]) => (
-            <div key={label} style={{
-              padding: '12px 14px',
-              borderRadius: '10px',
-              border: `1px solid ${colors.border}`,
-              backgroundColor: colors.bgSecondary,
-              minWidth: 0,
-            }}>
+            <div
+              key={label}
+              className="card-interactive"
+              style={{
+                padding: '13px 15px',
+                borderRadius: '10px',
+                border: `1px solid ${colors.border}`,
+                backgroundColor: colors.bgSecondary,
+                minWidth: 0,
+              }}
+            >
               <p style={{
                 margin: '0 0 4px', fontSize: '10px', fontWeight: '700',
                 textTransform: 'uppercase', letterSpacing: '0.8px', color: colors.textTertiary,

@@ -6,29 +6,41 @@ import { usePageTitle } from '../../hooks/usePageTitle'
 import LazyImage from '../../components/LazyImage'
 import { cloudinaryUrl } from '../../utils/cloudinaryUrl'
 
-// Card-sized preview. w_500 is plenty for the grid; q_auto/f_auto let
-// Cloudinary pick the smallest good-looking format (webp/avif) per browser
-// instead of shipping the full original (which can be several MB for an
-// unedited phone photo). No-ops safely on any non-Cloudinary URL.
 function toThumbUrl(path) {
   if (!path) return path
   return cloudinaryUrl(path, 'w_500,q_auto,f_auto')
 }
 
-// Fullscreen lightbox for viewing the currently displayed image at full
-// size. Always shown at ORIGINAL resolution, not the compressed preview —
-// shared by every card via the page-level `lightboxImage` state below,
-// rather than each card managing its own overlay.
 function Lightbox({ src, alt, onClose }) {
   const { isDarkMode } = useTheme()
+
+  useEffect(() => {
+    if (!src) return
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prevOverflow
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [src, onClose])
+
   if (!src) return null
 
   return (
     <div
+      className="modal-backdrop-enter"
+      role="dialog"
+      aria-modal="true"
+      aria-label={alt || 'Expanded motif preview'}
       style={{
         position: 'fixed',
         inset: 0,
         backgroundColor: isDarkMode ? 'rgba(15, 14, 12, 0.9)' : 'rgba(0, 0, 0, 0.85)',
+        backdropFilter: 'blur(8px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -44,23 +56,28 @@ function Lightbox({ src, alt, onClose }) {
           position: 'absolute',
           top: '20px',
           right: '24px',
-          background: 'none',
+          background: 'rgba(255,255,255,0.12)',
           border: 'none',
+          borderRadius: '10px',
           cursor: 'pointer',
           color: '#fff',
-          padding: '6px'
+          padding: '8px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
-        <X size={28} />
+        <X size={24} />
       </button>
       <img
         src={src}
         alt={alt}
+        className="modal-panel-enter"
         style={{
           maxWidth: '100%',
           maxHeight: '90vh',
-          borderRadius: '10px',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+          borderRadius: '12px',
+          boxShadow: '0 24px 64px rgba(0,0,0,0.55)',
           objectFit: 'contain'
         }}
         onClick={(e) => e.stopPropagation()}
@@ -69,17 +86,6 @@ function Lightbox({ src, alt, onClose }) {
   )
 }
 
-// One pattern card — image flush at the top with an expand button
-// overlaid in its corner (opens the fullscreen lightbox at FULL
-// resolution), then a text row underneath with a category tag,
-// name/description, and a separate pattern/cloth-example toggle icon.
-//
-// The card itself always displays the COMPRESSED thumb, not the original
-// upload — that's what keeps the grid fast to load. It also silently
-// preloads the OTHER thumb (the one you'd see if you hit the toggle) as
-// soon as it mounts, so by the time someone actually clicks the toggle
-// button the image is already sitting in the browser cache instead of
-// triggering a fresh multi-second download.
 function MimangCard({ mimang, onExpand }) {
   const { colors } = useTheme()
   const [showExample, setShowExample] = useState(false)
@@ -99,23 +105,31 @@ function MimangCard({ mimang, onExpand }) {
   const hasToggleTarget = Boolean(mimang.image && mimang.clothExample)
 
   return (
-    <div style={{
-      backgroundColor: colors.bgSecondary,
-      borderRadius: '12px',
-      overflow: 'hidden',
-      boxShadow: `0 4px 14px ${colors.shadowColor}`
-    }}>
-      {/* Square swatch — flush with the top of the card, no border */}
-      <div style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', backgroundColor: colors.accentLight }}>
+    <div
+      className="card-interactive"
+      style={{
+        backgroundColor: colors.bgSecondary,
+        border: `1px solid ${colors.border}`,
+        borderRadius: '14px',
+        overflow: 'hidden',
+        boxShadow: `0 4px 14px ${colors.shadowColor}`,
+        display: 'flex',
+        flexDirection: 'column'
+      }}
+    >
+      {/* Square swatch */}
+      <div
+        className="card-media-zoom"
+        style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', backgroundColor: colors.accentLight, overflow: 'hidden' }}
+      >
         {displayedThumb ? (
           <>
             <LazyImage
               src={displayedThumb}
               alt={displayedAlt}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', cursor: 'zoom-in' }}
+              onClick={() => onExpand(displayedFull, displayedAlt)}
               onError={(e) => {
-                // Thumb transform failed to resolve for some reason —
-                // fall back to the original once, rather than a broken image.
                 if (e.target.dataset.fallback) return
                 e.target.dataset.fallback = 'true'
                 e.target.src = displayedFull
@@ -129,17 +143,18 @@ function MimangCard({ mimang, onExpand }) {
                 position: 'absolute',
                 bottom: '8px',
                 right: '8px',
-                width: '28px',
-                height: '28px',
+                width: '30px',
+                height: '30px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: '7px',
+                borderRadius: '8px',
                 border: 'none',
                 backgroundColor: 'rgba(255,255,255,0.92)',
                 color: '#1A1A1A',
                 cursor: 'pointer',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.18)'
+                boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                zIndex: 2
               }}
             >
               <Maximize2 size={14} />
@@ -163,7 +178,7 @@ function MimangCard({ mimang, onExpand }) {
         )}
       </div>
 
-      {/* Text row — label on the left, pattern/cloth toggle on the right */}
+      {/* Text row */}
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -215,17 +230,19 @@ function MimangCard({ mimang, onExpand }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            width: '22px',
-            height: '22px',
+            width: '30px',
+            height: '30px',
             padding: 0,
-            background: 'none',
+            background: hasToggleTarget ? colors.accentLight : 'transparent',
             border: 'none',
-            color: hasToggleTarget ? colors.textSecondary : colors.textTertiary,
+            borderRadius: '8px',
+            color: hasToggleTarget ? colors.accentPrimary : colors.textTertiary,
             cursor: hasToggleTarget ? 'pointer' : 'not-allowed',
-            opacity: hasToggleTarget ? 1 : 0.5
+            opacity: hasToggleTarget ? 1 : 0.45,
+            transition: 'transform 0.2s ease, background-color 0.2s ease'
           }}
         >
-          {showExample ? <LayoutGrid size={17} /> : <Shirt size={17} />}
+          {showExample ? <LayoutGrid size={16} /> : <Shirt size={16} />}
         </button>
       </div>
     </div>
@@ -235,18 +252,27 @@ function MimangCard({ mimang, onExpand }) {
 export default function MisingMotifs() {
   usePageTitle('Mising Motifs')
   const { mimang: mimangData } = useMimang()
-  const { colors } = useTheme()
-  const [lightbox, setLightbox] = useState(null) // { src, alt } | null
-  const [sortDir, setSortDir] = useState('asc') // 'asc' | 'desc'
+  const { isDarkMode, colors } = useTheme()
+  const [lightbox, setLightbox] = useState(null)
+  const [sortDir, setSortDir] = useState('asc')
+  const [filterCat, setFilterCat] = useState('All')
 
   const openLightbox = (src, alt) => setLightbox({ src, alt })
 
+  const categories = useMemo(() => {
+    const cats = [...new Set(mimangData.map(m => m.category).filter(Boolean))]
+    return cats.length > 1 ? ['All', ...cats] : []
+  }, [mimangData])
+
   const sortedMimang = useMemo(() => {
-    const sorted = [...mimangData].sort((a, b) =>
+    const filtered = filterCat === 'All'
+      ? mimangData
+      : mimangData.filter(m => m.category === filterCat)
+    const sorted = [...filtered].sort((a, b) =>
       a.gamigName.localeCompare(b.gamigName, 'en', { sensitivity: 'base' })
     )
     return sortDir === 'asc' ? sorted : sorted.reverse()
-  }, [sortDir, mimangData])
+  }, [sortDir, mimangData, filterCat])
 
   const eyebrow = {
     fontSize: '12px',
@@ -267,7 +293,7 @@ export default function MisingMotifs() {
       {/* Page intro */}
       <section style={{ ...sectionWrap, padding: '48px clamp(20px, 5vw, 40px) 0' }}>
         <span style={eyebrow}>Learn</span>
-        <h1 style={{ fontSize: '34px', fontWeight: '700', margin: '10px 0 8px', color: colors.text }}>
+        <h1 style={{ fontSize: '34px', fontWeight: '700', margin: '10px 0 10px', color: colors.text }}>
           Mising Motifs
         </h1>
         <p style={{ fontSize: '14px', color: colors.textSecondary, lineHeight: '1.7', maxWidth: '640px' }}>
@@ -278,41 +304,79 @@ export default function MisingMotifs() {
         </p>
       </section>
 
-      {/* Sort control */}
-      <section style={{ ...sectionWrap, padding: '28px clamp(20px, 5vw, 40px) 0' }}>
-        <button
-          onClick={() => setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '10px 16px',
-            fontSize: '13px',
-            fontWeight: '700',
-            color: colors.accentPrimary,
-            backgroundColor: colors.bgSecondary,
-            border: `1px solid ${colors.border}`,
-            borderRadius: '10px',
-            backdropFilter: 'blur(10px)',
-            cursor: 'pointer',
-            boxShadow: `0 4px 12px ${colors.shadowColor}`,
-            fontFamily: 'inherit'
-          }}
-        >
-          <ArrowUpDown size={14} />
-          Sort: {sortDir === 'asc' ? 'A → Z' : 'Z → A'}
-        </button>
+      {/* Controls */}
+      <section style={{
+        ...sectionWrap,
+        padding: '24px clamp(20px, 5vw, 40px) 0',
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '12px'
+      }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center' }}>
+          <button
+            onClick={() => setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))}
+            className="pill-btn"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '9px 16px',
+              fontSize: '13px',
+              fontWeight: '700',
+              color: colors.accentPrimary,
+              backgroundColor: colors.bgSecondary,
+              border: `1px solid ${colors.border}`,
+              borderRadius: '999px',
+              backdropFilter: 'blur(10px)',
+              cursor: 'pointer',
+              boxShadow: `0 4px 12px ${colors.shadowColor}`,
+              fontFamily: 'inherit'
+            }}
+          >
+            <ArrowUpDown size={14} />
+            Sort: {sortDir === 'asc' ? 'A → Z' : 'Z → A'}
+          </button>
+
+          {categories.map((cat) => {
+            const active = filterCat === cat
+            return (
+              <button
+                key={cat}
+                onClick={() => setFilterCat(cat)}
+                className="pill-btn"
+                style={{
+                  padding: '9px 16px',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  borderRadius: '999px',
+                  border: `1px solid ${active ? colors.accentPrimary : colors.border}`,
+                  backgroundColor: active ? colors.accentPrimary : colors.bgSecondary,
+                  color: active ? (isDarkMode ? colors.bg : '#fff') : colors.textSecondary,
+                  cursor: 'pointer'
+                }}
+              >
+                {cat}
+              </button>
+            )
+          })}
+        </div>
+
+        <span style={{ fontSize: '13px', fontWeight: '600', color: colors.textTertiary }}>
+          {sortedMimang.length} {sortedMimang.length === 1 ? 'pattern' : 'patterns'}
+        </span>
       </section>
 
       {/* Pattern grid */}
       <section style={{ ...sectionWrap, padding: '20px clamp(20px, 5vw, 40px) 60px' }}>
         {sortedMimang.length > 0 ? (
           <div
-            className="cards-grid"
+            className="cards-grid stagger-grid is-visible"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-              gap: '14px'
+              gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+              gap: '16px'
             }}
           >
             {sortedMimang.map((m) => (
@@ -325,7 +389,7 @@ export default function MisingMotifs() {
             padding: '80px 40px',
             color: colors.textTertiary,
             backgroundColor: colors.bgSecondary,
-            borderRadius: '12px',
+            borderRadius: '14px',
             border: `1px solid ${colors.border}`,
             backdropFilter: 'blur(10px)',
             boxShadow: `0 8px 32px ${colors.shadowColor}`

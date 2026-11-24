@@ -8,7 +8,7 @@ import LazyImage from '../LazyImage'
 
 export default function ProductCard({ product, categoryName, showArtisan = true }) {
   const { colors } = useTheme()
-  const { cardBase, hoverIn, hoverOut } = useCardStyle()
+  const { cardBase } = useCardStyle()
   const soldOut = product.availability === 'sold_out'
   const img = product.images?.[0]
   const artisan = product.artisans
@@ -16,17 +16,16 @@ export default function ProductCard({ product, categoryName, showArtisan = true 
   return (
     <Link
       to={`/shop/product/${product.id}`}
+      className="card-interactive"
       style={{ ...cardBase, display: 'flex', flexDirection: 'column', textDecoration: 'none', color: colors.text, overflow: 'hidden', height: '100%' }}
-      onMouseEnter={hoverIn}
-      onMouseLeave={hoverOut}
     >
-      <div style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', backgroundColor: colors.accentLight, flexShrink: 0 }}>
+      <div className="card-media-zoom" style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', backgroundColor: colors.accentLight, flexShrink: 0, overflow: 'hidden' }}>
         {img ? (
           <LazyImage
-src={cloudinaryUrl(img, 'w_500,h_500,c_pad,b_auto,q_auto,f_auto')}
-  alt={product.title}
-  style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', opacity: soldOut ? 0.55 : 1 }}
-/>
+            src={cloudinaryUrl(img, 'w_500,h_500,c_pad,b_auto,q_auto,f_auto')}
+            alt={product.title}
+            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', opacity: soldOut ? 0.55 : 1 }}
+          />
         ) : (
           <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontStyle: 'italic', color: colors.textTertiary }}>
             No photo yet
