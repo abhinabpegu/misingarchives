@@ -6,12 +6,13 @@ import { useTheme } from '../context/ThemeContext'
 import BookDetailModal from '../components/BookDetailModal'
 import ContributeCard from '../components/ContributeCard'
 import { usePageTitle } from '../hooks/usePageTitle'
-import { useStats, formatCount } from '../lib/stats'
+import { useStats } from '../lib/stats'
+import BookCard from '../components/BookCard'
 
 export default function DigitalBookLibrary() {
   usePageTitle('Digital Book Library')
   const { books: booksData } = useBooks()
-  const { isDarkMode, colors } = useTheme()
+  const { colors } = useTheme()
   const [searchParams] = useSearchParams()
   const stats = useStats('book')
 
@@ -255,167 +256,21 @@ export default function DigitalBookLibrary() {
         margin: '0 auto'
       }}>
         {displayedBooks.length > 0 ? (
-          <div className="books-grid" style={{ marginTop: '32px' }}>
-            {displayedBooks.map((book) => {
-              const s = stats[book.code]
-              return (
-                <div
-                  key={book.code}
-                  className="book-card"
-                  style={{
-                    backgroundColor: colors.bgSecondary,
-                    borderRadius: '12px',
-                    border: `1px solid ${colors.border}`,
-                    padding: '20px',
-                    backdropFilter: 'blur(10px)',
-                    boxShadow: `0 4px 12px ${colors.shadowColor}`,
-                    transition: 'all 0.2s ease',
-                    display: 'flex',
-                    flexDirection: 'column'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = colors.tableHover
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = colors.bgSecondary
-                  }}
-                >
-                  <div style={{ display: 'flex', gap: '14px', marginBottom: '12px', flex: 1 }}>
-                    {book.coverImage ? (
-                      <img
-                        src={book.coverImage}
-                        alt={book.title}
-                        style={{
-                          width: '64px',
-                          height: '92px',
-                          flexShrink: 0,
-                          objectFit: 'cover',
-                          borderRadius: '6px',
-                          boxShadow: `0 4px 10px ${colors.shadowColor}`
-                        }}
-                      />
-                    ) : (
-                      <div
-                        style={{
-                          width: '64px',
-                          height: '92px',
-                          flexShrink: 0,
-                          borderRadius: '6px',
-                          backgroundColor: colors.accentLight,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '22px'
-                        }}
-                      >
-                        📖
-                      </div>
-                    )}
-
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'start',
-                          marginBottom: '8px'
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontSize: '13px',
-                            fontWeight: '700',
-                            color: colors.accentPrimary
-                          }}
-                        >
-                          {book.code}
-                        </span>
-                        <span
-                          style={{
-                            fontSize: '11px',
-                            padding: '4px 8px',
-                            backgroundColor: colors.accentLight,
-                            color: colors.accentPrimary,
-                            borderRadius: '4px',
-                            fontWeight: '600'
-                          }}
-                        >
-                          {book.language}
-                        </span>
-                      </div>
-                      <h3
-                        style={{
-                          margin: '0 0 6px 0',
-                          fontSize: '16px',
-                          fontWeight: '700',
-                          color: colors.text,
-                          lineHeight: '1.35'
-                        }}
-                      >
-                        {book.title}
-                      </h3>
-                      <p
-                        style={{
-                          margin: '0 0 6px 0',
-                          fontSize: '13px',
-                          color: colors.textSecondary
-                        }}
-                      >
-                        {book.author}
-                      </p>
-                      {s && (
-                        <p style={{ margin: '0 0 6px 0', fontSize: '12px', color: colors.textTertiary }}>
-                          {formatCount(s.views)} views · {formatCount(s.downloads)} downloads
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
-                    {book.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        style={{
-                          fontSize: '11px',
-                          padding: '4px 8px',
-                          backgroundColor: colors.accentLight,
-                          color: colors.accentPrimary,
-                          borderRadius: '4px',
-                          fontWeight: '500'
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={() => setSelectedBook(book)}
-                    style={{
-                      width: '100%',
-                      padding: '10px 14px',
-                      backgroundColor: colors.accentPrimary,
-                      color: isDarkMode ? colors.bg : '#fff',
-                      border: 'none',
-                      borderRadius: '8px',
-                      cursor: 'pointer',
-                      fontSize: '13px',
-                      fontWeight: '600',
-                      transition: 'all 0.2s ease',
-                      boxShadow: `0 4px 12px ${colors.shadowColor}`
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.backgroundColor = colors.accentSecondary
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = colors.accentPrimary
-                    }}
-                  >
-                    View Details
-                  </button>
-                </div>
-              )
-            })}
+          <div
+            className="books-grid"
+            style={{
+              marginTop: '32px',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))'
+            }}
+          >
+            {displayedBooks.map((book) => (
+              <BookCard
+                key={book.code}
+                book={book}
+                stats={stats[book.code]}
+                onOpen={setSelectedBook}
+              />
+            ))}
           </div>
         ) : (
           <div style={{
