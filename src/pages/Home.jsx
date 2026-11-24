@@ -267,7 +267,7 @@ export default function Home() {
           </div>
 
           <div
-            className="hero-stagger"
+            className="hero-stagger hero-actions-col"
             style={{
               '--stagger': 3,
               display: 'flex',

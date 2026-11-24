@@ -41,10 +41,7 @@ const ThemeContext = createContext(null)
 
 function getInitialTheme() {
   try {
-    const saved = localStorage.getItem('mising-theme')
-    if (saved === 'dark') return true
-    if (saved === 'light') return false
-    return window.matchMedia?.('(prefers-color-scheme: dark)').matches || false
+    return localStorage.getItem('mising-theme') === 'dark'
   } catch {
     return false
   }

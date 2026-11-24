@@ -443,6 +443,11 @@ button:active {
     flex-direction: column !important;
     align-items: flex-start !important;
   }
+
+  .hero-actions-col {
+    align-items: flex-start !important;
+    width: 100%;
+  }
 }
 
 /* Balanced homepage grids — no orphan empty column gaps */
